@@ -60,15 +60,15 @@
         app:tabTextAppearance="@style/tab_text"
         app:tabMode="fixed"
         >
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="@string/all_apps" />-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/all_apps" />
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="@string/locked_apps" />-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/locked_apps" />
 
     </com.google.android.material.tabs.TabLayout>
 
