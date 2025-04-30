@@ -13,25 +13,33 @@
         android:theme="@style/Theme.LightTheme"
         tools:targetApi="31">
 
+        <activity
+            android:name=".presentations.splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- Activity thiết lập pattern mới -->
         <activity
             android:name=".screen.set_new_lock_pattern.SetLockPatternActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- Activity xác thực pattern -->
         <activity
             android:name=".screen.validate_lock_pattern.LockPatternActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
 
         <!-- Home screen -->
         <activity
             android:name=".screen.home.HomeActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

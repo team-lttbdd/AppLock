@@ -36,6 +36,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -50,10 +51,12 @@ dependencies {
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.gson)
+    implementation ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
 
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.databinding.runtime)
     kapt(libs.androidx.room.compiler)
 
     // Testing
