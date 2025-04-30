@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Top bar -->
+    <View
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/titlebar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:contentDescription="@null"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/setting"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintStart_toEndOf="@id/imgBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Scrollable area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_60sdp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Banner -->
+            <ImageView
+                android:id="@+id/imgBanner"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@null"
+                android:src="@drawable/app_lock_banner"
+                app:layout_constraintDimensionRatio="328:140"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/remove_ads"
+                android:layout_width="@dimen/_126sdp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@null"
+                android:src="@drawable/btn_next"
+                app:layout_constraintBottom_toBottomOf="@id/imgBanner"
+                app:layout_constraintDimensionRatio="126:32"
+                app:layout_constraintStart_toStartOf="@id/imgBanner" />
+
+            <!-- Password Section Title -->
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgBanner" />
+
+            <View
+                android:id="@+id/itemSecurityQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPassword" />
+
+            <ImageView
+                android:id="@+id/imgSecurityQuestions"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_security_question"
+                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
+                app:layout_constraintStart_toStartOf="@id/itemSecurityQuestions"
+                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
+
+            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
+                android:id="@+id/imgChevron1"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:avdFirst="@drawable/avd_chevron"
+                app:avdSecond="@drawable/avd_chevron_reverse"
+                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
+                app:layout_constraintEnd_toEndOf="@id/itemSecurityQuestions"
+                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/security_questions"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
+                app:layout_constraintStart_toEndOf="@id/imgSecurityQuestions"
+                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
+
+            <View
+                android:id="@+id/itemFingerprintUnlock"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemSecurityQuestions" />
+
+            <ImageView
+                android:id="@+id/imgFingerprintUnlock"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_fingerprint"
+                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
+                app:layout_constraintStart_toStartOf="@id/itemFingerprintUnlock"
+                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
+
+            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
+                android:id="@+id/imgToggle1"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:avdFirst="@drawable/avd_toggle_reverse"
+
+                app:avdSecond="@drawable/avd_toggle"
+                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
+                app:layout_constraintEnd_toEndOf="@id/itemFingerprintUnlock"
+                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/fingerprint_unlock"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
+                app:layout_constraintStart_toEndOf="@id/imgFingerprintUnlock"
+                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
+
+            <View
+                android:id="@+id/itemLockNewApp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemFingerprintUnlock" />
+
+            <ImageView
+                android:id="@+id/imgLockNewApp"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_lock_new_app"
+                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
+                app:layout_constraintStart_toStartOf="@id/itemLockNewApp"
+                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
+
+            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
+                android:id="@+id/imgToggle2"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:avdFirst="@drawable/avd_toggle_reverse"
+
+                app:avdSecond="@drawable/avd_toggle"
+                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
+                app:layout_constraintEnd_toEndOf="@id/itemLockNewApp"
+                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/lock_new_app"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
+                app:layout_constraintStart_toEndOf="@id/imgLockNewApp"
+                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
+
+            <View
+                android:id="@+id/itemHidePatternDrawPath"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemLockNewApp" />
+
+            <ImageView
+                android:id="@+id/imgHidePatternDrawPath"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_hidden"
+                app:layout_constraintBottom_toBottomOf="@id/itemHidePatternDrawPath"
+                app:layout_constraintStart_toStartOf="@id/itemHidePatternDrawPath"
+                app:layout_constraintTop_toTopOf="@id/itemHidePatternDrawPath" />
+
+            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
+                android:id="@+id/imgToggle3"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:avdFirst="@drawable/avd_toggle_reverse"
+
+                app:avdSecond="@drawable/avd_toggle"
+                app:layout_constraintBottom_toBottomOf="@id/itemHidePatternDrawPath"
+                app:layout_constraintEnd_toEndOf="@id/itemHidePatternDrawPath"
+                app:layout_constraintTop_toTopOf="@id/itemHidePatternDrawPath" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/hide_pattern_draw_path"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemHidePatternDrawPath"
+                app:layout_constraintStart_toEndOf="@id/imgHidePatternDrawPath"
+                app:layout_constraintTop_toTopOf="@id/itemHidePatternDrawPath" />
+
+            <View
+                android:id="@+id/itemChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemHidePatternDrawPath" />
+
+            <ImageView
+                android:id="@+id/imgChangePassword"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_change_password"
+                app:layout_constraintBottom_toBottomOf="@id/itemChangePassword"
+                app:layout_constraintStart_toStartOf="@id/itemChangePassword"
+                app:layout_constraintTop_toTopOf="@id/itemChangePassword" />
+
+            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
+                android:id="@+id/imgChevron3"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                app:avdFirst="@drawable/avd_chevron"
+
+                app:avdSecond="@drawable/avd_chevron_reverse"
+                app:layout_constraintBottom_toBottomOf="@id/itemChangePassword"
+                app:layout_constraintEnd_toEndOf="@id/itemChangePassword"
+                app:layout_constraintTop_toTopOf="@id/itemChangePassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/change_password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemChangePassword"
+                app:layout_constraintStart_toEndOf="@id/imgChangePassword"
+                app:layout_constraintTop_toTopOf="@id/itemChangePassword" />
+
+            <TextView
+                android:id="@+id/tvOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/others"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemChangePassword" />
+
+            <View
+                android:id="@+id/itemChangeLanguages"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOthers" />
+
+            <ImageView
+                android:id="@+id/imgChangeLanguages"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_change_language"
+                app:layout_constraintBottom_toBottomOf="@id/itemChangeLanguages"
+                app:layout_constraintStart_toStartOf="@id/itemChangeLanguages"
+                app:layout_constraintTop_toTopOf="@id/itemChangeLanguages" />
+
+            <TextView
+                android:id="@+id/tvChangeLanguages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/change_language"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemChangeLanguages"
+                app:layout_constraintStart_toEndOf="@id/imgChangeLanguages"
+                app:layout_constraintTop_toTopOf="@id/itemChangeLanguages" />
+
+
+            <View
+                android:id="@+id/itemShareWithFriends"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemChangeLanguages" />
+
+            <ImageView
+                android:id="@+id/imgShareWithFriends"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="@id/itemShareWithFriends"
+                app:layout_constraintStart_toStartOf="@id/itemShareWithFriends"
+                app:layout_constraintTop_toTopOf="@id/itemShareWithFriends" />
+
+            <TextView
+                android:id="@+id/tvShareWithFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/share_with_friends"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemShareWithFriends"
+                app:layout_constraintStart_toEndOf="@id/imgShareWithFriends"
+                app:layout_constraintTop_toTopOf="@id/itemShareWithFriends" />
+
+            <View
+                android:id="@+id/itemFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="#EDF3FF"
+                app:layout_constraintDimensionRatio="328:55"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemShareWithFriends" />
+
+            <ImageView
+                android:id="@+id/imgFeedback"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_feedback"
+                app:layout_constraintBottom_toBottomOf="@id/itemFeedback"
+                app:layout_constraintStart_toStartOf="@id/itemFeedback"
+                app:layout_constraintTop_toTopOf="@id/itemFeedback" />
+
+            <TextView
+                android:id="@+id/tvFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@id/itemFeedback"
+                app:layout_constraintStart_toEndOf="@id/imgFeedback"
+                app:layout_constraintTop_toTopOf="@id/itemFeedback" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
