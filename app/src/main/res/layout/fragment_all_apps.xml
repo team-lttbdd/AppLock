@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:queryHint="Search"
+            app:searchIcon="@drawable/ic_search"
+            android:background="@drawable/bg_search_bar"
+            app:iconifiedByDefault="false"
+            app:submitBackground="@null"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/cbSelectAll"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/checkbox_unchecked"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSelectOrRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_all"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/inter_regular"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintStart_toEndOf="@id/cbSelectAll"/>
+
+        <ImageView
+            android:id="@+id/btnLock"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/bg_inactive_button"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lock"
+            android:textColor="#A7A7A7"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/inter_bold"
+            app:layout_constraintTop_toTopOf="@id/btnLock"
+            app:layout_constraintBottom_toBottomOf="@+id/btnLock"
+            app:layout_constraintEnd_toEndOf="@id/btnLock"
+            app:layout_constraintStart_toStartOf="@id/btnLock"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_64sdp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/btnLock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+
