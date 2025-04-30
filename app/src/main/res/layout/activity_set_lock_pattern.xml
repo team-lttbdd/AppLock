@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".screen.set_new_lock_pattern.SetLockPatternActivity">
+
+    <ImageView
+        android:id="@+id/imgStepOne"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:contentDescription="@null"
+        android:src="@drawable/iv_step_1"
+        app:layout_constraintDimensionRatio="1 : 1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/_1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgStepOne"
+        app:layout_constraintEnd_toEndOf="@+id/imgStepOne"
+        app:layout_constraintStart_toStartOf="@+id/imgStepOne"
+        app:layout_constraintTop_toTopOf="@+id/imgStepOne" />
+
+    <ImageView
+        android:id="@+id/imgStepTwo"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_100sdp"
+        android:contentDescription="@null"
+        android:src="@drawable/iv_step_2"
+        app:layout_constraintDimensionRatio="1 : 1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_number__step_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/_2"
+        android:textColor="@color/gradient_end"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgStepTwo"
+        app:layout_constraintEnd_toEndOf="@+id/imgStepTwo"
+        app:layout_constraintStart_toStartOf="@+id/imgStepTwo"
+        app:layout_constraintTop_toTopOf="@+id/imgStepTwo" />
+
+    <View
+        android:id="@+id/iv_progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        android:background="@color/grey"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="@id/imgStepOne"
+        app:layout_constraintEnd_toStartOf="@id/imgStepTwo"
+        app:layout_constraintStart_toEndOf="@id/imgStepOne"
+        app:layout_constraintTop_toTopOf="@id/imgStepOne" />
+
+    <TextView
+        android:id="@+id/tv_draw_an_unlock_pattern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/draw_an_unlock_pattern"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_progress_bar" />
+
+    <TextView
+        android:id="@+id/tv_connect_4_or_more_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/connect_4_or_more_dots"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_draw_an_unlock_pattern" />
+
+
+    <ImageView
+        android:id="@+id/btnReset"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:contentDescription="@null"
+        android:src="@drawable/bg_active_button"
+        android:visibility="invisible"
+        app:layout_constraintDimensionRatio="28 : 5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_Reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/reset"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnReset"
+        app:layout_constraintEnd_toEndOf="@+id/btnReset"
+        app:layout_constraintStart_toStartOf="@+id/btnReset"
+        app:layout_constraintTop_toTopOf="@+id/btnReset" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
