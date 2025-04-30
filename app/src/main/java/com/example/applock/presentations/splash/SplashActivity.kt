@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.applock.R
 import com.example.applock.databinding.ActivitySplashBinding
-//import com.example.applock.presentations.language.LanguageActivity
+import com.example.applock.presentations.language.LanguageActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -25,10 +25,10 @@ class SplashActivity : AppCompatActivity() {
         val splashIconiv = binding.splashIconiv
         splashIconiv.startAnimation(splashAnimation)
 
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            startActivity(Intent(this@SplashActivity, LanguageActivity::class.java))
-//            finish()
-//        }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@SplashActivity, LanguageActivity::class.java))
+            finish()
+        }, 3000)
     }
 
 }

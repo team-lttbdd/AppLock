@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
 
+        <!-- Language screen -->
+        <activity
+            android:name=".presentations.language.LanguageActivity"
+            android:exported="true">
+        </activity>
+
         <!-- Activity thiết lập pattern mới -->
         <activity
             android:name=".screen.set_new_lock_pattern.SetLockPatternActivity"
