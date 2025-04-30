@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import androidx.room.TypeConverters
-import com.example.applock.util.Converters
 
 
 @Database(entities = [AppInfo::class], version = 1)
