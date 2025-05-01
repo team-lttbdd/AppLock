@@ -2,8 +2,6 @@ package com.example.applock.screen.home
 
 import android.graphics.Color
 import android.graphics.Shader
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.CharacterStyle
@@ -12,8 +10,11 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.applock.R
+import com.example.applock.base.BaseActivity
+import com.example.applock.databinding.ActivityHomeBinding
+import com.example.applock.screen.home.all_app.AllAppFragment
+import com.example.applock.screen.home.locked_app.LockedAppFragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityHomeBinding {
@@ -35,8 +36,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                     binding.tabLayout.getTabAt(position)?.select()
                     updateTabLayoutTextColor(position)
                     when (position) {
-                        0 -> AllAppsFragment()
-                        1 -> LockedAppsFragment()
+                        0 -> AllAppFragment()
+                        1 -> LockedAppFragment()
                     }
                 }
             })

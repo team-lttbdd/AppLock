@@ -1,0 +1,44 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="16dp"
+            android:height="16dp"
+            android:viewportWidth="16"
+            android:viewportHeight="16">
+
+            <!-- 1 path duy nhất -->
+            <path
+                android:name="chevron"
+                android:pathData="M 6 12.666 L 10 8 L 6 3.333"
+                android:strokeWidth="1.5"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round">
+                <aapt:attr name="android:strokeColor">
+                    <gradient
+                        android:type="linear"
+                        android:startX="0"
+                        android:startY="0"
+                        android:endX="16"
+                        android:endY="16"
+                        android:startColor="#0089FD"
+                        android:endColor="#0047F1" />
+                </aapt:attr>
+            </path>
+
+        </vector>
+    </aapt:attr>
+
+    <target android:name="chevron">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="pathData"
+                android:duration="100"
+                android:valueFrom="M 6 12.666 L 10 8 L 6 3.333"
+                android:valueTo="M 3.333 6 L 8 10 L 12.667 6"
+                android:valueType="pathType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>
