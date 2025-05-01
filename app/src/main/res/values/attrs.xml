@@ -25,6 +25,11 @@
         <attr format="float" name="angle"/>
     </declare-styleable>
 
+    <declare-styleable name="ReverseAnimatedVectorDrawableImageView">
+        <attr name="avdFirst" format="reference" />
+        <attr name="avdSecond" format="reference" />
+    </declare-styleable>
+
     <attr name="background_color_1" format="color"/>
     <attr name="background_color_2" format="color"/>
     <attr name="background_color_3" format="color"/>
