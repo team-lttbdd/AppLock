@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Khóa ứng dụng 2.0</string>
+    <string name="please_wait_loading">Vui lòng đợi, đang tải.....</string>
+    <string name="this_action_may_contain_advertisements">(Hành động này có thể chứa quảng cáo)</string>
+    <string name="languages">Ngôn ngữ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="korean">Tiếng Hàn</string>
+    <string name="portuguese">Tiếng Bồ Đào Nha</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="hindi">Tiếng Hindi</string>
+    <string name="french">Tiếng Pháp</string>
+    <string name="italian">Tiếng Ý</string>
+    <string name="polish">Tiếng Ba Lan</string>
+    <string name="german">Tiếng Đức</string>
+    <string name="japanese">Tiếng Nhật</string>
+    <string name="spanish">Tiếng Tây Ban Nha</string>
+</resources>

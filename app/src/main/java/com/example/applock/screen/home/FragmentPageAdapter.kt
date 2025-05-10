@@ -7,8 +7,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.applock.screen.home.all_app.AllAppFragment
 import com.example.applock.screen.home.locked_app.LockedAppFragment
 
-class FragmentPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class FragmentPageAdapter(
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int = 2
+
 
     override fun createFragment(position: Int): Fragment {
         return if (position == 0)
