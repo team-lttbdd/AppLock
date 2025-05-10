@@ -12,8 +12,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivityHomeBinding
-import com.example.applock.screen.home.all_app.AllAppFragment
-import com.example.applock.screen.home.locked_app.LockedAppFragment
 import com.google.android.material.tabs.TabLayout
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
@@ -25,7 +23,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     }
 
-
     override fun setupView() {
         binding.apply {
             viewPager2.adapter = FragmentPageAdapter(supportFragmentManager, lifecycle)
@@ -33,12 +30,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    binding.tabLayout.getTabAt(position)?.select()
+                    tabLayout.getTabAt(position)?.select()
                     updateTabLayoutTextColor(position)
-                    when (position) {
-                        0 -> AllAppFragment()
-                        1 -> LockedAppFragment()
-                    }
                 }
             })
         }
@@ -62,16 +55,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     fun updateTabLayoutTextColor(selectedPosition: Int) {
         for (i in 0 until binding.tabLayout.tabCount) {
-            val colors = if (i == selectedPosition) intArrayOf(
-                resources.getColor(
-                    R.color.gradient_start,
-                    null
-                ), resources.getColor(R.color.gradient_end, null)
-            ) else intArrayOf(Color.parseColor("#ACACAC"), Color.parseColor("#ACACAC"))
 
+            val colors = if (i == selectedPosition) intArrayOf(
+                resources.getColor(R.color.gradient_start, null),
+                resources.getColor(R.color.gradient_end, null)
+            ) else
+                intArrayOf(Color.parseColor("#ACACAC"),
+                    Color.parseColor("#ACACAC"))
             val tab = binding.tabLayout.getTabAt(i)
             val height = tab?.view?.height ?: 0
             val spannable = SpannableString(tab?.text)
+
             spannable.setSpan(GradientTextSpan(colors, height.toFloat()), 0, spannable.length, 0)
             tab?.text = spannable
 
@@ -96,7 +90,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             for (i in 0 until tab.view.childCount) {
                 val typeface = ResourcesCompat.getFont(tab.view.context, R.font.exo_bold)
                 val tabViewChild = tab.view.getChildAt(i)
-                if (tabViewChild is TextView) (tabViewChild).typeface = typeface
+                if (tabViewChild is TextView) tabViewChild.typeface = typeface
             }
         }
     }
