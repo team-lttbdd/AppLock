@@ -51,7 +51,6 @@ dependencies {
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.gson)
-    implementation ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0")
 
     // Room
     implementation(libs.androidx.room.runtime)
