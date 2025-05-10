@@ -2,19 +2,15 @@ package com.example.applock.util
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.applock.dao.AppInfoDatabase
 import com.example.applock.model.AppInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 object AppInfoUtil {
     var listAppInfo = ArrayList<AppInfo>()
@@ -33,7 +29,7 @@ object AppInfoUtil {
             if (activityInfo != null) {
                 val name: String = activityInfo.loadLabel(packageManager).toString()
                 val icon: Drawable = activityInfo.loadIcon(packageManager)
-                val packageName : String = activityInfo.packageName
+                val packageName: String = activityInfo.packageName
 
                 listAppInfo.add(AppInfo(icon, name, packageName, false))
 
@@ -42,39 +38,49 @@ object AppInfoUtil {
         listAppInfo.sortWith(compareBy { it.name })
     }
 
-    //Binary sort
-    private fun insertSortedAppInfo(sortedList: MutableList<AppInfo>, newApp: AppInfo) {
-        val index = sortedList.binarySearchBy(newApp.name) { it.name }
-        val insertIndex = if (index >= 0) index else -index - 1
-        sortedList.add(insertIndex, newApp)
+    private fun insertSortedAppInfo(
+        sortedList: MutableList<AppInfo>,
+        newApps: List<AppInfo>) {
+
+        sortedList.addAll(newApps)
+        sortedList.sortBy { it.name }
     }
 
-    fun transferAppInfo(context: Context,
-                        appInfo: AppInfo,
-                        receiveList: MutableList<AppInfo>,
-                        sendList: MutableList<AppInfo>,
-                        setNewList: (List<AppInfo>) -> Unit) {
-        // Avoid adding the same app to listLockedAppInfo multiple times when the user clicks repeatedly
-        if(!receiveList.contains(appInfo)) {
-            //Update the database
-            CoroutineScope(Dispatchers.IO).launch {
-                val db = AppInfoDatabase.getInstance(context)
-                db.appInfoDAO().updateAppLockStatus(appInfo.packageName, true)
+    fun transferAppInfo(
+        context: Context,
+        positionArray: BooleanArray,
+        receiveList: MutableList<AppInfo>,
+        sendList: MutableList<AppInfo>,
+        setNewList: (List<AppInfo>) -> Unit) {
+
+        val transferList: MutableList<AppInfo> = mutableListOf()
+        //Update the database
+        CoroutineScope(Dispatchers.IO).launch {
+            val db = AppInfoDatabase.getInstance(context)
+            for(i in positionArray.indices) {
+                if(positionArray[i])
+                    db.appInfoDAO().updateAppLockStatus(sendList[i].packageName, true)
             }
-
-            insertSortedAppInfo(receiveList, appInfo)
-
-            //Ensure that DiffUtil can accurately detect changes between the old and new lists
-            val tempList = sendList.filterNot { it == appInfo }
-            setNewList(tempList)
-            sendList.remove(appInfo)
         }
+
+        for(i in positionArray.indices) {
+            if(positionArray[i]) transferList.add(sendList[i])
+        }
+        insertSortedAppInfo(receiveList, transferList)
+
+        //Ensure that DiffUtil can accurately detect changes between the old and new lists
+        val tempList = sendList.filterNot {it in transferList}
+        setNewList(tempList)
+        sendList.clear()
+        sendList.addAll(tempList)
     }
 
-    fun filterList(context: Context,
-                   text : String,
-                   filteredList: MutableList<AppInfo>,
-                   setNewList: (List<AppInfo>) -> Unit) {
+    fun filterList(
+        context: Context,
+        text: String,
+        filteredList: MutableList<AppInfo>,
+        setNewList: (List<AppInfo>) -> Unit) {
+
         val tempList = filteredList.filter {
             it.name.lowercase().contains(text.lowercase())
         }
