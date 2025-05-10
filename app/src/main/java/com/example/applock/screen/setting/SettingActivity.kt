@@ -3,6 +3,7 @@ package com.example.applock.screen.setting
 import android.view.LayoutInflater
 import com.example.applock.databinding.ActivitySettingBinding
 
+
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivitySettingBinding {
         return ActivitySettingBinding.inflate(layoutInflater)

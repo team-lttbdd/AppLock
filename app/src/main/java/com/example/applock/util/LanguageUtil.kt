@@ -1,4 +1,5 @@
 package com.example.applock.util
+
 import android.content.Context
 import com.example.applock.preference.MyPreferences
 import java.util.Locale
