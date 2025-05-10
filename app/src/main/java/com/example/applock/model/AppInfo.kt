@@ -17,3 +17,5 @@ data class AppInfo(
     @ColumnInfo(name = "appInfo_isLocked")
     var isLocked: Boolean
 )
+
+

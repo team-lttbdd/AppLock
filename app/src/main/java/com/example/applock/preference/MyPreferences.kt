@@ -36,5 +36,3 @@ object MyPreferences {
             commit()
         }
     }
-}
-
