@@ -1,12 +1,13 @@
 package com.example.applock.base
 
+import com.example.applock.util.LanguageUtil
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.example.applock.util.LanguageUtil
 
 abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
     protected lateinit var binding: VB

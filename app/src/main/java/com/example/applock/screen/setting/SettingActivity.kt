@@ -1,6 +1,7 @@
 package com.example.applock.screen.setting
 
 import android.view.LayoutInflater
+import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivitySettingBinding
 
 
