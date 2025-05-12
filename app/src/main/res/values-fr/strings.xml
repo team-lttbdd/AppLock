@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">AppLock 2.0</string>
+    <string name="please_wait_loading">Veuillez patienter, chargement.....</string>
+    <string name="this_action_may_contain_advertisements">(Cette action peut contenir des publicités)</string>
+    <string name="languages">Langues</string>
+    <string name="english">Anglais</string>
+    <string name="korean">Coréen</string>
+    <string name="portuguese">Portugais</string>
+    <string name="vietnamese">Vietnamien</string>
+    <string name="hindi">Hindi</string>
+    <string name="french">Français</string>
+    <string name="italian">Italien</string>
+    <string name="polish">Polonais</string>
+    <string name="german">Allemand</string>
+    <string name="japanese">Japonais</string>
+    <string name="spanish">Espagnol</string>
+    <string name="fingerprint_unlock" translatable="false">Déverrouillage par empreinte digitale</string>
+    <string name="unlock_status" translatable="false">Non activé. Voulez-vous lactiver ?</string>
+    <string name="all_apps">Toutes les applications</string>
+    <string name="locked_apps">Applications verrouillées</string>
+    <string name="select_all">Tout sélectionner</string>
+    <string name="remove_all">Tout supprimer</string>
+    <string name="lock">Verrouiller</string>
+    <string name="unlock">Déverrouiller</string>
+    <string name="search">Rechercher</string>
+    <string name="setting">Paramètres</string>
+    <string name="password">Mot de passe</string>
+    <string name="feedback">Commentaires</string>
+    <string name="rate_this_app">Évaluer cette application</string>
+    <string name="share_with_friends">Partager avec des amis</string>
+    <string name="change_language">Changer de langue</string>
+    <string name="others">Autres</string>
+    <string name="unistall_protection">Protection contre la désinstallation</string>
+    <string name="relock_setting">Paramètres de reverrouillage</string>
+    <string name="security_questions">Questions de sécurité</string>
+    <string name="lock_new_app">Verrouiller la nouvelle application</string>
+    <string name="general">Général</string>
+    <string name="change_password">Changer de mot de passe</string>
+    <string name="hide_pattern_draw_path">Masquer le tracé du motif</string>
+</resources>

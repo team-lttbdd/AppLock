@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">AppLock 2.0</string>
+    <string name="please_wait_loading">Proszę czekać, ładowanie.....</string>
+    <string name="this_action_may_contain_advertisements">(Ta akcja może zawierać reklamy)</string>
+    <string name="languages">Języki</string>
+    <string name="english">Angielski</string>
+    <string name="korean">Koreański</string>
+    <string name="portuguese">Portugalski</string>
+    <string name="vietnamese">Wietnamski</string>
+    <string name="hindi">Hindi</string>
+    <string name="french">Francuski</string>
+    <string name="italian">Włoski</string>
+    <string name="polish">Polski</string>
+    <string name="german">Niemiecki</string>
+    <string name="japanese">Japoński</string>
+    <string name="spanish">Hiszpański</string>
+    <string name="fingerprint_unlock" translatable="false">Odblokowanie odciskiem palca</string>
+    <string name="unlock_status" translatable="false">Nie włączone. Czy chcesz włączyć?</string>
+    <string name="all_apps">Wszystkie aplikacje</string>
+    <string name="locked_apps">Zablokowane aplikacje</string>
+    <string name="select_all">Zaznacz wszystko</string>
+    <string name="remove_all">Usuń wszystko</string>
+    <string name="lock">Zablokuj</string>
+    <string name="unlock">Odblokuj</string>
+    <string name="search">Szukaj</string>
+    <string name="setting">Ustawienia</string>
+    <string name="password">Hasło</string>
+    <string name="feedback">Opinie</string>
+    <string name="rate_this_app">Oceń tę aplikację</string>
+    <string name="share_with_friends">Udostępnij znajomym</string>
+    <string name="change_language">Zmień język</string>
+    <string name="others">Inne</string>
+    <string name="unistall_protection">Ochrona przed odinstalowaniem</string>
+    <string name="relock_setting">Ustawienia ponownego blokowania</string>
+    <string name="security_questions">Pytania zabezpieczające</string>
+    <string name="lock_new_app">Zablokuj nową aplikację</string>
+    <string name="general">Ogólne</string>
+    <string name="change_password">Zmień hasło</string>
+    <string name="hide_pattern_draw_path">Ukryj ścieżkę rysowania wzoru</string>
+</resources>
