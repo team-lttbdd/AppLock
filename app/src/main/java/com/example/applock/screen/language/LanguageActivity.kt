@@ -8,6 +8,7 @@ import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivityLanguageBinding
 import com.example.applock.model.Language
 import com.example.applock.preference.MyPreferences
+import com.example.applock.screen.home.HomeActivity
 import com.example.applock.screen.set_new_lock_pattern.SetLockPatternActivity
 
 class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
@@ -69,7 +70,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         binding.btnDone.setOnClickListener {
             curLanguage?.let {
                 MyPreferences.write(MyPreferences.PREF_LANGUAGE, it)
-                startActivity(Intent(this@LanguageActivity, SetLockPatternActivity::class.java))
+                startActivity(Intent(this@LanguageActivity, HomeActivity::class.java))
                 finish()
             }
         }

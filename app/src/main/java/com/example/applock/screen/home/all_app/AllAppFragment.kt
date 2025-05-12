@@ -7,8 +7,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.applock.R
 import com.example.applock.base.BaseFragment
+import com.example.applock.dao.AppInfoDatabase
 import com.example.applock.databinding.FragmentAllAppsBinding
+import com.example.applock.model.AppInfo
 import com.example.applock.util.AppInfoUtil
+import com.example.applock.util.AppInfoUtil.listAppInfo
+import com.example.applock.util.AppInfoUtil.listLockedAppInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
 
@@ -18,7 +25,8 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
 
     override fun onResume() {
         super.onResume()
-        allAppAdapter.setNewList(AppInfoUtil.listAppInfo)
+        val tempList = listAppInfo
+        allAppAdapter.setNewList(tempList)
     }
 
     override fun getViewBinding(layoutInflater: LayoutInflater): FragmentAllAppsBinding {
@@ -30,7 +38,7 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
     override fun setupView() {
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            allAppAdapter = AllAppAdapter(AppInfoUtil.listAppInfo) { clickedAppInfo ->
+            allAppAdapter = AllAppAdapter(listAppInfo) { clickedAppInfo ->
                 allAppAdapter.updateSelectedPosition(clickedAppInfo)
                 updateBtnLock()
 
@@ -48,7 +56,7 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
                     AppInfoUtil.filterList(
                         requireContext(),
                         newText ?: "",
-                        AppInfoUtil.listAppInfo) {
+                        listAppInfo) {
                         allAppAdapter.setNewList(it)
                     }
                     return true
@@ -62,12 +70,35 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
         binding.apply {
             btnLock.setOnClickListener({
                 if(allAppAdapter.count != 0) {
-                    AppInfoUtil.transferAppInfo(
-                        requireContext(),
-                        allAppAdapter.booleanArray,
-                        AppInfoUtil.listLockedAppInfo,
-                        AppInfoUtil.listAppInfo) {allAppAdapter.setNewList(it)}
-                    allAppAdapter.booleanArray = BooleanArray(AppInfoUtil.listAppInfo.size)
+                    val transferList: MutableList<AppInfo> = mutableListOf()
+
+                    //Update the database
+                    //Guarantee that the lists do not change while iterating
+                    val flagsSnapshot = allAppAdapter.booleanArray.copyOf()
+                    val pkgSnapshot   = listAppInfo.toList()
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val db = AppInfoDatabase.getInstance(requireContext())
+                        for(i in flagsSnapshot.indices) {
+                            if(flagsSnapshot[i])
+                                db.appInfoDAO().updateAppLockStatus(pkgSnapshot[i].packageName, true)
+                        }
+                    }
+
+                    //Update the locked app list
+                    for(i in allAppAdapter.booleanArray.indices) {
+                        if(allAppAdapter.booleanArray[i]) transferList.add(listAppInfo[i])
+                    }
+                    AppInfoUtil.insertSortedAppInfo(listLockedAppInfo, transferList)
+
+                    //Update the app list and ui
+                    //Ensure that DiffUtil can accurately detect changes between the old and new lists
+                    val tempList = listAppInfo.filterNot {it in transferList}
+                    allAppAdapter.setNewList(tempList)
+                    listAppInfo.clear()
+                    listAppInfo.addAll(tempList)
+
+                    //Update the btnLock
                     allAppAdapter.count = 0
                     updateBtnLock()
                 }
@@ -111,4 +142,3 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
         }
     }
 }
-

@@ -63,6 +63,7 @@ class AllAppAdapter(
         })
 
         appList = newList
+        booleanArray = BooleanArray(appList.size)
         diffResult.dispatchUpdatesTo(this)
     }
 
