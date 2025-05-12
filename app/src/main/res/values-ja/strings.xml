@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">AppLock2.0</string>
+    <string name="please_wait_loading">しばらくお待ちください、ロード中.....</string>
+    <string name="this_action_may_contain_advertisements">(この操作には広告が含まれる場合があります)</string>
+    <string name="languages">言語</string>
+    <string name="english">英語</string>
+    <string name="korean">韓国語</string>
+    <string name="portuguese">ポルトガル語</string>
+    <string name="vietnamese">ベトナム語</string>
+    <string name="hindi">ヒンディー語</string>
+    <string name="french">フランス語</string>
+    <string name="italian">イタリア語</string>
+    <string name="polish">ポーランド語</string>
+    <string name="german">ドイツ語</string>
+    <string name="japanese">日本語</string>
+    <string name="spanish">スペイン語</string>
+    <string name="fingerprint_unlock" translatable="false">指紋認証</string>
+    <string name="unlock_status" translatable="false">無効です。有効にしますか？</string>
+    <string name="all_apps">すべてのアプリ</string>
+    <string name="locked_apps">ロックされたアプリ</string>
+    <string name="select_all">すべて選択</string>
+    <string name="remove_all">すべて削除</string>
+    <string name="lock">ロック</string>
+    <string name="unlock">ロック解除</string>
+    <string name="search">検索</string>
+    <string name="setting">設定</string>
+    <string name="password">パスワード</string>
+    <string name="feedback">フィードバック</string>
+    <string name="rate_this_app">このアプリを評価する</string>
+    <string name="share_with_friends">友達と共有</string>
+    <string name="change_language">言語を変更</string>
+    <string name="others">その他</string>
+    <string name="unistall_protection">アンインストール保護</string>
+    <string name="relock_setting">再ロック設定</string>
+    <string name="security_questions">セキュリティの質問</string>
+    <string name="lock_new_app">新しいアプリをロック</string>
+    <string name="general">一般</string>
+    <string name="change_password">パスワードを変更</string>
+    <string name="hide_pattern_draw_path">パターン描画パスを非表示</string>
+</resources>

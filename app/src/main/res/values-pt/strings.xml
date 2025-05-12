@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">AppLock2.0</string>
+    <string name="please_wait_loading">Por favor, aguarde, a carregar.....</string>
+    <string name="this_action_may_contain_advertisements">(Esta ação pode conter anúncios)</string>
+    <string name="languages">Idiomas</string>
+    <string name="english">Inglês</string>
+    <string name="korean">Coreano</string>
+    <string name="portuguese">Português</string>
+    <string name="vietnamese">Vietnamita</string>
+    <string name="hindi">Hindi</string>
+    <string name="french">Francês</string>
+    <string name="italian">Italiano</string>
+    <string name="polish">Polaco</string>
+    <string name="german">Alemão</string>
+    <string name="japanese">Japonês</string>
+    <string name="spanish">Espanhol</string>
+    <string name="fingerprint_unlock" translatable="false">Desbloqueio por impressão digital</string>
+    <string name="unlock_status" translatable="false">Não ativado. Deseja ativar?</string>
+    <string name="all_apps">Todas as Apps</string>
+    <string name="locked_apps">Apps Bloqueadas</string>
+    <string name="select_all">Selecionar Tudo</string>
+    <string name="remove_all">Remover Tudo</string>
+    <string name="lock">Bloquear</string>
+    <string name="unlock">Desbloquear</string>
+    <string name="search">Pesquisar</string>
+    <string name="setting">Definições</string>
+    <string name="password">Palavra-passe</string>
+    <string name="feedback">Feedback</string>
+    <string name="rate_this_app">Avalie esta app</string>
+    <string name="share_with_friends">Partilhe com amigos</string>
+    <string name="change_language">Mudar idioma</string>
+    <string name="others">Outros</string>
+    <string name="unistall_protection">Proteção contra desinstalação</string>
+    <string name="relock_setting">Definição de novo bloqueio</string>
+    <string name="security_questions">Perguntas de segurança</string>
+    <string name="lock_new_app">Bloquear nova app</string>
+    <string name="general">Geral</string>
+    <string name="change_password">Mudar palavra-passe</string>
+    <string name="hide_pattern_draw_path">Ocultar caminho do padrão de desenho</string>
+</resources>
