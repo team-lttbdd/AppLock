@@ -12,7 +12,7 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            app:queryHint="Search"
+            app:queryHint="@string/search"
             app:searchIcon="@drawable/ic_search"
             android:background="@drawable/bg_search_bar"
             app:iconifiedByDefault="false"

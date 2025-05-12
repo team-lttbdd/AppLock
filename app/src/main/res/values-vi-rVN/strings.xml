@@ -15,4 +15,28 @@
     <string name="german">Tiếng Đức</string>
     <string name="japanese">Tiếng Nhật</string>
     <string name="spanish">Tiếng Tây Ban Nha</string>
+
+    <string name="fingerprint_unlock" translatable="false">Mở khóa bằng vân tay</string>
+    <string name="unlock_status" translatable="false">Chưa bật. Bạn có muốn bật không?</string>
+    <string name="all_apps">Tất cả ứng dụng</string>
+    <string name="locked_apps">Ứng dụng đã khóa</string>
+    <string name="select_all">Chọn tất cả</string>
+    <string name="remove_all">Xóa tất cả</string>
+    <string name="lock">Khóa</string>
+    <string name="unlock">Mở khóa</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="setting">Cài đặt</string>
+    <string name="password">Mật khẩu</string>
+    <string name="feedback">Phản hồi</string>
+    <string name="rate_this_app">Đánh giá ứng dụng này</string>
+    <string name="share_with_friends">Chia sẻ với bạn bè</string>
+    <string name="change_language">Đổi ngôn ngữ</string>
+    <string name="others">Khác</string>
+    <string name="unistall_protection">Chống gỡ cài đặt</string>
+    <string name="relock_setting">Cài đặt tự động khóa lại</string>
+    <string name="security_questions">Câu hỏi bảo mật</string>
+    <string name="lock_new_app">Khóa ứng dụng mới</string>
+    <string name="general">Chung</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="hide_pattern_draw_path">Ẩn đường vẽ hình</string>
 </resources>
