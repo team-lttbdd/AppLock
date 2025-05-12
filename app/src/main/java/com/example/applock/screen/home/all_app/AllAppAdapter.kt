@@ -11,11 +11,10 @@ import com.example.applock.databinding.ItemAppBinding
 import com.example.applock.model.AppInfo
 
 class AllAppAdapter(
-    var appList: List<AppInfo>,
+    private var appList: MutableList<AppInfo>, // Sử dụng MutableList để có thể chỉnh sửa trong adapter
     private val onItemClick: (AppInfo) -> Unit
 ) : RecyclerView.Adapter<AllAppAdapter.AppItemViewHolder>() {
 
-    private lateinit var itemView: ItemAppBinding
     internal var booleanArray = BooleanArray(appList.size)
     internal var count = 0
     private var lastClickTime = 0L
@@ -46,29 +45,25 @@ class AllAppAdapter(
         else count = 0
     }
 
-    fun setNewList(newList: List<AppInfo>) {
+    fun setNewList(newList: List<AppInfo>) { // Nhận List<AppInfo> và chuyển thành MutableList
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun getOldListSize(): Int = appList.size
-
             override fun getNewListSize(): Int = newList.size
-
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return appList[oldItemPosition].packageName ==
-                        newList[newItemPosition].packageName
+                return appList[oldItemPosition].packageName == newList[newItemPosition].packageName
             }
-
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return appList[oldItemPosition] == newList[newItemPosition]
             }
         })
-
-        appList = newList
+        appList.clear()
+        appList.addAll(newList)
         booleanArray = BooleanArray(appList.size)
         diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppItemViewHolder {
-        itemView = ItemAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemView = ItemAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AppItemViewHolder(itemView)
     }
 
@@ -92,7 +87,6 @@ class AllAppAdapter(
                 itemView.setBackgroundResource(
                     if (booleanArray[position]) R.drawable.bg_selected_language_item else R.drawable.bg_language_item
                 )
-                // Global debounce to prevent multiple clicks across items
                 itemView.setOnClickListener {
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastClickTime > 800) {
@@ -111,9 +105,7 @@ class SlideOutRightItemAnimator : DefaultItemAnimator() {
         view.animate()
             .translationX(view.width.toFloat())
             .setDuration(300)
-            .withEndAction {
-                dispatchRemoveFinished(holder)
-            }
+            .withEndAction { dispatchRemoveFinished(holder) }
             .start()
         return true
     }
@@ -124,9 +116,7 @@ class SlideOutRightItemAnimator : DefaultItemAnimator() {
         view.animate()
             .translationX(0f)
             .setDuration(300)
-            .withEndAction {
-                dispatchAddFinished(holder)
-            }
+            .withEndAction { dispatchAddFinished(holder) }
             .start()
         return true
     }
