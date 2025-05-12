@@ -151,11 +151,11 @@ class LockedAppFragment : BaseFragment<FragmentLockedAppsBinding>() {
             if (lockedAppAdapter.count != 0) {
                 btnLock.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_active_button))
                 tvLock.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                tvLock.text = "(${lockedAppAdapter.count}) Unlock"
+                tvLock.text = "(${lockedAppAdapter.count}) ${getString(R.string.unlock)}"
             } else {
                 btnLock.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_inactive_button))
                 tvLock.setTextColor(ContextCompat.getColor(requireContext(), R.color.hint_text))
-                tvLock.text = "Unlock"
+                tvLock.text = "${getString(R.string.unlock)}"
             }
         }
     }

@@ -49,27 +49,39 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
     }
 
-    private suspend fun processAppDataAndNavigate(hasLockPattern : Boolean) {
+    private suspend fun processAppDataAndNavigate(hasLockPattern: Boolean) {
         val startTime = System.currentTimeMillis()
-        //Initial 2 app lists
         withContext(Dispatchers.IO) {
             val appInfoDao = db.appInfoDAO()
-            if(!hasLockPattern) {
+            if (!hasLockPattern) {
                 AppInfoUtil.initInstalledApps(this@SplashActivity)
-                AppInfoUtil.listAppInfo.forEach{ appInfo ->
-                appInfoDao.insertAppInfo(appInfo)
+                // Tạo bản sao để tránh ConcurrentModificationException
+                val appListCopy = ArrayList(AppInfoUtil.listAppInfo)
+                appListCopy.forEach { appInfo ->
+                    appInfoDao.insertAppInfo(appInfo)
                 }
-            }
-            else {
-                AppInfoUtil.listAppInfo = appInfoDao.getAllApp() as ArrayList<AppInfo>
-                AppInfoUtil.listLockedAppInfo = appInfoDao.getLockedApp() as ArrayList<AppInfo>
+            } else {
+                // Lấy danh sách từ database
+                val allApps = appInfoDao.getAllApp() as ArrayList<AppInfo>
+                val lockedApps = appInfoDao.getLockedApp() as ArrayList<AppInfo>
+
+                // Cập nhật trạng thái isLocked cho allApps
+                allApps.forEach { app ->
+                    app.isLocked = lockedApps.any { it.packageName == app.packageName }
+                }
+
+                // Gán vào danh sách toàn cục
+                synchronized(AppInfoUtil) {
+                    AppInfoUtil.listAppInfo = allApps
+                    AppInfoUtil.listLockedAppInfo = lockedApps
+                }
             }
         }
 
         val elapsedTime = System.currentTimeMillis() - startTime
         if (elapsedTime < 3000) delay(3000 - elapsedTime)
 
-        navigateTo(if(!hasLockPattern) LanguageActivity::class.java else LockPatternActivity::class.java)
+        navigateTo(if (!hasLockPattern) LanguageActivity::class.java else LockPatternActivity::class.java)
     }
 
     private fun navigateTo(destination: Class<*>) {
