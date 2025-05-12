@@ -11,7 +11,7 @@ import com.example.applock.databinding.ItemAppBinding
 import com.example.applock.model.AppInfo
 
 class AllAppAdapter(
-    private var appList: MutableList<AppInfo>, // Sử dụng MutableList để có thể chỉnh sửa trong adapter
+    private var appList: MutableList<AppInfo>,
     private val onItemClick: (AppInfo) -> Unit
 ) : RecyclerView.Adapter<AllAppAdapter.AppItemViewHolder>() {
 
@@ -45,7 +45,7 @@ class AllAppAdapter(
         else count = 0
     }
 
-    fun setNewList(newList: List<AppInfo>) { // Nhận List<AppInfo> và chuyển thành MutableList
+    fun setNewList(newList: List<AppInfo>) {
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun getOldListSize(): Int = appList.size
             override fun getNewListSize(): Int = newList.size
@@ -58,8 +58,13 @@ class AllAppAdapter(
         })
         appList.clear()
         appList.addAll(newList)
-        booleanArray = BooleanArray(appList.size)
+        booleanArray = BooleanArray(appList.size) // Reset booleanArray khi danh sách thay đổi
+        count = 0 // Reset count khi danh sách thay đổi
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun getCurrentList(): List<AppInfo> {
+        return appList.toList() // Trả về một bản sao của danh sách hiện tại
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppItemViewHolder {
