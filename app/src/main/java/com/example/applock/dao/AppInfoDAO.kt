@@ -11,23 +11,26 @@ import com.example.applock.model.AppInfo
 @Dao
 interface AppInfoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAppInfo(appInfo: AppInfo) : Long
+    suspend fun insertAppInfo(appInfo: AppInfo): Long
 
     @Update
-    suspend fun updateAppInfo(appInfo: AppInfo) : Int
+    suspend fun updateAppInfo(appInfo: AppInfo): Int
 
     @Query("UPDATE appInfo_data_tab SET appInfo_isLocked = :isLocked WHERE appInfo_packageName = :packageName")
     suspend fun updateAppLockStatus(packageName: String, isLocked: Boolean): Int
 
     @Delete
-    suspend fun deleteAppInfo(appInfo: AppInfo) : Int
+    suspend fun deleteAppInfo(appInfo: AppInfo): Int
 
     @Query("DELETE FROM appInfo_data_tab")
     suspend fun deleteAll()
 
     @Query("SELECT * FROM appInfo_data_tab WHERE appInfo_isLocked = 0")
-    suspend fun getAllApp(): List<AppInfo>
+    suspend fun getAllApp(): List<AppInfo> // Giữ nguyên List<AppInfo>, xử lý mutable ở ViewModel
 
     @Query("SELECT * FROM appInfo_data_tab WHERE appInfo_isLocked = 1")
-    suspend fun getLockedApp(): List<AppInfo>
+    suspend fun getLockedApp(): List<AppInfo> // Giữ nguyên List<AppInfo>
+
+    @Query("SELECT appInfo_isLocked FROM appInfo_data_tab WHERE appInfo_packageName = :packageName")
+    suspend fun isAppLocked(packageName: String): Boolean // Thêm phương thức kiểm tra trạng thái khóa
 }

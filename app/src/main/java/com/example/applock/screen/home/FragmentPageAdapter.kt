@@ -9,15 +9,16 @@ import com.example.applock.screen.home.locked_app.LockedAppFragment
 
 class FragmentPageAdapter(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    lifecycle: Lifecycle,
+    private val viewModel: AppLockViewModel
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int = 2
 
-
     override fun createFragment(position: Int): Fragment {
-        return if (position == 0)
-            AllAppFragment()
-        else
-            LockedAppFragment()
+        return when (position) {
+            0 -> AllAppFragment().apply { setViewModel(viewModel) }
+            1 -> LockedAppFragment().apply { setViewModel(viewModel) }
+            else -> throw IllegalArgumentException("Invalid position")
+        }
     }
-
 }
