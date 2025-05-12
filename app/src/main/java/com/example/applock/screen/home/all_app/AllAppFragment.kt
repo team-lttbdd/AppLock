@@ -31,7 +31,13 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.allApps.value?.let { allAppAdapter.setNewList(it) } ?: allAppAdapter.setNewList(mutableListOf())
+        val appList = viewModel.allApps.value ?: mutableListOf()
+        checkBox = false
+        allAppAdapter.updateAllPosition(false)
+        allAppAdapter.count = 0
+        updateBtnLock()
+        updateCheckboxState(appList)
+        allAppAdapter.setNewList(appList)
     }
 
     override fun getViewBinding(layoutInflater: LayoutInflater): FragmentAllAppsBinding {
@@ -50,12 +56,23 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
             allAppAdapter = AllAppAdapter(mutableListOf()) { clickedAppInfo ->
                 allAppAdapter.updateSelectedPosition(clickedAppInfo)
                 updateBtnLock()
+                updateCheckboxState(allAppAdapter.getCurrentList()) // Cập nhật checkbox khi chọn ứng dụng
             }
             recyclerView.adapter = allAppAdapter
             recyclerView.itemAnimator = SlideOutRightItemAnimator()
 
             viewModel.allApps.observe(viewLifecycleOwner) { apps ->
                 allAppAdapter.setNewList(apps ?: mutableListOf())
+                binding.cbSelectAll.isEnabled = (apps?.isNotEmpty() == true)
+                if (apps.isNullOrEmpty()) {
+                    checkBox = false
+                    allAppAdapter.updateAllPosition(false)
+                    allAppAdapter.count = 0
+                    updateBtnLock()
+                    updateCheckboxState(apps ?: mutableListOf())
+                } else {
+                    updateCheckboxState(apps)
+                }
             }
 
             searchBar.clearFocus()
@@ -66,6 +83,7 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
                     val currentList = viewModel.allApps.value ?: mutableListOf()
                     AppInfoUtil.filterList(requireContext(), newText ?: "", currentList) { filteredList ->
                         allAppAdapter.setNewList(filteredList.toMutableList())
+                        updateCheckboxState(filteredList)
                     }
                     return true
                 }
@@ -92,11 +110,11 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
                                 transferList.add(currentAllApps[i])
                             }
                         }
-                        // Sau khi cập nhật database, reload lại dữ liệu
                         withContext(Dispatchers.Main) {
                             viewModel.loadInitialData(requireContext())
                             allAppAdapter.count = 0
                             updateBtnLock()
+                            updateCheckboxState(viewModel.allApps.value ?: mutableListOf())
                         }
                     }
                 }
@@ -106,17 +124,20 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
                 val currentTime = System.currentTimeMillis()
                 if (currentTime - lastButtonClickTime > 1000) {
                     lastButtonClickTime = currentTime
+                    val currentList = allAppAdapter.getCurrentList()
                     if (!checkBox) {
                         cbSelectAll.setBackgroundResource(R.drawable.checkbox_checked)
                         tvSelectOrRemove.text = ContextCompat.getString(tvSelectOrRemove.context, R.string.remove_all)
                         checkBox = true
                         allAppAdapter.updateAllPosition(true)
+                        allAppAdapter.count = currentList.size // Đặt count bằng tổng số phần tử
                         updateBtnLock()
                     } else {
                         cbSelectAll.setBackgroundResource(R.drawable.checkbox_unchecked)
                         tvSelectOrRemove.text = ContextCompat.getString(tvSelectOrRemove.context, R.string.select_all)
                         checkBox = false
                         allAppAdapter.updateAllPosition(false)
+                        allAppAdapter.count = 0
                         updateBtnLock()
                     }
                 }
@@ -137,5 +158,20 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
                 tvLock.text = "Lock"
             }
         }
+    }
+
+    private fun updateCheckboxState(appList: List<AppInfo>) {
+        val allSelected = allAppAdapter.count == appList.size
+        if (allSelected && appList.isNotEmpty()) {
+            binding.cbSelectAll.setBackgroundResource(R.drawable.checkbox_checked)
+            binding.tvSelectOrRemove.text = ContextCompat.getString(binding.tvSelectOrRemove.context, R.string.remove_all)
+            checkBox = true
+        } else {
+            binding.cbSelectAll.setBackgroundResource(R.drawable.checkbox_unchecked)
+            binding.tvSelectOrRemove.text = ContextCompat.getString(binding.tvSelectOrRemove.context, R.string.select_all)
+            checkBox = false
+        }
+        binding.cbSelectAll.isEnabled = appList.isNotEmpty()
+        updateBtnLock()
     }
 }
