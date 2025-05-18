@@ -66,4 +66,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
+    <com.example.applock.custom.lock_pattern.PatternLockView
+        android:id="@+id/pattern_lock_view"
+        android:layout_width="@dimen/_240sdp"
+        android:layout_height="@dimen/_240sdp"
+        android:layout_marginBottom="@dimen/_76sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_draw_an_unlock_pattern" />
 </androidx.constraintlayout.widget.ConstraintLayout>
