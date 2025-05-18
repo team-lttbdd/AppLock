@@ -8,6 +8,7 @@ object MyPreferences {
     private const val PREFS_NAME = "shared_preferences"
     const val PREF_LANGUAGE = "pref_language"
     const val PREF_LOCK_PATTERN = "pref_lock_pattern"
+    const val IS_HIDE_DRAW_PATTERN = "isHidePattern"
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

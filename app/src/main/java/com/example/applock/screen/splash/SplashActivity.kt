@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
+import com.example.applock.constant.EXTRA_FROM_SPLASH
 import com.example.applock.dao.AppInfoDatabase
 import com.example.applock.databinding.ActivitySplashBinding
 import com.example.applock.model.AppInfo
@@ -81,11 +82,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         val elapsedTime = System.currentTimeMillis() - startTime
         if (elapsedTime < 3000) delay(3000 - elapsedTime)
 
-        navigateTo(if (!hasLockPattern) LanguageActivity::class.java else LockPatternActivity::class.java)
+        navigateTo(hasLockPattern)
     }
 
-    private fun navigateTo(destination: Class<*>) {
-        startActivity(Intent(this, destination))
+    private fun navigateTo(hasLockPattern: Boolean) {
+        if (!hasLockPattern) {
+            startActivity(Intent(this, LanguageActivity::class.java).apply {
+                putExtra(EXTRA_FROM_SPLASH, true)
+            })
+        } else {
+            startActivity(Intent(this, LockPatternActivity::class.java))
+        }
         finish()
     }
 
