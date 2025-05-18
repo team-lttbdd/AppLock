@@ -1,4 +1,3 @@
 package com.example.applock.constant;
-enum class myConstant {
-    DARK_THEME, LIGHT_THEME
-}
+
+const val EXTRA_FROM_SPLASH = "EXTRA_FROM_SPLASH"
