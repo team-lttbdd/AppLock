@@ -1,12 +1,8 @@
 package com.example.applock.screen.home
 
-import android.app.AppOpsManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Shader
-import android.media.audiofx.BassBoost.Settings
-import android.os.Build
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.CharacterStyle
@@ -16,13 +12,15 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.applock.LockService
+import com.example.applock.service.LockService
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivityHomeBinding
+import com.example.applock.screen.setting.SettingActivity
 import com.example.applock.util.PermissionUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.jvm.java
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private val viewModel: AppLockViewModel by viewModels()
@@ -94,6 +92,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
+            btnSetting.setOnClickListener({
+                startActivity(Intent(this@HomeActivity, SettingActivity::class.java))
+
             })
         }
     }

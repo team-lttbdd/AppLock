@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
-import com.example.applock.constant.EXTRA_FROM_SPLASH
 import com.example.applock.dao.AppInfoDatabase
 import com.example.applock.databinding.ActivitySplashBinding
 import com.example.applock.model.AppInfo
@@ -50,49 +49,31 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
     }
 
-    private suspend fun processAppDataAndNavigate(hasLockPattern: Boolean) {
+    private suspend fun processAppDataAndNavigate(hasLockPattern : Boolean) {
         val startTime = System.currentTimeMillis()
+        //Initial 2 app lists
         withContext(Dispatchers.IO) {
             val appInfoDao = db.appInfoDAO()
-            if (!hasLockPattern) {
+            if(!hasLockPattern) {
                 AppInfoUtil.initInstalledApps(this@SplashActivity)
-                // Tạo bản sao để tránh ConcurrentModificationException
-                val appListCopy = ArrayList(AppInfoUtil.listAppInfo)
-                appListCopy.forEach { appInfo ->
+                AppInfoUtil.listAppInfo.forEach{ appInfo ->
                     appInfoDao.insertAppInfo(appInfo)
                 }
-            } else {
-                // Lấy danh sách từ database
-                val allApps = appInfoDao.getAllApp() as ArrayList<AppInfo>
-                val lockedApps = appInfoDao.getLockedApp() as ArrayList<AppInfo>
-
-                // Cập nhật trạng thái isLocked cho allApps
-                allApps.forEach { app ->
-                    app.isLocked = lockedApps.any { it.packageName == app.packageName }
-                }
-
-                // Gán vào danh sách toàn cục
-                synchronized(AppInfoUtil) {
-                    AppInfoUtil.listAppInfo = allApps
-                    AppInfoUtil.listLockedAppInfo = lockedApps
-                }
+            }
+            else {
+                AppInfoUtil.listAppInfo = appInfoDao.getAllApp() as ArrayList<AppInfo>
+                AppInfoUtil.listLockedAppInfo = appInfoDao.getLockedApp() as ArrayList<AppInfo>
             }
         }
 
         val elapsedTime = System.currentTimeMillis() - startTime
         if (elapsedTime < 3000) delay(3000 - elapsedTime)
 
-        navigateTo(hasLockPattern)
+        navigateTo(if(!hasLockPattern) LanguageActivity::class.java else LockPatternActivity::class.java)
     }
 
-    private fun navigateTo(hasLockPattern: Boolean) {
-        if (!hasLockPattern) {
-            startActivity(Intent(this, LanguageActivity::class.java).apply {
-                putExtra(EXTRA_FROM_SPLASH, true)
-            })
-        } else {
-            startActivity(Intent(this, LockPatternActivity::class.java))
-        }
+    private fun navigateTo(destination: Class<*>) {
+        startActivity(Intent(this, destination))
         finish()
     }
 

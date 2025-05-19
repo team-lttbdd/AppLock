@@ -28,7 +28,7 @@
 
 
     <ImageView
-        android:id="@+id/btn_done"
+        android:id="@+id/btn_setting"
         android:layout_width="@dimen/_32sdp"
         android:layout_height="@dimen/_32sdp"
         android:layout_marginTop="@dimen/_15sdp"

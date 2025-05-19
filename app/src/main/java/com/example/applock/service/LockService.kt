@@ -1,4 +1,4 @@
-package com.example.applock
+package com.example.applock.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.app.Service
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
@@ -18,11 +17,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import androidx.annotation.RequiresApi
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import com.example.applock.R
 import com.example.applock.custom.lock_pattern.PatternLockView
-import com.example.applock.custom.lock_pattern.PatternLockView.PatternViewMode
 import com.example.applock.custom.lock_pattern.listener.PatternLockViewListener
 import com.example.applock.preference.MyPreferences
 import com.example.applock.screen.home.HomeActivity
@@ -53,9 +51,9 @@ class LockService : Service() {
         super.onCreate()
         createNotificationChannel()
 
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
 
-        usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        usageStatsManager = getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
 
         // Tải pattern từ SharedPreferences
         loadSavedPattern()
@@ -130,7 +128,10 @@ class LockService : Service() {
         }
 
         if (foregroundPackageName.isNotEmpty() && foregroundPackageName != lastForegroundPackageName) {
-            val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+            val timestamp = SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss",
+                Locale.getDefault()
+            ).format(Date())
             val logMessage = "[$timestamp] Ứng dụng được mở: $foregroundPackageName"
             val isLocked = AppInfoUtil.listLockedAppInfo.stream()
                 .anyMatch({ appInfo -> appInfo.packageName.equals(foregroundPackageName) })
@@ -153,14 +154,14 @@ class LockService : Service() {
         if (isOverlayShown) return
 
         try {
-            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             // Sử dụng layout lock_pattern_overlay.xml (bạn cần tạo file layout này)
             overlayView = inflater.inflate(R.layout.lock_pattern_overlay, null)
 
             // Lấy các view từ layout
             val patternLockView = overlayView?.findViewById<PatternLockView>(R.id.pattern_lock_view)
-            val tvAppName = overlayView?.findViewById<android.widget.TextView>(R.id.tv_app_name)
-            val tvDrawPattern = overlayView?.findViewById<android.widget.TextView>(R.id.tv_draw_an_unlock_pattern)
+            val tvAppName = overlayView?.findViewById<TextView>(R.id.tv_app_name)
+            val tvDrawPattern = overlayView?.findViewById<TextView>(R.id.tv_draw_an_unlock_pattern)
 
             // Cập nhật tên ứng dụng
             tvAppName?.text = getAppNameFromPackage(packageName)
@@ -183,7 +184,7 @@ class LockService : Service() {
                         AnimationUtil.setTextWrong(patternLockView, tvDrawPattern, tempPattern)
                     } else {
                         // Pattern đúng, ẩn overlay
-                        patternLockView.setPattern(PatternViewMode.CORRECT, tempPattern)
+                        patternLockView.setPattern(PatternLockView.PatternViewMode.CORRECT, tempPattern)
 
                         // Thêm độ trễ ngắn để người dùng thấy mẫu hình đúng đã được vẽ
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -262,7 +263,7 @@ class LockService : Service() {
                 logFile.createNewFile()
             }
 
-            applicationContext.openFileOutput("app_access_log.txt", Context.MODE_APPEND).use { output ->
+            applicationContext.openFileOutput("app_access_log.txt", MODE_APPEND).use { output ->
                 output.write("$message\n".toByteArray())
             }
         } catch (e: Exception) {
