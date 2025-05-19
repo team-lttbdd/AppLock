@@ -1,23 +1,32 @@
 package com.example.applock.screen.home
 
+import android.app.AppOpsManager
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Shader
+import android.media.audiofx.BassBoost.Settings
+import android.os.Build
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.CharacterStyle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.applock.LockService
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivityHomeBinding
+import com.example.applock.util.PermissionUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private val viewModel: AppLockViewModel by viewModels()
+    private lateinit var permissionUtils: PermissionUtils
 
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityHomeBinding {
         return ActivityHomeBinding.inflate(layoutInflater)
@@ -30,8 +39,23 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        permissionUtils = PermissionUtils(this)
+        // Yêu cầu các quyền cần thiết
+        checkAndRequestPermissions()
+        ContextCompat.startForegroundService(this, Intent(this, LockService::class.java))
     }
 
+    private fun checkAndRequestPermissions() {
+        if (!permissionUtils.checkUsageStatsPermission()) {
+            permissionUtils.requestUsageStatsPermission()
+        }
+
+        // Kiểm tra quyền Overlay
+        if (!permissionUtils.checkOverlayPermission()) {
+            permissionUtils.requestOverlayPermission()
+        }
+    }
     override fun setupView() {
         try {
             binding.apply {

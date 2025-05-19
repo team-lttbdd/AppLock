@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
     <application
         android:name="com.example.applock.screen.app.MyApplication"
         android:allowBackup="true"
@@ -14,9 +25,18 @@
         android:theme="@style/Theme.LightTheme"
         tools:targetApi="31">
 
+        <service
+            android:name=".service.LockService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="specialUse" />
+
+        <activity
+            android:name=".screen.setting.SettingActivity"
+            android:exported="false" />
         <activity
             android:name=".screen.set_new_lock_pattern.SetLockPatternActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".screen.validate_lock_pattern.LockPatternActivity"
             android:exported="false" />
