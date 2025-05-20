@@ -19,6 +19,7 @@ class LockPatternActivity : BaseActivity<ActivityLockPatternBinding>() {
 
     private lateinit var correctPattern: List<PatternLockView.Dot>
     private lateinit var tempPattern : ArrayList<PatternLockView.Dot>
+    private var isChangePassword = false
 
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityLockPatternBinding {
         return ActivityLockPatternBinding.inflate(layoutInflater)
@@ -30,6 +31,7 @@ class LockPatternActivity : BaseActivity<ActivityLockPatternBinding>() {
         val json = MyPreferences.read(MyPreferences.PREF_LOCK_PATTERN, null)
         val type = object : TypeToken<List<PatternLockView.Dot>>() {}.type
         correctPattern = gson.fromJson(json, type)
+        isChangePassword = intent.getBooleanExtra("CHANGE_PASSWORD", false)
     }
 
     override fun setupView() {
@@ -53,8 +55,12 @@ class LockPatternActivity : BaseActivity<ActivityLockPatternBinding>() {
                     AnimationUtil.setTextWrong(binding.patternLockView, binding.tvDrawAnUnlockPattern, tempPattern)
 
                 } else {
-                    binding.patternLockView.setPattern(PatternViewMode.CORRECT, tempPattern)
-                    startActivity(Intent(this@LockPatternActivity,  HomeActivity::class.java))
+                    val intent = if (isChangePassword) {
+                        Intent(this@LockPatternActivity, com.example.applock.screen.set_new_lock_pattern.SetLockPatternActivity::class.java)
+                    } else {
+                        Intent(this@LockPatternActivity, HomeActivity::class.java)
+                    }
+                    startActivity(intent)
                     finish()
                 }
 

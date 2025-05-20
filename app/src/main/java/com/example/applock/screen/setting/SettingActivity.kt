@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivitySettingBinding
 import com.example.applock.screen.home.HomeActivity
+import com.example.applock.screen.validate_lock_pattern.LockPatternActivity
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivitySettingBinding {
@@ -22,36 +23,15 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
     override fun handleEvent() {
         binding.apply {
-            imgToggle1.setOnClickListener {
-                imgToggle1.startAnim {
 
-                }
+            binding.itemChangePassword.setOnClickListener {
+                val intent = Intent(this@SettingActivity, LockPatternActivity::class.java)
+                intent.putExtra("CHANGE_PASSWORD", true)
+                startActivity(intent)
             }
 
-            imgToggle2.setOnClickListener {
-                imgToggle2.startAnim {
 
-                }
-            }
-            imgToggle3.setOnClickListener {
-                imgToggle3.startAnim {
-
-                }
-            }
-            imgChevron1.setOnClickListener {
-                imgChevron1.startAnim {
-
-                }
-            }
-
-            imgChevron3.setOnClickListener {
-                imgChevron3.startAnim {
-
-                }
-            }
-
-            btnBack.setOnClickListener {
-                startActivity(Intent(this@SettingActivity, HomeActivity::class.java))
+            imgBack.setOnClickListener {
                 finish()
             }
         }
