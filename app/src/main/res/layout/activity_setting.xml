@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btnBack"
+        android:id="@+id/imgBack"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
         android:layout_marginStart="@dimen/_15sdp"
@@ -36,7 +36,7 @@
         android:text="@string/setting"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/imgBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Scrollable area -->
@@ -96,148 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imgBanner" />
 
-            <View
-                android:id="@+id/itemSecurityQuestions"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:background="#EDF3FF"
-                app:layout_constraintDimensionRatio="328:55"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPassword" />
 
-            <ImageView
-                android:id="@+id/imgSecurityQuestions"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_security_question"
-                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
-                app:layout_constraintStart_toStartOf="@id/itemSecurityQuestions"
-                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
-
-            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
-                android:id="@+id/imgChevron1"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:avdFirst="@drawable/avd_chevron"
-                app:avdSecond="@drawable/avd_chevron_reverse"
-                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
-                app:layout_constraintEnd_toEndOf="@id/itemSecurityQuestions"
-                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/security_questions"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="@id/itemSecurityQuestions"
-                app:layout_constraintStart_toEndOf="@id/imgSecurityQuestions"
-                app:layout_constraintTop_toTopOf="@id/itemSecurityQuestions" />
-
-            <View
-                android:id="@+id/itemFingerprintUnlock"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:background="#EDF3FF"
-                app:layout_constraintDimensionRatio="328:55"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemSecurityQuestions" />
-
-            <ImageView
-                android:id="@+id/imgFingerprintUnlock"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_fingerprint"
-                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
-                app:layout_constraintStart_toStartOf="@id/itemFingerprintUnlock"
-                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
-
-            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
-                android:id="@+id/imgToggle1"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:avdFirst="@drawable/avd_toggle_reverse"
-
-                app:avdSecond="@drawable/avd_toggle"
-                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
-                app:layout_constraintEnd_toEndOf="@id/itemFingerprintUnlock"
-                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/fingerprint_unlock"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="@id/itemFingerprintUnlock"
-                app:layout_constraintStart_toEndOf="@id/imgFingerprintUnlock"
-                app:layout_constraintTop_toTopOf="@id/itemFingerprintUnlock" />
-
-            <View
-                android:id="@+id/itemLockNewApp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:background="#EDF3FF"
-                app:layout_constraintDimensionRatio="328:55"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemFingerprintUnlock" />
-
-            <ImageView
-                android:id="@+id/imgLockNewApp"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_lock_new_app"
-                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
-                app:layout_constraintStart_toStartOf="@id/itemLockNewApp"
-                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
-
-            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
-                android:id="@+id/imgToggle2"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:avdFirst="@drawable/avd_toggle_reverse"
-
-                app:avdSecond="@drawable/avd_toggle"
-                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
-                app:layout_constraintEnd_toEndOf="@id/itemLockNewApp"
-                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/lock_new_app"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="@id/itemLockNewApp"
-                app:layout_constraintStart_toEndOf="@id/imgLockNewApp"
-                app:layout_constraintTop_toTopOf="@id/itemLockNewApp" />
 
             <View
                 android:id="@+id/itemHidePatternDrawPath"
@@ -248,7 +107,7 @@
                 app:layout_constraintDimensionRatio="328:55"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemLockNewApp" />
+                app:layout_constraintTop_toBottomOf="@id/tvPassword" />
 
             <ImageView
                 android:id="@+id/imgHidePatternDrawPath"
@@ -261,16 +120,13 @@
                 app:layout_constraintStart_toStartOf="@id/itemHidePatternDrawPath"
                 app:layout_constraintTop_toTopOf="@id/itemHidePatternDrawPath" />
 
-            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
-                android:id="@+id/imgToggle3"
+            <ImageView
+                android:id="@+id/imgToggle"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_toggle_inactive"
                 android:contentDescription="@null"
-                app:avdFirst="@drawable/avd_toggle_reverse"
-
-                app:avdSecond="@drawable/avd_toggle"
                 app:layout_constraintBottom_toBottomOf="@id/itemHidePatternDrawPath"
                 app:layout_constraintEnd_toEndOf="@id/itemHidePatternDrawPath"
                 app:layout_constraintTop_toTopOf="@id/itemHidePatternDrawPath" />
@@ -309,19 +165,6 @@
                 app:layout_constraintStart_toStartOf="@id/itemChangePassword"
                 app:layout_constraintTop_toTopOf="@id/itemChangePassword" />
 
-            <com.example.applock.screen.ReverseAnimatedVectorDrawableImageView
-                android:id="@+id/imgChevron3"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@null"
-                app:avdFirst="@drawable/avd_chevron"
-
-                app:avdSecond="@drawable/avd_chevron_reverse"
-                app:layout_constraintBottom_toBottomOf="@id/itemChangePassword"
-                app:layout_constraintEnd_toEndOf="@id/itemChangePassword"
-                app:layout_constraintTop_toTopOf="@id/itemChangePassword" />
 
             <TextView
                 android:layout_width="wrap_content"

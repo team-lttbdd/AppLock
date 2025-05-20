@@ -63,6 +63,7 @@ public class PatternLockView extends View {
 
     /**
      * Represents the different modes in which this view can be represented
+     * Represents the different modes in which this view can be represented
      */
     @IntDef({PatternViewMode.CORRECT, PatternViewMode.AUTO_DRAW, PatternViewMode.WRONG})
     @Retention(RetentionPolicy.SOURCE)
