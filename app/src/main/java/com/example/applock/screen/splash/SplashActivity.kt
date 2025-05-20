@@ -56,11 +56,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             val hasLanguage = MyPreferences.read(MyPreferences.PREF_LANGUAGE, null) != null
             val hasLockPattern = MyPreferences.read(MyPreferences.PREF_LOCK_PATTERN, null) != null
 
-            when {
-                !hasLanguage -> processAppDataAndNavigate(ProcessDestination.LANGUAGE) // Chưa chọn ngôn ngữ -> Màn hình chọn ngôn ngữ
-                hasLanguage && !hasLockPattern -> processAppDataAndNavigate(ProcessDestination.SET_LOCK_PATTERN) // Đã có ngôn ngữ, chưa có mẫu khóa -> Màn hình tạo mẫu khóa mới
-                else -> processAppDataAndNavigate(ProcessDestination.LOCK_PATTERN) // Đã có mẫu khóa -> Màn hình xác thực mẫu khóa
-            }
+            processAppDataAndNavigate(
+                when {
+                    !hasLanguage -> ProcessDestination.LANGUAGE
+                    hasLanguage && !hasLockPattern -> ProcessDestination.SET_LOCK_PATTERN
+                    else -> ProcessDestination.LOCK_PATTERN
+                }
+            )
         }
     }
 
@@ -78,18 +80,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         // Tải danh sách ứng dụng và cập nhật database
         withContext(Dispatchers.IO) {
             val appInfoDao = db.appInfoDAO()
-            // Logic khởi tạo/tải dữ liệu dựa trên việc đã có ngôn ngữ chưa
             val hasLanguage = MyPreferences.read(MyPreferences.PREF_LANGUAGE, null) != null
+            
             if (!hasLanguage) {
-                // Nếu chưa có ngôn ngữ (lần đầu chạy), khởi tạo danh sách ứng dụng và lưu vào database
+                // Lần đầu chạy app, khởi tạo danh sách app
                 AppInfoUtil.initInstalledApps(this@SplashActivity)
-                // Tạo một bản sao của danh sách để tránh ConcurrentModificationException
+                appInfoDao.deleteAll()
                 val appsToInsert = ArrayList(AppInfoUtil.listAppInfo)
                 appsToInsert.forEach { appInfo ->
                     appInfoDao.insertAppInfo(appInfo)
                 }
             } else {
-                // Nếu đã có ngôn ngữ, lấy danh sách từ database
+                // Các lần sau, chỉ cập nhật danh sách từ database
                 val allApps = appInfoDao.getAllApp()
                 val lockedApps = appInfoDao.getLockedApp()
                 AppInfoUtil.listAppInfo = ArrayList(allApps)
@@ -101,19 +103,24 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         val elapsedTime = System.currentTimeMillis() - startTime
         if (elapsedTime < 3000) delay(3000 - elapsedTime)
 
-        // Điều hướng đến màn hình tương ứng dựa trên đích đến
+        // Điều hướng đến màn hình tương ứng
         when (destination) {
-            ProcessDestination.LANGUAGE -> navigateTo(LanguageActivity::class.java)
+            ProcessDestination.LANGUAGE -> {
+                val intent = Intent(this, LanguageActivity::class.java)
+                intent.putExtra("IS_FIRST_LAUNCH", true)
+                startActivity(intent)
+            }
             ProcessDestination.HOME -> navigateTo(HomeActivity::class.java)
             ProcessDestination.LOCK_PATTERN -> navigateTo(LockPatternActivity::class.java)
             ProcessDestination.SET_LOCK_PATTERN -> navigateTo(SetLockPatternActivity::class.java)
         }
+        finish()
     }
 
     // Điều hướng đến Activity đích và kết thúc SplashActivity
     private fun navigateTo(destination: Class<*>) {
-        startActivity(Intent(this, destination))
-        finish() // Kết thúc Activity
+        val intent = Intent(this, destination)
+        startActivity(intent)
     }
 
     // Không xử lý sự kiện trong SplashActivity

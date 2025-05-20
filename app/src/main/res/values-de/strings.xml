@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppLock2.0</string>
-    <string name="please_wait_loading">Bitte warten, wird geladen.....</string>
+    <string name="please_wait_loading">Bitte warten, lädt.....</string>
     <string name="this_action_may_contain_advertisements">(Diese Aktion kann Werbung enthalten)</string>
     <string name="languages">Sprachen</string>
     <string name="english">Englisch</string>
@@ -16,14 +16,27 @@
     <string name="spanish">Spanisch</string>
     <string name="fingerprint_unlock" translatable="false">Fingerabdruck-Entsperrung</string>
     <string name="unlock_status" translatable="false">Nicht aktiviert. Möchten Sie es aktivieren?</string>
+
+    <string name="lib_name">Muster-Sperransicht</string>
+    <string name="message_pattern_dot_added">Punkt zum Muster hinzugefügt</string>
+    <string name="message_pattern_started">Musterzeichnung gestartet</string>
+    <string name="message_pattern_detected">Musterzeichnung abgeschlossen</string>
+    <string name="message_pattern_cleared">Muster gelöscht</string>
+    <string name="draw_an_unlock_pattern">Ein Entsperrmuster zeichnen</string>
+    <string name="draw_pattern_again_to_confirm">Muster zur Bestätigung erneut zeichnen</string>
+    <string name="reset">Zurücksetzen</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">4 oder mehr Punkte verbinden</string>
     <string name="all_apps">Alle Apps</string>
     <string name="locked_apps">Gesperrte Apps</string>
+    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
     <string name="select_all">Alle auswählen</string>
     <string name="remove_all">Alle entfernen</string>
     <string name="lock">Sperren</string>
     <string name="unlock">Entsperren</string>
     <string name="search">Suchen</string>
-    <string name="setting">Einstellungen</string>
+    <string name="setting">Einstellung</string>
     <string name="password">Passwort</string>
     <string name="feedback">Feedback</string>
     <string name="rate_this_app">Diese App bewerten</string>
@@ -31,10 +44,15 @@
     <string name="change_language">Sprache ändern</string>
     <string name="others">Andere</string>
     <string name="unistall_protection">Deinstallationsschutz</string>
-    <string name="relock_setting">Automatische Sperreinstellungen</string>
+    <string name="relock_setting">Wiederholungs-Einstellung</string>
     <string name="security_questions">Sicherheitsfragen</string>
     <string name="lock_new_app">Neue App sperren</string>
     <string name="general">Allgemein</string>
     <string name="change_password">Passwort ändern</string>
-    <string name="hide_pattern_draw_path">Musterpfad ausblenden</string>
+    <string name="hide_pattern_draw_path">Musterzeichnungspfad ausblenden</string>
+
+    <string name="go_to_setting">Zur Einstellung gehen</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Nutzungszugriffsberechtigung\nApp Lock benötigt die Nutzungszugriffsberechtigung, um Ihre Privatsphäre zu schützen</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Bildschirmüberlagerungsberechtigung\nApp Lock benötigt die Bildschirmüberlagerungsberechtigung, um den Sperrbildschirm anzuzeigen</string>
+    <string name="permission_required">Berechtigung erforderlich</string>
 </resources>

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
-    <string name="please_wait_loading">기다려 주십시오, 로딩 중.....</string>
-    <string name="this_action_may_contain_advertisements">(이 작업은 광고를 포함할 수 있습니다)</string>
+    <string name="app_name">앱 잠금 2.0</string>
+    <string name="please_wait_loading">잠시 기다려주세요, 로딩 중.....</string>
+    <string name="this_action_may_contain_advertisements">(이 작업에는 광고가 포함될 수 있습니다)</string>
     <string name="languages">언어</string>
     <string name="english">영어</string>
     <string name="korean">한국어</string>
@@ -15,9 +15,22 @@
     <string name="japanese">일본어</string>
     <string name="spanish">스페인어</string>
     <string name="fingerprint_unlock" translatable="false">지문 잠금 해제</string>
-    <string name="unlock_status" translatable="false">사용 안 함. 사용하시겠습니까?</string>
+    <string name="unlock_status" translatable="false">활성화되지 않았습니다. 활성화하시겠습니까?</string>
+
+    <string name="lib_name">패턴 잠금 보기</string>
+    <string name="message_pattern_dot_added">패턴에 점 추가됨</string>
+    <string name="message_pattern_started">패턴 그리기 시작됨</string>
+    <string name="message_pattern_detected">패턴 그리기 완료됨</string>
+    <string name="message_pattern_cleared">패턴 지워짐</string>
+    <string name="draw_an_unlock_pattern">잠금 해제 패턴 그리기</string>
+    <string name="draw_pattern_again_to_confirm">확인을 위해 패턴 다시 그리기</string>
+    <string name="reset">재설정</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">4개 이상의 점 연결</string>
     <string name="all_apps">모든 앱</string>
     <string name="locked_apps">잠긴 앱</string>
+    <string name="hello_blank_fragment">안녕하세요 빈 프래그먼트</string>
     <string name="select_all">모두 선택</string>
     <string name="remove_all">모두 제거</string>
     <string name="lock">잠금</string>
@@ -27,7 +40,7 @@
     <string name="password">비밀번호</string>
     <string name="feedback">피드백</string>
     <string name="rate_this_app">이 앱 평가하기</string>
-    <string name="share_with_friends">친구와 공유</string>
+    <string name="share_with_friends">친구와 공유하기</string>
     <string name="change_language">언어 변경</string>
     <string name="others">기타</string>
     <string name="unistall_protection">제거 방지</string>
@@ -37,4 +50,9 @@
     <string name="general">일반</string>
     <string name="change_password">비밀번호 변경</string>
     <string name="hide_pattern_draw_path">패턴 그리기 경로 숨기기</string>
+
+    <string name="go_to_setting">설정으로 이동</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">사용량 접근 권한\n앱 잠금은 개인 정보 보호를 위해 사용량 접근 권한이 필요합니다</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">화면 오버레이 권한\n앱 잠금은 잠금 화면을 표시하기 위해 화면 오버레이 권한이 필요합니다</string>
+    <string name="permission_required">권한 필요</string>
 </resources>

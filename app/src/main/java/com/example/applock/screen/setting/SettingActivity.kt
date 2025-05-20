@@ -42,7 +42,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             }
 
             itemChangeLanguages.setOnClickListener {
-                startActivity(Intent(this@SettingActivity, LanguageActivity::class.java))
+                val intent = Intent(this@SettingActivity, LanguageActivity::class.java)
+                intent.putExtra("IS_FIRST_LAUNCH", false)
+                startActivity(intent)
             }
 
             itemShareWithFriends.setOnClickListener {

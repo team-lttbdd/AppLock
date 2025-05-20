@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock 2.0</string>
+    <string name="app_name">AppLock2.0</string>
     <string name="please_wait_loading">Proszę czekać, ładowanie.....</string>
     <string name="this_action_may_contain_advertisements">(Ta akcja może zawierać reklamy)</string>
     <string name="languages">Języki</string>
@@ -16,8 +16,21 @@
     <string name="spanish">Hiszpański</string>
     <string name="fingerprint_unlock" translatable="false">Odblokowanie odciskiem palca</string>
     <string name="unlock_status" translatable="false">Nie włączone. Czy chcesz włączyć?</string>
+
+    <string name="lib_name">Widok blokady wzoru</string>
+    <string name="message_pattern_dot_added">Kropka dodana do wzoru</string>
+    <string name="message_pattern_started">Rozpoczęto rysowanie wzoru</string>
+    <string name="message_pattern_detected">Rysowanie wzoru zakończone</string>
+    <string name="message_pattern_cleared">Wzór wyczyszczony</string>
+    <string name="draw_an_unlock_pattern">Narysuj wzór odblokowania</string>
+    <string name="draw_pattern_again_to_confirm">Narysuj wzór ponownie, aby potwierdzić</string>
+    <string name="reset">Resetuj</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">Połącz 4 lub więcej kropek</string>
     <string name="all_apps">Wszystkie aplikacje</string>
     <string name="locked_apps">Zablokowane aplikacje</string>
+    <string name="hello_blank_fragment">Witaj pusty fragment</string>
     <string name="select_all">Zaznacz wszystko</string>
     <string name="remove_all">Usuń wszystko</string>
     <string name="lock">Zablokuj</string>
@@ -32,9 +45,14 @@
     <string name="others">Inne</string>
     <string name="unistall_protection">Ochrona przed odinstalowaniem</string>
     <string name="relock_setting">Ustawienia ponownego blokowania</string>
-    <string name="security_questions">Pytania zabezpieczające</string>
+    <string name="security_questions">Pytania bezpieczeństwa</string>
     <string name="lock_new_app">Zablokuj nową aplikację</string>
     <string name="general">Ogólne</string>
     <string name="change_password">Zmień hasło</string>
     <string name="hide_pattern_draw_path">Ukryj ścieżkę rysowania wzoru</string>
+
+    <string name="go_to_setting">Przejdź do ustawień</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Uprawnienia dostępu do użytkowania\nBlokada aplikacji potrzebuje uprawnień dostępu do użytkowania, aby chronić Twoją prywatność</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Uprawnienia nakładki ekranowej\nBlokada aplikacji wymaga uprawnień nakładki ekranowej do wyświetlania ekranu blokady</string>
+    <string name="permission_required">Wymagane uprawnienia</string>
 </resources>

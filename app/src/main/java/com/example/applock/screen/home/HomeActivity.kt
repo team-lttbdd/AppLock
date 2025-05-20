@@ -25,6 +25,7 @@ import com.example.applock.receiver.PackageChangeReceiver
 import com.example.applock.screen.dialog.PermissionDialog
 import com.example.applock.screen.setting.SettingActivity
 import com.example.applock.service.LockService
+import com.example.applock.util.AppInfoUtil
 import com.example.applock.util.PermissionUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,7 +44,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     // Khởi tạo dữ liệu và quyền
     override fun initData() {
         try {
-            viewModel.loadInitialData(this) // Tải dữ liệu ứng dụng
+            // Always refresh app data from system
+            AppInfoUtil.initInstalledApps(this)
+            viewModel.loadInitialData(this)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -230,5 +233,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onResume() {
         super.onResume()
         permissionDialog?.updateToggle()
+        // Refresh data when activity resumes
+        viewModel.refreshData()
     }
 }

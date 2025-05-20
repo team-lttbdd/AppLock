@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AppLock 2.0</string>
-    <string name="please_wait_loading">Attendere, caricamento.....</string>
-    <string name="this_action_may_contain_advertisements">(Questa azione potrebbe contenere pubblicità)</string>
+    <string name="app_name">AppLock2.0</string>
+    <string name="please_wait_loading">Si prega di attendere, caricamento.....</string>
+    <string name="this_action_may_contain_advertisements">(Questa azione potrebbe contenere annunci)</string>
     <string name="languages">Lingue</string>
     <string name="english">Inglese</string>
     <string name="korean">Coreano</string>
@@ -16,8 +16,21 @@
     <string name="spanish">Spagnolo</string>
     <string name="fingerprint_unlock" translatable="false">Sblocco con impronta digitale</string>
     <string name="unlock_status" translatable="false">Non abilitato. Vuoi abilitarlo?</string>
+
+    <string name="lib_name">Vista Blocco Modello</string>
+    <string name="message_pattern_dot_added">Punto aggiunto al modello</string>
+    <string name="message_pattern_started">Disegno modello avviato</string>
+    <string name="message_pattern_detected">Disegno modello completato</string>
+    <string name="message_pattern_cleared">Modello cancellato</string>
+    <string name="draw_an_unlock_pattern">Disegna un modello di sblocco</string>
+    <string name="draw_pattern_again_to_confirm">Disegna di nuovo il modello per confermare</string>
+    <string name="reset">Reset</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">Collega 4 o più punti</string>
     <string name="all_apps">Tutte le app</string>
     <string name="locked_apps">App bloccate</string>
+    <string name="hello_blank_fragment">Ciao frammento vuoto</string>
     <string name="select_all">Seleziona tutto</string>
     <string name="remove_all">Rimuovi tutto</string>
     <string name="lock">Blocca</string>
@@ -30,11 +43,16 @@
     <string name="share_with_friends">Condividi con gli amici</string>
     <string name="change_language">Cambia lingua</string>
     <string name="others">Altro</string>
-    <string name="unistall_protection">Protezione da disinstallazione</string>
-    <string name="relock_setting">Impostazioni di blocco automatico</string>
+    <string name="unistall_protection">Protezione disinstallazione</string>
+    <string name="relock_setting">Impostazioni di riblocco</string>
     <string name="security_questions">Domande di sicurezza</string>
     <string name="lock_new_app">Blocca nuova app</string>
     <string name="general">Generale</string>
     <string name="change_password">Cambia password</string>
-    <string name="hide_pattern_draw_path">Nascondi il percorso del disegno del pattern</string>
+    <string name="hide_pattern_draw_path">Nascondi percorso disegno modello</string>
+
+    <string name="go_to_setting">Vai alle impostazioni</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Permesso di accesso all\'utilizzo\nApp Lock necessita del permesso di accesso all\'utilizzo per proteggere la tua privacy</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Permesso di sovrapposizione schermo\nApp Lock richiede il permesso di sovrapposizione schermo per mostrare la schermata di blocco</string>
+    <string name="permission_required">Permesso richiesto</string>
 </resources>
