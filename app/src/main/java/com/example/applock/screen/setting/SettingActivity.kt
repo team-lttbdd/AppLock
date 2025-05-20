@@ -1,9 +1,11 @@
 package com.example.applock.screen.setting
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivitySettingBinding
-
+import com.example.applock.screen.home.HomeActivity
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivitySettingBinding {
@@ -46,6 +48,11 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
                 imgChevron3.startAnim {
 
                 }
+            }
+
+            btnBack.setOnClickListener {
+                startActivity(Intent(this@SettingActivity, HomeActivity::class.java))
+                finish()
             }
         }
     }

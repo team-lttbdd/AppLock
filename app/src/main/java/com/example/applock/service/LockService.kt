@@ -22,6 +22,7 @@ import androidx.core.app.NotificationCompat
 import com.example.applock.R
 import com.example.applock.custom.lock_pattern.PatternLockView
 import com.example.applock.custom.lock_pattern.listener.PatternLockViewListener
+import com.example.applock.dao.AppInfoDatabase
 import com.example.applock.preference.MyPreferences
 import com.example.applock.screen.home.HomeActivity
 import com.example.applock.util.AnimationUtil
@@ -32,6 +33,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LockService : Service() {
     private val TAG = "LockService"
@@ -119,11 +124,13 @@ class LockService : Service() {
         val usageEvents = usageStatsManager.queryEvents(startTime, currentTime)
         val event = UsageEvents.Event()
         var foregroundPackageName = ""
+        var foregroundClassName = ""
 
         while (usageEvents.hasNextEvent()) {
             usageEvents.getNextEvent(event)
             if (event.eventType == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                 foregroundPackageName = event.packageName
+                foregroundClassName = event.className
             }
         }
 
@@ -132,21 +139,62 @@ class LockService : Service() {
                 "yyyy-MM-dd HH:mm:ss",
                 Locale.getDefault()
             ).format(Date())
-            val logMessage = "[$timestamp] Ứng dụng được mở: $foregroundPackageName"
-            val isLocked = AppInfoUtil.listLockedAppInfo.stream()
-                .anyMatch({ appInfo -> appInfo.packageName.equals(foregroundPackageName) })
+            val logMessage = "[$timestamp] Ứng dụng được mở: $foregroundPackageName (Activity: $foregroundClassName)"
 
-            // Ghi log
-            Log.i(TAG, logMessage)
-            writeToLogFile(logMessage)
-
-            if (isLocked) {
-                showPatternLockOverlay(foregroundPackageName)
-            } else if (isOverlayShown) {
-                hideOverlay()
+            // Kiểm tra xem có pattern hay không
+            val hasPattern = MyPreferences.read(MyPreferences.PREF_LOCK_PATTERN, null) != null
+            if (!hasPattern) {
+                Log.i(TAG, "Không có mẫu khóa được lưu, không kiểm tra ứng dụng.")
+                lastForegroundPackageName = foregroundPackageName
+                return
             }
 
-            lastForegroundPackageName = foregroundPackageName
+            // Tải lại pattern từ SharedPreferences
+            loadSavedPattern()
+
+            // Kiểm tra nếu ứng dụng hiện tại là AppLock
+            val isThisAppLock = foregroundPackageName == applicationContext.packageName
+
+            // Kiểm tra nếu activity hiện tại là một trong các activity màn hình khóa của AppLock
+            val isLockScreenActivity = foregroundClassName.contains("SplashActivity") ||
+                                       foregroundClassName.contains("SetLockPatternActivity") ||
+                                       foregroundClassName.contains("LockPatternActivity")
+
+
+            // Chạy phần truy cập database trong coroutine trên Dispatchers.IO
+            GlobalScope.launch(Dispatchers.IO) {
+                val db = AppInfoDatabase.getInstance(this@LockService)
+                val lockedApps = db.appInfoDAO().getLockedApp()
+
+                // Cập nhật danh sách và kiểm tra isLocked trên main thread hoặc sau khi lấy dữ liệu
+                withContext(Dispatchers.Main) {
+                    AppInfoUtil.listLockedAppInfo = ArrayList(lockedApps)
+
+                    val isLocked = AppInfoUtil.listLockedAppInfo.stream()
+                        .anyMatch({ appInfo -> appInfo.packageName.equals(foregroundPackageName) })
+
+                    // Ghi log
+                    Log.i(TAG, logMessage)
+                    writeToLogFile(logMessage)
+
+                    // Hiển thị overlay nếu ứng dụng bị khóa VÀ không phải là AppLock đang ở màn hình khóa
+                    // hoặc AppLock đang ở một activity khác (ví dụ: HomeActivity) NHƯNG vẫn cần khóa
+                    if (isLocked && !(isThisAppLock && !isLockScreenActivity)) {
+                         // Logic để không khóa lại AppLock khi đã mở khóa thành công và đang ở HomeActivity
+                        if (isThisAppLock && !isLockScreenActivity && isOverlayShown) {
+                            hideOverlay()
+                             Log.i(TAG, "Đã ẩn màn hình khóa cho AppLock.")
+                        } else if (!isThisAppLock || (isThisAppLock && isLockScreenActivity)) {
+                             showPatternLockOverlay(foregroundPackageName)
+                        }
+
+                    } else if (isOverlayShown) {
+                        hideOverlay()
+                    }
+
+                    lastForegroundPackageName = foregroundPackageName
+                }
+            }
         }
     }
 
@@ -160,7 +208,6 @@ class LockService : Service() {
 
         try {
             val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            // Sử dụng layout lock_pattern_overlay.xml (bạn cần tạo file layout này)
             overlayView = inflater.inflate(R.layout.lock_pattern_overlay, null)
 
             // Lấy các view từ layout
