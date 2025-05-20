@@ -141,14 +141,11 @@ class LockedAppFragment : BaseFragment<FragmentLockedAppsBinding>() {
                             }
                         }
 
-                        // Xóa mẫu khóa khi mở khóa ứng dụng
-                        if (unlockedAppsList.isNotEmpty()) {
-                            MyPreferences.remove(MyPreferences.PREF_LOCK_PATTERN)
-                        }
-
                         withContext(Dispatchers.Main) {
                             // Cập nhật danh sách chưa khóa trong ViewModel
-                            viewModel.updateAllApps((viewModel.allApps.value ?: mutableListOf()).apply { addAll(unlockedAppsList) })
+                            unlockedAppsList.forEach { appInfo ->
+                                viewModel.addToAllApps(appInfo)
+                            }
 
                             // Xóa ứng dụng đã mở khóa khỏi danh sách đã khóa
                             val currentLockedApps = viewModel.lockedApps.value?.toMutableList() ?: mutableListOf()

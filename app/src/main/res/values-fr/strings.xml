@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock 2.0</string>
+    <string name="app_name">AppLock2.0</string>
     <string name="please_wait_loading">Veuillez patienter, chargement.....</string>
     <string name="this_action_may_contain_advertisements">(Cette action peut contenir des publicités)</string>
     <string name="languages">Langues</string>
@@ -15,9 +15,22 @@
     <string name="japanese">Japonais</string>
     <string name="spanish">Espagnol</string>
     <string name="fingerprint_unlock" translatable="false">Déverrouillage par empreinte digitale</string>
-    <string name="unlock_status" translatable="false">Non activé. Voulez-vous lactiver ?</string>
+    <string name="unlock_status" translatable="false">Non activé. Voulez-vous l\'activer ?</string>
+
+    <string name="lib_name">Vue du verrouillage par motif</string>
+    <string name="message_pattern_dot_added">Point ajouté au motif</string>
+    <string name="message_pattern_started">Dessin du motif commencé</string>
+    <string name="message_pattern_detected">Dessin du motif terminé</string>
+    <string name="message_pattern_cleared">Motif effacé</string>
+    <string name="draw_an_unlock_pattern">Dessinez un motif de déverrouillage</string>
+    <string name="draw_pattern_again_to_confirm">Dessinez le motif à nouveau pour confirmer</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">Connectez 4 points ou plus</string>
     <string name="all_apps">Toutes les applications</string>
     <string name="locked_apps">Applications verrouillées</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
     <string name="select_all">Tout sélectionner</string>
     <string name="remove_all">Tout supprimer</string>
     <string name="lock">Verrouiller</string>
@@ -31,10 +44,15 @@
     <string name="change_language">Changer de langue</string>
     <string name="others">Autres</string>
     <string name="unistall_protection">Protection contre la désinstallation</string>
-    <string name="relock_setting">Paramètres de reverrouillage</string>
+    <string name="relock_setting">Paramètre de reverrouillage</string>
     <string name="security_questions">Questions de sécurité</string>
-    <string name="lock_new_app">Verrouiller la nouvelle application</string>
+    <string name="lock_new_app">Verrouiller une nouvelle application</string>
     <string name="general">Général</string>
     <string name="change_password">Changer de mot de passe</string>
-    <string name="hide_pattern_draw_path">Masquer le tracé du motif</string>
+    <string name="hide_pattern_draw_path">Masquer le chemin de dessin du motif</string>
+
+    <string name="go_to_setting">Aller aux paramètres</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Autorisation d\'accès à l\'utilisation\nApp Lock a besoin de l\'autorisation d\'accès à l\'utilisation pour protéger votre vie privée</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Autorisation de superposition d\'écran\nApp Lock nécessite l\'autorisation de superposition d\'écran pour afficher l\'écran de verrouillage</string>
+    <string name="permission_required">Permission requise</string>
 </resources>

@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Khóa ứng dụng 2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">Vui lòng đợi, đang tải.....</string>
-    <string name="this_action_may_contain_advertisements">(Hành động này có thể chứa quảng cáo)</string>
+    <string name="this_action_may_contain_advertisements">(Thao tác này có thể chứa quảng cáo)</string>
     <string name="languages">Ngôn ngữ</string>
     <string name="english">Tiếng Anh</string>
     <string name="korean">Tiếng Hàn</string>
@@ -15,11 +14,23 @@
     <string name="german">Tiếng Đức</string>
     <string name="japanese">Tiếng Nhật</string>
     <string name="spanish">Tiếng Tây Ban Nha</string>
-
     <string name="fingerprint_unlock" translatable="false">Mở khóa bằng vân tay</string>
     <string name="unlock_status" translatable="false">Chưa bật. Bạn có muốn bật không?</string>
+
+    <string name="lib_name">Xem khóa hình</string>
+    <string name="message_pattern_dot_added">Đã thêm chấm vào hình mẫu</string>
+    <string name="message_pattern_started">Bắt đầu vẽ hình mẫu</string>
+    <string name="message_pattern_detected">Hoàn thành vẽ hình mẫu</string>
+    <string name="message_pattern_cleared">Đã xóa hình mẫu</string>
+    <string name="draw_an_unlock_pattern">Vẽ một hình mở khóa</string>
+    <string name="draw_pattern_again_to_confirm">Vẽ lại hình mẫu để xác nhận</string>
+    <string name="reset">Đặt lại</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">Kết nối 4 chấm trở lên</string>
     <string name="all_apps">Tất cả ứng dụng</string>
     <string name="locked_apps">Ứng dụng đã khóa</string>
+    <string name="hello_blank_fragment">Xin chào fragment trống</string>
     <string name="select_all">Chọn tất cả</string>
     <string name="remove_all">Xóa tất cả</string>
     <string name="lock">Khóa</string>
@@ -30,13 +41,18 @@
     <string name="feedback">Phản hồi</string>
     <string name="rate_this_app">Đánh giá ứng dụng này</string>
     <string name="share_with_friends">Chia sẻ với bạn bè</string>
-    <string name="change_language">Đổi ngôn ngữ</string>
+    <string name="change_language">Thay đổi ngôn ngữ</string>
     <string name="others">Khác</string>
-    <string name="unistall_protection">Chống gỡ cài đặt</string>
-    <string name="relock_setting">Cài đặt tự động khóa lại</string>
+    <string name="unistall_protection">Bảo vệ gỡ cài đặt</string>
+    <string name="relock_setting">Cài đặt khóa lại</string>
     <string name="security_questions">Câu hỏi bảo mật</string>
     <string name="lock_new_app">Khóa ứng dụng mới</string>
     <string name="general">Chung</string>
-    <string name="change_password">Đổi mật khẩu</string>
-    <string name="hide_pattern_draw_path">Ẩn đường vẽ hình</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="hide_pattern_draw_path">Ẩn đường dẫn vẽ hình mẫu</string>
+
+    <string name="go_to_setting">Đi đến cài đặt</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Quyền truy cập sử dụng\nApp Lock cần quyền truy cập sử dụng để bảo vệ quyền riêng tư của bạn</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Quyền phủ màn hình\nApp Lock yêu cầu quyền phủ màn hình để hiển thị màn hình khóa</string>
+    <string name="permission_required">Yêu cầu quyền</string>
 </resources>

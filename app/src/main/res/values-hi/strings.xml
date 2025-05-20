@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">AppLock2.0</string>
+    <string name="please_wait_loading">कृपया प्रतीक्षा करें, लोड हो रहा है.....</string>
+    <string name="this_action_may_contain_advertisements">(इस कार्रवाई में विज्ञापन हो सकते हैं)</string>
+    <string name="languages">भाषाएँ</string>
+    <string name="english">अंग्रेजी</string>
+    <string name="korean">कोरियाई</string>
+    <string name="portuguese">पुर्तगाली</string>
+    <string name="vietnamese">वियतनामी</string>
+    <string name="hindi">हिंदी</string>
+    <string name="french">फ्रेंच</string>
+    <string name="italian">इतालवी</string>
+    <string name="polish">पोलिश</string>
+    <string name="german">जर्मन</string>
+    <string name="japanese">जापानी</string>
+    <string name="spanish">स्पेनिश</string>
+    <string name="fingerprint_unlock" translatable="false">फिंगरप्रिंट अनलॉक</string>
+    <string name="unlock_status" translatable="false">सक्षम नहीं है। क्या आप इसे सक्षम करना चाहते हैं?</string>
+
+    <string name="lib_name">पैटर्न लॉक व्यू</string>
+    <string name="message_pattern_dot_added">पैटर्न में डॉट जोड़ा गया</string>
+    <string name="message_pattern_started">पैटर्न बनाना शुरू हुआ</string>
+    <string name="message_pattern_detected">पैटर्न बनाना पूरा हुआ</string>
+    <string name="message_pattern_cleared">पैटर्न साफ़ किया गया</string>
+    <string name="draw_an_unlock_pattern">एक अनलॉक पैटर्न बनाएं</string>
+    <string name="draw_pattern_again_to_confirm">पुष्टि करने के लिए पैटर्न फिर से बनाएं</string>
+    <string name="reset">रीसेट करें</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">4 या अधिक डॉट्स कनेक्ट करें</string>
+    <string name="all_apps">सभी ऐप्स</string>
+    <string name="locked_apps">लॉक किए गए ऐप्स</string>
+    <string name="hello_blank_fragment">नमस्ते रिक्त फ़्रैग्मेंट</string>
+    <string name="select_all">सभी चुनें</string>
+    <string name="remove_all">सभी हटाएँ</string>
+    <string name="lock">लॉक करें</string>
+    <string name="unlock">अनलॉक करें</string>
+    <string name="search">खोजें</string>
+    <string name="setting">सेटिंग</string>
+    <string name="password">पासवर्ड</string>
+    <string name="feedback">प्रतिक्रिया</string>
+    <string name="rate_this_app">इस ऐप को रेट करें</string>
+    <string name="share_with_friends">दोस्तों के साथ साझा करें</string>
+    <string name="change_language">भाषा बदलें</string>
+    <string name="others">अन्य</string>
+    <string name="unistall_protection">अनइंस्टॉल सुरक्षा</string>
+    <string name="relock_setting">पुनः लॉक सेटिंग</string>
+    <string name="security_questions">सुरक्षा प्रश्न</string>
+    <string name="lock_new_app">नया ऐप लॉक करें</string>
+    <string name="general">सामान्य</string>
+    <string name="change_password">पासवर्ड बदलें</string>
+    <string name="hide_pattern_draw_path">पैटर्न ड्रॉ पाथ छुपाएं</string>
+
+    <string name="go_to_setting">सेटिंग पर जाएं</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">उपयोग पहुंच अनुमति\nऐप लॉक को आपकी गोपनीयता की रक्षा के लिए उपयोग पहुंच अनुमति की आवश्यकता है</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">स्क्रीन ओवरले अनुमति\nऐप लॉक को लॉक स्क्रीन प्रदर्शित करने के लिए स्क्रीन ओवरले अनुमति की आवश्यकता है</string>
+    <string name="permission_required">अनुमति आवश्यक</string>
+</resources>

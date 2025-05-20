@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppLock2.0</string>
-    <string name="please_wait_loading">Por favor, aguarde, a carregar.....</string>
+    <string name="please_wait_loading">Por favor, aguarde, carregando.....</string>
     <string name="this_action_may_contain_advertisements">(Esta ação pode conter anúncios)</string>
     <string name="languages">Idiomas</string>
     <string name="english">Inglês</string>
@@ -10,31 +10,49 @@
     <string name="hindi">Hindi</string>
     <string name="french">Francês</string>
     <string name="italian">Italiano</string>
-    <string name="polish">Polaco</string>
+    <string name="polish">Polonês</string>
     <string name="german">Alemão</string>
     <string name="japanese">Japonês</string>
     <string name="spanish">Espanhol</string>
     <string name="fingerprint_unlock" translatable="false">Desbloqueio por impressão digital</string>
-    <string name="unlock_status" translatable="false">Não ativado. Deseja ativar?</string>
-    <string name="all_apps">Todas as Apps</string>
-    <string name="locked_apps">Apps Bloqueadas</string>
-    <string name="select_all">Selecionar Tudo</string>
-    <string name="remove_all">Remover Tudo</string>
+    <string name="unlock_status" translatable="false">Não ativado. Deseja ativá-lo?</string>
+
+    <string name="lib_name">Visualização de Bloqueio de Padrão</string>
+    <string name="message_pattern_dot_added">Ponto adicionado ao padrão</string>
+    <string name="message_pattern_started">Desenho do padrão iniciado</string>
+    <string name="message_pattern_detected">Desenho do padrão concluído</string>
+    <string name="message_pattern_cleared">Padrão limpo</string>
+    <string name="draw_an_unlock_pattern">Desenhe um padrão de desbloqueio</string>
+    <string name="draw_pattern_again_to_confirm">Desenhe o padrão novamente para confirmar</string>
+    <string name="reset">Redefinir</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">Conecte 4 ou mais pontos</string>
+    <string name="all_apps">Todos os aplicativos</string>
+    <string name="locked_apps">Aplicativos bloqueados</string>
+    <string name="hello_blank_fragment">Olá fragmento em branco</string>
+    <string name="select_all">Selecionar tudo</string>
+    <string name="remove_all">Remover tudo</string>
     <string name="lock">Bloquear</string>
     <string name="unlock">Desbloquear</string>
     <string name="search">Pesquisar</string>
-    <string name="setting">Definições</string>
-    <string name="password">Palavra-passe</string>
+    <string name="setting">Configuração</string>
+    <string name="password">Senha</string>
     <string name="feedback">Feedback</string>
-    <string name="rate_this_app">Avalie esta app</string>
-    <string name="share_with_friends">Partilhe com amigos</string>
+    <string name="rate_this_app">Avalie este aplicativo</string>
+    <string name="share_with_friends">Compartilhar com amigos</string>
     <string name="change_language">Mudar idioma</string>
     <string name="others">Outros</string>
     <string name="unistall_protection">Proteção contra desinstalação</string>
-    <string name="relock_setting">Definição de novo bloqueio</string>
+    <string name="relock_setting">Configuração de novo bloqueio</string>
     <string name="security_questions">Perguntas de segurança</string>
-    <string name="lock_new_app">Bloquear nova app</string>
+    <string name="lock_new_app">Bloquear novo aplicativo</string>
     <string name="general">Geral</string>
-    <string name="change_password">Mudar palavra-passe</string>
-    <string name="hide_pattern_draw_path">Ocultar caminho do padrão de desenho</string>
+    <string name="change_password">Alterar senha</string>
+    <string name="hide_pattern_draw_path">Ocultar caminho de desenho do padrão</string>
+
+    <string name="go_to_setting">Ir para configuração</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Permissão de Acesso de Uso\nO App Lock precisa da permissão de Acesso de Uso para proteger sua privacidade</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Permissão de Sobreposição de Tela\nO App Lock requer a permissão de Sobreposição de Tela para exibir a tela de bloqueio</string>
+    <string name="permission_required">Permissão Necessária</string>
 </resources>

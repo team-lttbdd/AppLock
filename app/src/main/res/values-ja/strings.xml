@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AppLock2.0</string>
-    <string name="please_wait_loading">しばらくお待ちください、ロード中.....</string>
-    <string name="this_action_may_contain_advertisements">(この操作には広告が含まれる場合があります)</string>
+    <string name="please_wait_loading">お待ちください、読み込み中.....</string>
+    <string name="this_action_may_contain_advertisements">(このアクションには広告が含まれる場合があります)</string>
     <string name="languages">言語</string>
     <string name="english">英語</string>
     <string name="korean">韓国語</string>
@@ -14,10 +14,23 @@
     <string name="german">ドイツ語</string>
     <string name="japanese">日本語</string>
     <string name="spanish">スペイン語</string>
-    <string name="fingerprint_unlock" translatable="false">指紋認証</string>
-    <string name="unlock_status" translatable="false">無効です。有効にしますか？</string>
+    <string name="fingerprint_unlock" translatable="false">指紋ロック解除</string>
+    <string name="unlock_status" translatable="false">有効になっていません。有効にしますか？</string>
+
+    <string name="lib_name">パターンロックビュー</string>
+    <string name="message_pattern_dot_added">パターンに点が追加されました</string>
+    <string name="message_pattern_started">パターン描画開始</string>
+    <string name="message_pattern_detected">パターン描画完了</string>
+    <string name="message_pattern_cleared">パターン消去</string>
+    <string name="draw_an_unlock_pattern">ロック解除パターンを描画</string>
+    <string name="draw_pattern_again_to_confirm">確認のためにもう一度パターンを描画</string>
+    <string name="reset">リセット</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="connect_4_or_more_dots">4つ以上の点を接続</string>
     <string name="all_apps">すべてのアプリ</string>
     <string name="locked_apps">ロックされたアプリ</string>
+    <string name="hello_blank_fragment">こんにちは、空のフラグメント</string>
     <string name="select_all">すべて選択</string>
     <string name="remove_all">すべて削除</string>
     <string name="lock">ロック</string>
@@ -26,7 +39,7 @@
     <string name="setting">設定</string>
     <string name="password">パスワード</string>
     <string name="feedback">フィードバック</string>
-    <string name="rate_this_app">このアプリを評価する</string>
+    <string name="rate_this_app">このアプリを評価</string>
     <string name="share_with_friends">友達と共有</string>
     <string name="change_language">言語を変更</string>
     <string name="others">その他</string>
@@ -37,4 +50,9 @@
     <string name="general">一般</string>
     <string name="change_password">パスワードを変更</string>
     <string name="hide_pattern_draw_path">パターン描画パスを非表示</string>
+
+    <string name="go_to_setting">設定へ移動</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">使用状況アクセス許可\nApp Lockはプライバシーを保護するために使用状況アクセス許可が必要です</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">画面オーバーレイ許可\nApp Lockはロック画面を表示するために画面オーバーレイ許可が必要です</string>
+    <string name="permission_required">権限が必要です</string>
 </resources>

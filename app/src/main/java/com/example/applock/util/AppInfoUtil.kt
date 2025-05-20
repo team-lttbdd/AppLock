@@ -27,6 +27,7 @@ object AppInfoUtil {
         }
         val resolveInfoList: List<ResolveInfo> = packageManager.queryIntentActivities(mainIntent, 0)
         listAppInfo.clear()
+        listLockedAppInfo.clear()
 
         // Lấy thông tin ứng dụng (tên, biểu tượng, packageName)
         for (resolveInfo in resolveInfoList) {
@@ -35,11 +36,13 @@ object AppInfoUtil {
                 val name: String = activityInfo.loadLabel(packageManager).toString()
                 val icon: Drawable = activityInfo.loadIcon(packageManager)
                 val packageName: String = activityInfo.packageName
-                listAppInfo.add(AppInfo(icon, name, packageName, false))
+                // Bỏ qua app của chúng ta
+                if (packageName != context.packageName) {
+                    listAppInfo.add(AppInfo(icon, name, packageName, false))
+                }
             }
         }
         listAppInfo.sortWith(compareBy { it.name }) // Sắp xếp theo tên
-        updateLockedAppsFromDatabase(context) // Cập nhật trạng thái khóa
     }
 
     // Cập nhật trạng thái khóa từ database

@@ -52,6 +52,9 @@ class LockService : Service() {
     // Pattern cho xác thực
     private lateinit var correctPattern: List<PatternLockView.Dot>
 
+    // Flag để theo dõi trạng thái mở khóa của AppLock
+    private var isAppLockUnlocked = false
+
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
@@ -177,19 +180,25 @@ class LockService : Service() {
                     Log.i(TAG, logMessage)
                     writeToLogFile(logMessage)
 
-                    // Hiển thị overlay nếu ứng dụng bị khóa VÀ không phải là AppLock đang ở màn hình khóa
-                    // hoặc AppLock đang ở một activity khác (ví dụ: HomeActivity) NHƯNG vẫn cần khóa
-                    if (isLocked && !(isThisAppLock && !isLockScreenActivity)) {
-                         // Logic để không khóa lại AppLock khi đã mở khóa thành công và đang ở HomeActivity
-                        if (isThisAppLock && !isLockScreenActivity && isOverlayShown) {
+                    // Logic mới để hiển thị/ẩn overlay
+                    if (isThisAppLock) {
+                        // Nếu là AppLock
+                        if (isLocked && !isLockScreenActivity && !isAppLockUnlocked) {
+                            // AppLock bị khóa, không ở màn hình khóa, và chưa được mở khóa
+                            showPatternLockOverlay(foregroundPackageName)
+                        } else if (!isLocked || isLockScreenActivity || isAppLockUnlocked) {
+                             // AppLock không bị khóa, hoặc đang ở màn hình khóa, hoặc đã mở khóa
                             hideOverlay()
-                             Log.i(TAG, "Đã ẩn màn hình khóa cho AppLock.")
-                        } else if (!isThisAppLock || (isThisAppLock && isLockScreenActivity)) {
-                             showPatternLockOverlay(foregroundPackageName)
                         }
-
-                    } else if (isOverlayShown) {
-                        hideOverlay()
+                    } else {
+                        // Nếu không phải AppLock
+                        if (isLocked) {
+                            // Ứng dụng khác bị khóa
+                            showPatternLockOverlay(foregroundPackageName)
+                        } else if (isOverlayShown) {
+                            // Ứng dụng khác không bị khóa và overlay đang hiển thị
+                            hideOverlay()
+                        }
                     }
 
                     lastForegroundPackageName = foregroundPackageName
@@ -237,6 +246,11 @@ class LockService : Service() {
                     } else {
                         // Pattern đúng, ẩn overlay
                         patternLockView.setPattern(PatternLockView.PatternViewMode.CORRECT, tempPattern)
+
+                        // Nếu là AppLock được mở khóa thành công, đặt flag isAppLockUnlocked = true
+                        if (packageName == applicationContext.packageName) {
+                            isAppLockUnlocked = true
+                        }
 
                         // Thêm độ trễ ngắn để người dùng thấy mẫu hình đúng đã được vẽ
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -291,6 +305,9 @@ class LockService : Service() {
             windowManager.removeView(overlayView)
             overlayView = null
             isOverlayShown = false
+
+            // Reset flag isAppLockUnlocked khi overlay bị ẩn
+            isAppLockUnlocked = false
 
             Log.i(TAG, "Đã ẩn màn hình khóa")
         } catch (e: Exception) {
