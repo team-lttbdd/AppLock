@@ -16,17 +16,20 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     private lateinit var languageAdapter: LanguageItemAdapter
     private val languageList by lazy { ArrayList<Language>() }
     private var curLanguage: String? = null
+    private var isFirstLaunch: Boolean = false
+
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityLanguageBinding {
         return ActivityLanguageBinding.inflate(layoutInflater)
     }
 
     override fun initData() {
+        isFirstLaunch = intent.getBooleanExtra("IS_FIRST_LAUNCH", false)
         curLanguage = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en")
         var temp: Language? = null
         languageList.addAll(
             listOf(
                 Language(0, getString(R.string.english), R.drawable.english_ic, "en"),
-                Language(1, getString(R.string.korean), R.drawable.korean_ic, "kr"),
+                Language(1, getString(R.string.korean), R.drawable.korean_ic, "ko"),
                 Language(2, getString(R.string.portuguese), R.drawable.portugal_ic, "pt"),
                 Language(3, getString(R.string.spanish), R.drawable.spanish_ic, "es"),
                 Language(4, getString(R.string.japanese), R.drawable.japanese_ic, "ja"),
@@ -59,7 +62,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                 languageAdapter.updateSelectedPosition(it)
             }
         }
-        //...The case when the user has not selected any item yet.
         curLanguage?.let {
             languageAdapter.updateSelectedPosition(it)
         }
@@ -70,7 +72,15 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         binding.btnDone.setOnClickListener {
             curLanguage?.let {
                 MyPreferences.write(MyPreferences.PREF_LANGUAGE, it)
-                startActivity(Intent(this@LanguageActivity, SetLockPatternActivity::class.java))
+                if (isFirstLaunch) {
+                    // Nếu là lần đầu mở app, chuyển đến màn hình set lock pattern
+                    startActivity(Intent(this@LanguageActivity, SetLockPatternActivity::class.java))
+                } else {
+                    // Nếu đã set lock pattern trước đó, chuyển về màn hình home
+                    val intent = Intent(this@LanguageActivity, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
                 finish()
             }
         }
