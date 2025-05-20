@@ -35,6 +35,7 @@ import com.example.applock.R;
 import com.example.applock.custom.lock_pattern.utils.PatternLockUtils;
 import com.example.applock.custom.lock_pattern.listener.PatternLockViewListener;
 import com.example.applock.custom.lock_pattern.utils.ResourceUtils;
+import com.example.applock.preference.MyPreferences;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -62,7 +63,6 @@ public class PatternLockView extends View {
     }
 
     /**
-     * Represents the different modes in which this view can be represented
      * Represents the different modes in which this view can be represented
      */
     @IntDef({PatternViewMode.CORRECT, PatternViewMode.AUTO_DRAW, PatternViewMode.WRONG})
@@ -276,6 +276,8 @@ public class PatternLockView extends View {
         setMeasuredDimension(newWidth, newHeight);
     }
 
+    public Boolean isHidePattern = MyPreferences.INSTANCE.read(MyPreferences.IS_HIDE_DRAW_PATTERN, false);
+
     @Override
     protected void onDraw(Canvas canvas) {
         ArrayList<Dot> pattern = mPattern;
@@ -321,7 +323,7 @@ public class PatternLockView extends View {
 
         // Draw the path of the pattern (unless we are in stealth mode)
         boolean drawPath = !mInStealthMode;
-        if (drawPath) {
+        if (drawPath && !isHidePattern) {
             mPathPaint.setColor(getPathColor());
 
             boolean anyCircles = false;
@@ -1129,7 +1131,7 @@ public class PatternLockView extends View {
     }
 
     private LinearGradient getCurrentGradientColor(boolean partOfPattern, float centerX, float centerY, float size) {
-        if (!partOfPattern) {
+        if (!partOfPattern || isHidePattern) {
             return getCustomGradient(centerX, centerY, size, "#C5C5C5", "#C5C5C5");
         } else if (mPatternViewMode == PatternViewMode.WRONG) {
             return getCustomGradient(centerX, centerY, size, "#FF4545", "#C63636");

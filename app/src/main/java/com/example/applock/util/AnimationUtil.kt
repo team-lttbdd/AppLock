@@ -4,7 +4,10 @@ import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import com.example.applock.custom.lock_pattern.PatternLockView
 import com.example.applock.custom.lock_pattern.PatternLockView.PatternViewMode
 
@@ -26,5 +29,6 @@ object AnimationUtil {
             patternLockView.clearPattern()
         }, 1000)
     }
+
 
 }

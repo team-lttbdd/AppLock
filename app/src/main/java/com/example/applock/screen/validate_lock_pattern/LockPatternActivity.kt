@@ -35,6 +35,8 @@ class LockPatternActivity : BaseActivity<ActivityLockPatternBinding>() {
     }
 
     override fun setupView() {
+        val isStealthMode = MyPreferences.read(MyPreferences.PREF_STEALTH_MODE, false)
+        binding.patternLockView.setInStealthMode(isStealthMode)
     }
 
     override fun handleEvent() {
