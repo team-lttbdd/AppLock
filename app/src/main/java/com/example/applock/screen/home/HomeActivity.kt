@@ -51,6 +51,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         // Đăng ký BroadcastReceiver để lắng nghe sự kiện gỡ cài đặt ứng dụng
         val packageFilter = IntentFilter().apply {
             addAction(Intent.ACTION_PACKAGE_REMOVED)
+            addAction(Intent.ACTION_PACKAGE_ADDED)
             addDataScheme("package")
         }
         packageChangeReceiver = PackageChangeReceiver(viewModel)

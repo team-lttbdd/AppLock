@@ -46,4 +46,8 @@ interface AppInfoDAO {
     // Kiểm tra trạng thái khóa của ứng dụng
     @Query("SELECT appInfo_isLocked FROM appInfo_data_tab WHERE appInfo_packageName = :packageName")
     suspend fun isAppLocked(packageName: String): Boolean
+
+    // Lấy thông tin ứng dụng theo package name
+    @Query("SELECT * FROM appInfo_data_tab WHERE appInfo_packageName = :packageName")
+    suspend fun getAppInfoByPackageName(packageName: String): AppInfo?
 }
