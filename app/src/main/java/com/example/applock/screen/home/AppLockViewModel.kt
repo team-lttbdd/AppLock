@@ -22,11 +22,13 @@ class AppLockViewModel : ViewModel() {
 
     // Cập nhật danh sách ứng dụng đã khóa
     fun updateLockedApps(newLockedApps: MutableList<AppInfo>) {
+        newLockedApps.sortBy { it.name } // Sắp xếp danh sách mới
         _lockedApps.value = newLockedApps
     }
 
     // Cập nhật danh sách ứng dụng chưa khóa
     fun updateAllApps(newAllApps: MutableList<AppInfo>) {
+        newAllApps.sortBy { it.name } // Sắp xếp danh sách mới
         _allApps.value = newAllApps
     }
 

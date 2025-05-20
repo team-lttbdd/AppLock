@@ -16,6 +16,7 @@ import com.example.applock.model.AppInfo
 import com.example.applock.preference.MyPreferences
 import com.example.applock.screen.home.HomeActivity
 import com.example.applock.screen.language.LanguageActivity
+import com.example.applock.screen.set_new_lock_pattern.SetLockPatternActivity
 import com.example.applock.screen.validate_lock_pattern.LockPatternActivity
 import com.example.applock.util.AppInfoUtil
 import kotlinx.coroutines.Dispatchers
@@ -54,20 +55,21 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         lifecycleScope.launch {
             val hasLanguage = MyPreferences.read(MyPreferences.PREF_LANGUAGE, null) != null
             val hasLockPattern = MyPreferences.read(MyPreferences.PREF_LOCK_PATTERN, null) != null
-            
+
             when {
-                !hasLanguage -> processAppDataAndNavigate(ProcessDestination.LANGUAGE) // Chưa chọn ngôn ngữ -> LanguageActivity
-                !hasLockPattern -> processAppDataAndNavigate(ProcessDestination.HOME) // Chưa có mẫu khóa -> HomeActivity
-                else -> processAppDataAndNavigate(ProcessDestination.LOCK_PATTERN) // Đã có mẫu khóa -> LockPatternActivity
+                !hasLanguage -> processAppDataAndNavigate(ProcessDestination.LANGUAGE) // Chưa chọn ngôn ngữ -> Màn hình chọn ngôn ngữ
+                hasLanguage && !hasLockPattern -> processAppDataAndNavigate(ProcessDestination.SET_LOCK_PATTERN) // Đã có ngôn ngữ, chưa có mẫu khóa -> Màn hình tạo mẫu khóa mới
+                else -> processAppDataAndNavigate(ProcessDestination.LOCK_PATTERN) // Đã có mẫu khóa -> Màn hình xác thực mẫu khóa
             }
         }
     }
 
     // Enum để định nghĩa các đích đến sau khi xử lý dữ liệu
     private enum class ProcessDestination {
-        LANGUAGE,
-        HOME,
-        LOCK_PATTERN
+        LANGUAGE, // Màn hình chọn ngôn ngữ
+        HOME, // Màn hình chính
+        LOCK_PATTERN, // Màn hình xác thực mẫu khóa
+        SET_LOCK_PATTERN // Màn hình tạo mẫu khóa mới
     }
 
     // Xử lý dữ liệu ứng dụng và điều hướng
@@ -104,6 +106,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             ProcessDestination.LANGUAGE -> navigateTo(LanguageActivity::class.java)
             ProcessDestination.HOME -> navigateTo(HomeActivity::class.java)
             ProcessDestination.LOCK_PATTERN -> navigateTo(LockPatternActivity::class.java)
+            ProcessDestination.SET_LOCK_PATTERN -> navigateTo(SetLockPatternActivity::class.java)
         }
     }
 

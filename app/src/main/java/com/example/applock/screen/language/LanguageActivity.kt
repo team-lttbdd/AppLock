@@ -70,7 +70,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         binding.btnDone.setOnClickListener {
             curLanguage?.let {
                 MyPreferences.write(MyPreferences.PREF_LANGUAGE, it)
-                startActivity(Intent(this@LanguageActivity, HomeActivity::class.java))
+                startActivity(Intent(this@LanguageActivity, SetLockPatternActivity::class.java))
                 finish()
             }
         }
