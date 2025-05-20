@@ -151,6 +151,11 @@ class LockService : Service() {
     }
 
     private fun showPatternLockOverlay(packageName: String) {
+        // Nếu pattern chưa được tải hoặc không tồn tại, không hiển thị overlay
+        if (!::correctPattern.isInitialized) {
+            Log.i(TAG, "Không có mẫu khóa được lưu, không hiển thị overlay.")
+            return
+        }
         if (isOverlayShown) return
 
         try {

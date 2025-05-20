@@ -37,4 +37,11 @@ object MyPreferences {
             commit()
         }
     }
+    fun remove(key: String) {
+        val prefsEditor: SharedPreferences.Editor = prefs.edit()
+        with(prefsEditor) {
+            remove(key)
+            commit()
+        }
+    }
 }

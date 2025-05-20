@@ -12,34 +12,37 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// Utility để quản lý thông tin ứng dụng
 object AppInfoUtil {
-    var listAppInfo = ArrayList<AppInfo>() // Giữ biến toàn cục để tương thích
-    var listLockedAppInfo = ArrayList<AppInfo>() // Giữ biến toàn cục để tương thích
+    // Danh sách toàn bộ ứng dụng
+    var listAppInfo = ArrayList<AppInfo>()
+    // Danh sách ứng dụng đã khóa
+    var listLockedAppInfo = ArrayList<AppInfo>()
 
-    // Phương thức cũ, giữ nguyên để tương thích
+    // Tải danh sách ứng dụng đã cài đặt từ hệ thống
     fun initInstalledApps(context: Context) {
         val packageManager = context.packageManager
         val mainIntent = Intent(Intent.ACTION_MAIN, null).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
         val resolveInfoList: List<ResolveInfo> = packageManager.queryIntentActivities(mainIntent, 0)
-        listAppInfo.clear() // Xóa danh sách cũ
+        listAppInfo.clear()
 
+        // Lấy thông tin ứng dụng (tên, biểu tượng, packageName)
         for (resolveInfo in resolveInfoList) {
             val activityInfo = resolveInfo.activityInfo
             if (activityInfo != null) {
                 val name: String = activityInfo.loadLabel(packageManager).toString()
                 val icon: Drawable = activityInfo.loadIcon(packageManager)
                 val packageName: String = activityInfo.packageName
-                // Mặc định isLocked là false, có thể cập nhật sau
                 listAppInfo.add(AppInfo(icon, name, packageName, false))
             }
         }
-        listAppInfo.sortWith(compareBy { it.name })
-        updateLockedAppsFromDatabase(context) // Cập nhật trạng thái khóa từ cơ sở dữ liệu
+        listAppInfo.sortWith(compareBy { it.name }) // Sắp xếp theo tên
+        updateLockedAppsFromDatabase(context) // Cập nhật trạng thái khóa
     }
 
-    // Phương thức mới để cập nhật trạng thái khóa từ cơ sở dữ liệu
+    // Cập nhật trạng thái khóa từ database
     private fun updateLockedAppsFromDatabase(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppInfoDatabase.getInstance(context)
@@ -55,14 +58,14 @@ object AppInfoUtil {
         }
     }
 
-    // Phương thức cũ, giữ nguyên để tương thích
+    // Thêm và sắp xếp danh sách ứng dụng
     internal fun insertSortedAppInfo(sortedList: MutableList<AppInfo>, newApps: List<AppInfo>): MutableList<AppInfo> {
         sortedList.addAll(newApps)
         sortedList.sortBy { it.name }
-        return sortedList // Thêm return để trả về danh sách
+        return sortedList
     }
 
-    // Phương thức cũ, giữ nguyên để tương thích
+    // Lọc danh sách ứng dụng theo tên
     fun filterList(
         context: Context,
         text: String,
@@ -80,19 +83,35 @@ object AppInfoUtil {
         ).show()
     }
 
-    // Phương thức mới để lấy tất cả ứng dụng không khóa
+    // Lấy danh sách ứng dụng chưa khóa từ database
     suspend fun getAllApp(context: Context): List<AppInfo> {
         return withContext(Dispatchers.IO) {
             val db = AppInfoDatabase.getInstance(context)
-            db.appInfoDAO().getAllApp()
+            val appsFromDb = db.appInfoDAO().getAllApp()
+            // Lọc bỏ những ứng dụng không còn cài đặt trên thiết bị
+            val packageManager = context.packageManager
+            appsFromDb.filter { isPackageInstalled(it.packageName, packageManager) }
         }
     }
 
-    // Phương thức mới để lấy tất cả ứng dụng bị khóa
+    // Lấy danh sách ứng dụng đã khóa từ database
     suspend fun getLockedApp(context: Context): List<AppInfo> {
         return withContext(Dispatchers.IO) {
             val db = AppInfoDatabase.getInstance(context)
-            db.appInfoDAO().getLockedApp()
+            val lockedAppsFromDb = db.appInfoDAO().getLockedApp()
+            // Lọc bỏ những ứng dụng không còn cài đặt trên thiết bị
+            val packageManager = context.packageManager
+            lockedAppsFromDb.filter { isPackageInstalled(it.packageName, packageManager) }
+        }
+    }
+
+    // Kiểm tra xem một package có được cài đặt trên thiết bị không
+    private fun isPackageInstalled(packageName: String, packageManager: android.content.pm.PackageManager): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+            true
+        } catch (e: android.content.pm.PackageManager.NameNotFoundException) {
+            false
         }
     }
 }
