@@ -114,4 +114,17 @@ object AppInfoUtil {
             false
         }
     }
+
+    // Lấy thông tin ứng dụng theo package name
+    fun getAppInfoByPackageName(context: Context, packageName: String): AppInfo? {
+        val packageManager = context.packageManager
+        return try {
+            val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
+            val name = packageManager.getApplicationLabel(applicationInfo).toString()
+            val icon = packageManager.getApplicationIcon(applicationInfo)
+            AppInfo(icon, name, packageName, false) // Mặc định isLocked = false
+        } catch (e: android.content.pm.PackageManager.NameNotFoundException) {
+            null // Trả về null nếu không tìm thấy ứng dụng
+        }
+    }
 }

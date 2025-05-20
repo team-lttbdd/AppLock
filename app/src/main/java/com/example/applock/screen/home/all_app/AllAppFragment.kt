@@ -59,7 +59,7 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
 
     // Khởi tạo dữ liệu ban đầu
     override fun initData() {
-        AppInfoUtil.initInstalledApps(requireContext()) // Tải danh sách ứng dụng từ hệ thống
+        // AppInfoUtil.initInstalledApps(requireContext()) // Tải danh sách ứng dụng từ hệ thống - Đã di chuyển sang SplashActivity
         val initialApps = AppInfoUtil.listAppInfo.filter { !it.isLocked } // Lọc ứng dụng chưa khóa
         viewModel.updateAllApps(initialApps.toMutableList()) // Cập nhật vào ViewModel
     }

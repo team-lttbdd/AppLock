@@ -52,7 +52,7 @@ class LockedAppFragment : BaseFragment<FragmentLockedAppsBinding>() {
 
     // Khởi tạo dữ liệu ban đầu
     override fun initData() {
-        AppInfoUtil.initInstalledApps(requireContext()) // Tải danh sách ứng dụng từ hệ thống
+        // AppInfoUtil.initInstalledApps(requireContext()) // Tải danh sách ứng dụng từ hệ thống - Đã di chuyển sang SplashActivity
         // Tải danh sách ứng dụng đã khóa từ database bất đồng bộ
         CoroutineScope(Dispatchers.IO).launch {
             val lockedApps = AppInfoUtil.getLockedApp(requireContext())
