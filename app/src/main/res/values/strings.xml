@@ -55,4 +55,37 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Usage Access Permission\nApp Lock needs Usage Access permission to protect your privacy</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Screen Overlay Permission\nApp Lock requires the Screen Overlay permission to display lock screen</string>
     <string name="permission_required">Permission Required</string>
+
+    <!-- New strings for Device Admin -->
+    <string name="device_admin_label">AppLock Device Admin</string>
+    <string name="device_admin_description">Allow AppLock to protect apps and prevent unauthorized uninstallation</string>
+    <string name="admin_receiver_enabled">Uninstallation protection enabled</string>
+    <string name="admin_receiver_disabled">Uninstallation protection disabled</string>
+    <string name="admin_receiver_disable_warning">Warning! Disabling this permission will allow AppLock to be uninstalled and your data may be lost. Are you sure you want to continue?</string>
+    <string name="admin_request_explanation">AppLock requires device admin permission to prevent unauthorized uninstallation and protect your data.</string>
+
+    <!-- Strings for Device Admin Setup -->
+    <string name="device_admin_setup_title">Protect your apps</string>
+    <string name="device_admin_setup_description">To protect apps and prevent unauthorized uninstallation, AppLock needs device admin permission.</string>
+    <string name="security_shield_icon">Security icon</string>
+    <string name="current_status">Current status</string>
+    <string name="admin_status_enabled">Protection enabled</string>
+    <string name="admin_status_disabled">Protection not enabled</string>
+    <string name="activate_admin">Enable protection</string>
+    <string name="continue_to_app">Continue</string>
+    <string name="device_admin_benefits">Benefits you will receive:\n\n• Prevent unauthorized uninstallation\n• Protect apps from unauthorized access\n• Require authentication to uninstall\n• Enhance personal data security</string>
+    <string name="device_admin_required_title">Device Admin Required</string>
+    <string name="device_admin_required_message">Device admin permission is required</string>
+    <string name="activate_now">Activate now</string>
+    <string name="later">Later</string>
+    <string name="device_admin_recommended">Device admin recommended</string>
+    <string name="notification_permission_title">Allow Notification</string>
+    <string name="notification_permission_message">The app requires notification permission to help keep your applications safe.</string>
+    <string name="agree">Agree</string>
+    <string name="cancel">Cancel</string>
+    <string name="notifications_disabled">Notifications disabled.</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+Device Admin Permission\nAppLock needs device admin permission to protect your privacy
+</string>
+
 </resources>

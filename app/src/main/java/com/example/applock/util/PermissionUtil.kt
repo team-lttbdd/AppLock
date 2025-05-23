@@ -1,21 +1,26 @@
 package com.example.applock.util
 
+import android.annotation.SuppressLint
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Process
 import android.provider.Settings
+import androidx.core.net.toUri
+import com.example.applock.app.MyApplication
+import com.example.applock.receiver.AppLockDeviceAdminReceiver
 
-object PermissionUtils {
+@SuppressLint("StaticFieldLeak")
+object PermissionUtil {
     private var context: Context? = null
 
-    fun init(context: Context) {
-        this.context = context
+    fun init(application: MyApplication) {
+        context = application.applicationContext
     }
 
-    fun isAllPermissisionRequested() : Boolean {
-        return checkUsageStatsPermission() && checkOverlayPermission()
+    fun isAllPermissionRequested() : Boolean {
+        return checkUsageStatsPermission() && checkOverlayPermission() && checkDeviceAdminPermission()
     }
 
     fun checkUsageStatsPermission(): Boolean {
@@ -47,7 +52,7 @@ object PermissionUtils {
 
     fun checkOverlayPermission(): Boolean {
         context?.let {
-            return Settings.canDrawOverlays(context)
+            return Settings.canDrawOverlays(it)
         }
         return false
     }
@@ -55,10 +60,18 @@ object PermissionUtils {
     fun requestOverlayPermission() {
         val intent = Intent(
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            android.net.Uri.parse("package:${context?.packageName}")
+            "package:${context?.packageName}".toUri()
         )
         context?.startActivity(intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         })
+    }
+
+    fun checkDeviceAdminPermission(): Boolean {
+        context?.let {
+            return AppLockDeviceAdminReceiver.isAdminActive(it)
+        }
+        return false
+
     }
 }

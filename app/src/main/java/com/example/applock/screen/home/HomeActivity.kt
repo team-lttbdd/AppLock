@@ -1,6 +1,8 @@
 package com.example.applock.screen.home
 
 import android.app.AlertDialog
+import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
@@ -21,19 +23,19 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.applock.R
 import com.example.applock.base.BaseActivity
 import com.example.applock.databinding.ActivityHomeBinding
+import com.example.applock.receiver.AppLockDeviceAdminReceiver
 import com.example.applock.receiver.PackageChangeReceiver
 import com.example.applock.screen.dialog.PermissionDialog
 import com.example.applock.screen.setting.SettingActivity
 import com.example.applock.service.LockService
 import com.example.applock.util.AppInfoUtil
-import com.example.applock.util.PermissionUtils
+import com.example.applock.util.PermissionUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 // Activity chính chứa ViewPager2 với AllAppFragment và LockedAppFragment
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private val viewModel: AppLockViewModel by viewModels() // ViewModel để quản lý dữ liệu
-    private lateinit var permissionUtils: PermissionUtils // Utility để kiểm tra quyền
     private lateinit var packageChangeReceiver: PackageChangeReceiver
 
     // Khởi tạo giao diện Activity
@@ -160,72 +162,77 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         unregisterReceiver(packageChangeReceiver)
     }
 
+    // 2. LockService: Hàm gọi để kiểm tra và xin quyền:
     fun checkAndRequestNotificationPermission() {
-        // Chỉ cần request trên Android 13+ (SDK 33)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
+                //Đã cấp quyền notification
                 ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED -> {
-                    // Đã có quyền
                     showDialogRequestPermission()
                 }
+
+                //User từng từ chối cấp quyền
                 shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS) -> {
-                    // Nên giải thích cho người dùng vì sao cần quyền
                     AlertDialog.Builder(this)
-                        .setTitle("Cho phép thông báo")
-                        .setMessage("Ứng dụng cần quyền gửi thông báo để giữ cho các ứng dụng của bạn luôn an toàn")
-                        .setPositiveButton("Đồng ý") { _, _ ->
+                        .setTitle(getString(R.string.notification_permission_title))
+                        .setMessage(getString(R.string.notification_permission_message))
+                        .setPositiveButton(getString(R.string.agree)) { _, _ ->
                             requestNotificationPermissionLauncher.launch(
                                 android.Manifest.permission.POST_NOTIFICATIONS
                             )
                         }
-                        .setNegativeButton("Hủy", null)
+                        .setNegativeButton(getString(R.string.cancel), null)
                         .show()
                 }
+
+                //Hiển thị lần đầu
                 else -> {
-                    // Chưa request lần nào
                     requestNotificationPermissionLauncher.launch(
                         android.Manifest.permission.POST_NOTIFICATIONS
                     )
                 }
             }
-        } else {
-            // Trên Android < 13 không cần request runtime
-            showDialogRequestPermission()
-        }
+        } else showDialogRequestPermission()
     }
+
 
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                showDialogRequestPermission()
-            } else {
-                Toast.makeText(this, "Quyền thông báo bị từ chối", Toast.LENGTH_SHORT).show()
-            }
+            if (isGranted) showDialogRequestPermission()
+            else Toast.makeText(
+                this,
+                getString(R.string.notifications_disabled),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     private var permissionDialog: PermissionDialog? = null
 
     private fun showDialogRequestPermission() {
-        if (PermissionUtils.isAllPermissisionRequested()) {
+        if (PermissionUtil.isAllPermissionRequested())
             ContextCompat.startForegroundService(this, Intent(this, LockService::class.java))
-        } else {
+        else {
             permissionDialog = PermissionDialog()
-            permissionDialog?.show(supportFragmentManager, "rating_dialog")
+            permissionDialog?.show(supportFragmentManager, "permission_dialog")
             permissionDialog?.onToggleUsageClick = {
-                PermissionUtils.requestUsageStatsPermission()
+                PermissionUtil.requestUsageStatsPermission()
             }
             permissionDialog?.onToggleOverlayClick = {
-                PermissionUtils.requestOverlayPermission()
+                PermissionUtil.requestOverlayPermission()
+            }
+            permissionDialog?.onToggleDeviceAdminClick = {
+                requestDeviceAdminPermission()
             }
             permissionDialog?.onGotoSettingClick = {
-                if (!PermissionUtils.checkUsageStatsPermission()) {
-                    PermissionUtils.requestUsageStatsPermission()
-                } else if (!PermissionUtils.checkOverlayPermission()) {
-                    PermissionUtils.requestOverlayPermission()
-                }
+                if (!PermissionUtil.checkUsageStatsPermission())
+                    PermissionUtil.requestUsageStatsPermission()
+                else if (!PermissionUtil.checkOverlayPermission())
+                    PermissionUtil.requestOverlayPermission()
+                else if (!PermissionUtil.checkDeviceAdminPermission())
+                    requestDeviceAdminPermission()
             }
         }
     }
@@ -233,7 +240,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onResume() {
         super.onResume()
         permissionDialog?.updateToggle()
-        // Refresh data when activity resumes
-        viewModel.refreshData()
     }
+
+    private fun requestDeviceAdminPermission() {
+        val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
+            val componentName =
+                ComponentName(this@HomeActivity, AppLockDeviceAdminReceiver::class.java)
+            putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
+        }
+
+        requestDeviceAdminLauncher.launch(intent)
+    }
+
+    private val requestDeviceAdminLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+        }
 }
