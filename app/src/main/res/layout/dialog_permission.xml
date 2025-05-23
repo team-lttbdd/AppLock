@@ -78,6 +78,28 @@
         app:layout_constraintStart_toEndOf="@id/tv_overlay_access"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/tvDeviceAdmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintTop_toBottomOf="@id/btnOverlayToggle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDeviceAdminToggle" />
+
+    <ImageView
+        android:id="@+id/btnDeviceAdminToggle"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_toggle_active"
+        app:layout_constraintTop_toTopOf="@id/tvDeviceAdmin"
+        app:layout_constraintStart_toEndOf="@id/tvDeviceAdmin"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Button Go to Setting -->
     <ImageView
         android:id="@+id/btnGoToSetting"
@@ -86,7 +108,7 @@
         android:layout_marginTop="@dimen/_24sdp"
         android:contentDescription="@null"
         android:src="@drawable/bg_active_button"
-        app:layout_constraintTop_toBottomOf="@id/tv_overlay_access"
+        app:layout_constraintTop_toBottomOf="@id/tvDeviceAdmin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

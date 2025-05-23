@@ -48,7 +48,7 @@ object PermissionUtil {
 
     // Yêu cầu quyền truy cập thống kê sử dụng
     fun requestUsageStatsPermission() {
-        context?.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).apply {
+        context?.startActivity(Intent.Settings.ACTION_USAGE_ACCESS_SETTINGS).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         })
     }
@@ -56,7 +56,7 @@ object PermissionUtil {
     // Kiểm tra quyền vẽ trên ứng dụng khác
     fun checkOverlayPermission(): Boolean {
         context?.let {
-            return Settings.canDrawOverlays(context)
+            return Settings.canDrawOverlays(it)
         }
         return false
     }
@@ -65,7 +65,7 @@ object PermissionUtil {
     fun requestOverlayPermission() {
         val intent = Intent(
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            android.net.Uri.parse("package:${context?.packageName}")
+            "package:${context?.packageName}".toUri()
         )
         context?.startActivity(intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK

@@ -1,6 +1,5 @@
 package com.example.applock.screen.dialog
 
-import android.view.View
 import com.example.applock.R
 import com.example.applock.base.BaseDialogFragment
 import com.example.applock.databinding.DialogPermissionBinding
@@ -9,10 +8,11 @@ import com.example.applock.util.PermissionUtil
 
 class PermissionDialog :
     BaseDialogFragment<DialogPermissionBinding>(DialogPermissionBinding::inflate) {
-    private var numStar = 0
+
     var onGotoSettingClick: (() -> Unit)? = null
     var onToggleUsageClick: (() -> Unit)? = null
     var onToggleOverlayClick: (() -> Unit)? = null
+    var onToggleDeviceAdminClick: (() -> Unit)? = null
 
     override fun onViewCreated() {
         binding.btnUsageToggle.setOnClickListener {
@@ -20,6 +20,9 @@ class PermissionDialog :
         }
         binding.btnOverlayToggle.setOnClickListener {
             onToggleOverlayClick?.invoke()
+        }
+        binding.btnDeviceAdminToggle.setOnClickListener {
+            onToggleDeviceAdminClick?.invoke()
         }
         binding.btnGoToSetting.setOnClickListener {
             onGotoSettingClick?.invoke()
