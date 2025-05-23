@@ -5,7 +5,7 @@ import com.example.applock.R
 import com.example.applock.base.BaseDialogFragment
 import com.example.applock.databinding.DialogPermissionBinding
 import com.example.applock.preference.MyPreferences
-import com.example.applock.util.PermissionUtils
+import com.example.applock.util.PermissionUtil
 
 class PermissionDialog :
     BaseDialogFragment<DialogPermissionBinding>(DialogPermissionBinding::inflate) {
@@ -28,15 +28,15 @@ class PermissionDialog :
 
     fun updateToggle() {
         binding.btnUsageToggle.setImageResource(
-            if (PermissionUtils.checkUsageStatsPermission()) R.drawable.ic_toggle_inactive
+            if (PermissionUtil.checkUsageStatsPermission()) R.drawable.ic_toggle_inactive
             else R.drawable.ic_toggle_active
         )
         binding.btnOverlayToggle.setImageResource(
-            if (PermissionUtils.checkOverlayPermission()) R.drawable.ic_toggle_inactive
+            if (PermissionUtil.checkOverlayPermission()) R.drawable.ic_toggle_inactive
             else R.drawable.ic_toggle_active
         )
 
-        if (PermissionUtils.isAllPermissisionRequested()) {
+        if (PermissionUtil.isAllPermissisionRequested()) {
             dismiss()
         }
     }

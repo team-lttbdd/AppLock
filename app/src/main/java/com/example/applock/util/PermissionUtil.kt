@@ -1,5 +1,6 @@
 package com.example.applock.util
 
+import android.annotation.SuppressLint
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
@@ -7,7 +8,8 @@ import android.os.Build
 import android.os.Process
 import android.provider.Settings
 
-object PermissionUtils {
+@SuppressLint("StaticFieldLeak")
+object PermissionUtil {
     private var context: Context? = null
 
     fun init(context: Context) {

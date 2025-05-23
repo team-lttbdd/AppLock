@@ -26,14 +26,13 @@ import com.example.applock.screen.dialog.PermissionDialog
 import com.example.applock.screen.setting.SettingActivity
 import com.example.applock.service.LockService
 import com.example.applock.util.AppInfoUtil
-import com.example.applock.util.PermissionUtils
+import com.example.applock.util.PermissionUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 // Activity chính chứa ViewPager2 với AllAppFragment và LockedAppFragment
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private val viewModel: AppLockViewModel by viewModels() // ViewModel để quản lý dữ liệu
-    private lateinit var permissionUtils: PermissionUtils // Utility để kiểm tra quyền
     private lateinit var packageChangeReceiver: PackageChangeReceiver
 
     // Khởi tạo giao diện Activity
@@ -209,22 +208,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private var permissionDialog: PermissionDialog? = null
 
     private fun showDialogRequestPermission() {
-        if (PermissionUtils.isAllPermissisionRequested()) {
+        if (PermissionUtil.isAllPermissisionRequested()) {
             ContextCompat.startForegroundService(this, Intent(this, LockService::class.java))
         } else {
             permissionDialog = PermissionDialog()
             permissionDialog?.show(supportFragmentManager, "rating_dialog")
             permissionDialog?.onToggleUsageClick = {
-                PermissionUtils.requestUsageStatsPermission()
+                PermissionUtil.requestUsageStatsPermission()
             }
             permissionDialog?.onToggleOverlayClick = {
-                PermissionUtils.requestOverlayPermission()
+                PermissionUtil.requestOverlayPermission()
             }
             permissionDialog?.onGotoSettingClick = {
-                if (!PermissionUtils.checkUsageStatsPermission()) {
-                    PermissionUtils.requestUsageStatsPermission()
-                } else if (!PermissionUtils.checkOverlayPermission()) {
-                    PermissionUtils.requestOverlayPermission()
+                if (!PermissionUtil.checkUsageStatsPermission()) {
+                    PermissionUtil.requestUsageStatsPermission()
+                } else if (!PermissionUtil.checkOverlayPermission()) {
+                    PermissionUtil.requestOverlayPermission()
                 }
             }
         }
