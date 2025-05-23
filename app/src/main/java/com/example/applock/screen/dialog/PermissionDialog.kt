@@ -38,7 +38,7 @@ class PermissionDialog :
             else R.drawable.ic_toggle_active
         )
         binding.btnDeviceAdminToggle.setImageResource(
-            if (PermissionUtil.checkOverlayPermission()) R.drawable.ic_toggle_inactive
+            if (PermissionUtil.checkDeviceAdminPermission()) R.drawable.ic_toggle_inactive
             else R.drawable.ic_toggle_active
         )
         if (PermissionUtil.isAllPermissionRequested()) {
