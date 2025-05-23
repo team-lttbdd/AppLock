@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-// ViewModel quản lý dữ liệu ứng dụng cho AllAppFragment và LockedAppFragment
+// ViewModel quản lý dữ liệu cho AllAppFragment và LockedAppFragment
 class AppLockViewModel : ViewModel() {
     // LiveData lưu danh sách ứng dụng chưa khóa
     private val _allApps = MutableLiveData<MutableList<AppInfo>>(mutableListOf())
@@ -36,27 +36,27 @@ class AppLockViewModel : ViewModel() {
         _allApps.value = uniqueApps
     }
 
-    // Tải dữ liệu ban đầu từ AppInfoUtil
+    // Tải dữ liệu ban đầu từ cơ sở dữ liệu
     fun loadInitialData(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
-            // Clear existing data
+            // Xóa dữ liệu hiện có
             _allApps.postValue(mutableListOf())
             _lockedApps.postValue(mutableListOf())
 
-            // Get data from database first
+            // Lấy dữ liệu từ cơ sở dữ liệu
             val db = AppInfoDatabase.getInstance(context)
             val allAppsFromDb = db.appInfoDAO().getAllApp()
             val lockedAppsFromDb = db.appInfoDAO().getLockedApp()
-            
-            // Update AppInfoUtil with database data
+
+            // Cập nhật AppInfoUtil với dữ liệu từ cơ sở dữ liệu
             AppInfoUtil.listAppInfo.clear()
             AppInfoUtil.listAppInfo.addAll(allAppsFromDb)
-            
-            // Update locked apps list
+
+            // Cập nhật danh sách ứng dụng đã khóa
             AppInfoUtil.listLockedAppInfo.clear()
             AppInfoUtil.listLockedAppInfo.addAll(lockedAppsFromDb)
 
-            // Filter apps based on lock status
+            // Lọc ứng dụng theo trạng thái khóa
             val allApps = allAppsFromDb.filter { !it.isLocked }
                 .distinctBy { it.packageName }
                 .toMutableList()
@@ -64,11 +64,11 @@ class AppLockViewModel : ViewModel() {
                 .distinctBy { it.packageName }
                 .toMutableList()
 
-            // Sort lists
+            // Sắp xếp danh sách
             allApps.sortBy { it.name }
             lockedApps.sortBy { it.name }
 
-            // Update LiveData on main thread
+            // Cập nhật LiveData trên luồng chính
             withContext(Dispatchers.Main) {
                 _allApps.value = allApps
                 _lockedApps.value = lockedApps
@@ -76,10 +76,10 @@ class AppLockViewModel : ViewModel() {
         }
     }
 
-    // Refresh data from AppInfoUtil
+    // Làm mới dữ liệu từ AppInfoUtil
     fun refreshData() {
         CoroutineScope(Dispatchers.IO).launch {
-            // Get fresh data from AppInfoUtil
+            // Lấy dữ liệu mới từ AppInfoUtil
             val allApps = AppInfoUtil.listAppInfo.filter { !it.isLocked }
                 .distinctBy { it.packageName }
                 .toMutableList()
@@ -87,11 +87,11 @@ class AppLockViewModel : ViewModel() {
                 .distinctBy { it.packageName }
                 .toMutableList()
 
-            // Sort lists
+            // Sắp xếp danh sách
             allApps.sortBy { it.name }
             lockedApps.sortBy { it.name }
 
-            // Update LiveData on main thread
+            // Cập nhật LiveData trên luồng chính
             withContext(Dispatchers.Main) {
                 _allApps.value = allApps
                 _lockedApps.value = lockedApps
@@ -99,18 +99,7 @@ class AppLockViewModel : ViewModel() {
         }
     }
 
-    // Update app lock status
-    fun updateAppLockStatus(appInfo: AppInfo, isLocked: Boolean) {
-        appInfo.isLocked = isLocked
-        refreshData()
-    }
-
-    fun removeFromAllApps(packageName: String) {
-        val currentList = _allApps.value?.toMutableList() ?: mutableListOf()
-        currentList.removeAll { it.packageName == packageName }
-        _allApps.value = currentList
-    }
-
+    // Thêm ứng dụng vào danh sách chưa khóa
     fun addToAllApps(appInfo: AppInfo) {
         val currentList = _allApps.value?.toMutableList() ?: mutableListOf()
         if (!currentList.any { it.packageName == appInfo.packageName }) {

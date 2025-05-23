@@ -55,4 +55,13 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Quyền truy cập sử dụng\nApp Lock cần quyền truy cập sử dụng để bảo vệ quyền riêng tư của bạn</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Quyền phủ màn hình\nApp Lock yêu cầu quyền phủ màn hình để hiển thị màn hình khóa</string>
     <string name="permission_required">Yêu cầu quyền</string>
+
+    <string name="notification_permission_title">Cho phép thông báo</string>
+    <string name="notification_permission_message">App Lock yêu cầu quyền thông báo để giữ ứng dụng của bạn an toàn</string>
+    <string name="agree">Đồng ý</string>
+    <string name="cancel">Hủy</string>
+    <string name="notification_permission_denied">Quyền thông báo bị từ chối</string>
+
+    <string name="lock_with_count">(%d) %s</string>
+    <string name="unlock_with_count">(%d) %s</string>
 </resources>

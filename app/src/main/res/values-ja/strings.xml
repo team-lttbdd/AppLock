@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">お待ちください、読み込み中.....</string>
     <string name="this_action_may_contain_advertisements">(このアクションには広告が含まれる場合があります)</string>
     <string name="languages">言語</string>
@@ -55,4 +55,13 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">使用状況アクセス許可\nApp Lockはプライバシーを保護するために使用状況アクセス許可が必要です</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">画面オーバーレイ許可\nApp Lockはロック画面を表示するために画面オーバーレイ許可が必要です</string>
     <string name="permission_required">権限が必要です</string>
+
+    <string name="notification_permission_title">通知を許可</string>
+    <string name="notification_permission_message">App Lockはアプリを安全に保つために通知権限が必要です</string>
+    <string name="agree">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="notification_permission_denied">通知権限が拒否されました</string>
+
+    <string name="lock_with_count">(%d) %s</string>
+    <string name="unlock_with_count">(%d) %s</string>
 </resources>

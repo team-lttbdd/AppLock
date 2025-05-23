@@ -9,4 +9,6 @@
     <color name="text_color">#131936</color>
     <color name="pomegranate">#f4511e</color>
     <color name="main_blue">#1454F2</color>
+
+    <color name="dark_blue">#131936</color>
 </resources>

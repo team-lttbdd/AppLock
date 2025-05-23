@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">Proszę czekać, ładowanie.....</string>
     <string name="this_action_may_contain_advertisements">(Ta akcja może zawierać reklamy)</string>
     <string name="languages">Języki</string>
@@ -55,4 +55,13 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Uprawnienia dostępu do użytkowania\nBlokada aplikacji potrzebuje uprawnień dostępu do użytkowania, aby chronić Twoją prywatność</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Uprawnienia nakładki ekranowej\nBlokada aplikacji wymaga uprawnień nakładki ekranowej do wyświetlania ekranu blokady</string>
     <string name="permission_required">Wymagane uprawnienia</string>
+
+    <string name="notification_permission_title">Zezwól na powiadomienia</string>
+    <string name="notification_permission_message">Blokada aplikacji wymaga uprawnień do powiadomień, aby zapewnić bezpieczeństwo Twoich aplikacji</string>
+    <string name="agree">OK</string>
+    <string name="cancel">Anuluj</string>
+    <string name="notification_permission_denied">Odmowa uprawnień do powiadomień</string>
+
+    <string name="lock_with_count">(%d) %s</string>
+    <string name="unlock_with_count">(%d) %s</string>
 </resources>

@@ -43,47 +43,36 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     // Khởi tạo dữ liệu và quyền
     override fun initData() {
         try {
-            // Always refresh app data from system
-            AppInfoUtil.initInstalledApps(this)
+            AppInfoUtil.initInstalledApps(this) // Lấy danh sách ứng dụng
             viewModel.loadInitialData(this)
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         checkAndRequestNotificationPermission()
-        // Khởi động dịch vụ khóa ứng dụng
-        ContextCompat.startForegroundService(this, Intent(this, LockService::class.java))
-
-        // Đăng ký BroadcastReceiver để lắng nghe sự kiện gỡ cài đặt ứng dụng
+        ContextCompat.startForegroundService(this, Intent(this, LockService::class.java)) // Khởi động dịch vụ khóa
         val packageFilter = IntentFilter().apply {
             addAction(Intent.ACTION_PACKAGE_REMOVED)
             addAction(Intent.ACTION_PACKAGE_ADDED)
             addDataScheme("package")
         }
         packageChangeReceiver = PackageChangeReceiver(viewModel)
-        registerReceiver(packageChangeReceiver, packageFilter)
+        registerReceiver(packageChangeReceiver, packageFilter) // Đăng ký lắng nghe sự kiện cài/gỡ ứng dụng
     }
 
     // Thiết lập giao diện và ViewPager2
     override fun setupView() {
         try {
             binding.apply {
-                // Gán adapter cho ViewPager2
-                viewPager2.adapter = FragmentPageAdapter(supportFragmentManager, lifecycle, viewModel)
-
-                // Liên kết TabLayout với ViewPager2
+                viewPager2.adapter = FragmentPageAdapter(supportFragmentManager, lifecycle, viewModel) // Gán adapter cho ViewPager2
                 TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
                     tab.text = when(position) {
-                        0 -> getString(R.string.all_apps) // Tab danh sách ứng dụng chưa khóa
-                        1 -> getString(R.string.locked_apps) // Tab danh sách ứng dụng đã khóa
+                        0 -> getString(R.string.all_apps)
+                        1 -> getString(R.string.locked_apps)
                         else -> ""
                     }
-                }.attach()
-
-                // Cập nhật màu chữ khi chuyển tab
+                }.attach() // Liên kết TabLayout với ViewPager2
                 viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
-                        super.onPageSelected(position)
                         tabLayout.getTabAt(position)?.select()
                         updateTabLayoutTextColor(position) // Cập nhật màu chữ tab
                     }
@@ -97,7 +86,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     // Xử lý sự kiện click
     override fun handleEvent() {
         binding.apply {
-            // Xử lý sự kiện chọn tab
             tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab != null) viewPager2.currentItem = tab.position
@@ -105,9 +93,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
             })
-            // Chuyển đến SettingActivity
             btnSetting.setOnClickListener {
-                startActivity(Intent(this@HomeActivity, SettingActivity::class.java))
+                startActivity(Intent(this@HomeActivity, SettingActivity::class.java)) // Chuyển đến SettingActivity
             }
         }
     }
@@ -122,7 +109,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             val tab = binding.tabLayout.getTabAt(i)
             val height = tab?.view?.height ?: 0
             val spannable = SpannableString(tab?.text)
-            // Áp dụng gradient cho chữ tab được chọn
             spannable.setSpan(GradientTextSpan(colors, height.toFloat()), 0, spannable.length, 0)
             tab?.text = spannable
             if (i == selectedPosition) setTabTypeface(binding.tabLayout.getTabAt(i))
@@ -155,44 +141,31 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     // Xử lý sự kiện khi Activity bị hủy
     override fun onDestroy() {
         super.onDestroy()
-        // Hủy đăng ký receiver khi Activity bị hủy
-        unregisterReceiver(packageChangeReceiver)
+        unregisterReceiver(packageChangeReceiver) // Hủy đăng ký receiver
     }
 
     fun checkAndRequestNotificationPermission() {
-        // Chỉ cần request trên Android 13+ (SDK 33)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    // Đã có quyền
-                    showDialogRequestPermission()
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED -> {
+                    showDialogRequestPermission() // Đã có quyền
                 }
                 shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS) -> {
-                    // Nên giải thích cho người dùng vì sao cần quyền
                     AlertDialog.Builder(this)
-                        .setTitle("Cho phép thông báo")
-                        .setMessage("Ứng dụng cần quyền gửi thông báo để giữ cho các ứng dụng của bạn luôn an toàn")
-                        .setPositiveButton("Đồng ý") { _, _ ->
-                            requestNotificationPermissionLauncher.launch(
-                                android.Manifest.permission.POST_NOTIFICATIONS
-                            )
+                        .setTitle(R.string.notification_permission_title)
+                        .setMessage(R.string.notification_permission_message)
+                        .setPositiveButton(R.string.agree) { _, _ ->
+                            requestNotificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
                         }
-                        .setNegativeButton("Hủy", null)
+                        .setNegativeButton(R.string.cancel, null)
                         .show()
                 }
                 else -> {
-                    // Chưa request lần nào
-                    requestNotificationPermissionLauncher.launch(
-                        android.Manifest.permission.POST_NOTIFICATIONS
-                    )
+                    requestNotificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS) // Yêu cầu quyền
                 }
             }
         } else {
-            // Trên Android < 13 không cần request runtime
-            showDialogRequestPermission()
+            showDialogRequestPermission() // Android < 13 không cần quyền runtime
         }
     }
 
@@ -201,7 +174,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             if (isGranted) {
                 showDialogRequestPermission()
             } else {
-                Toast.makeText(this, "Quyền thông báo bị từ chối", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.notification_permission_denied, Toast.LENGTH_SHORT).show() // Sử dụng chuỗi từ strings.xml
             }
         }
 
@@ -214,10 +187,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             permissionDialog = PermissionDialog()
             permissionDialog?.show(supportFragmentManager, "rating_dialog")
             permissionDialog?.onToggleUsageClick = {
-                PermissionUtil.requestUsageStatsPermission()
+                PermissionUtil.requestUsageStatsPermission() // Yêu cầu quyền thống kê
             }
             permissionDialog?.onToggleOverlayClick = {
-                PermissionUtil.requestOverlayPermission()
+                PermissionUtil.requestOverlayPermission() // Yêu cầu quyền overlay
             }
             permissionDialog?.onGotoSettingClick = {
                 if (!PermissionUtil.checkUsageStatsPermission()) {
@@ -232,7 +205,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onResume() {
         super.onResume()
         permissionDialog?.updateToggle()
-        // Refresh data when activity resumes
-        viewModel.refreshData()
+        viewModel.refreshData() // Làm mới dữ liệu
     }
 }

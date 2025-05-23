@@ -1,8 +1,8 @@
 package com.example.applock.screen.home.all_app
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,27 +10,26 @@ import com.example.applock.R
 import com.example.applock.databinding.ItemAppBinding
 import com.example.applock.model.AppInfo
 
-// Adapter để hiển thị danh sách ứng dụng trong AllAppFragment
+// Adapter hiển thị danh sách ứng dụng trong AllAppFragment
 class AllAppAdapter(
-    private var appList: MutableList<AppInfo>, // Danh sách ứng dụng hiển thị
-    private val onItemClick: (AppInfo) -> Unit // Callback khi click vào ứng dụng
+    private var appList: MutableList<AppInfo>, // Danh sách ứng dụng
+    private val onItemClick: (AppInfo) -> Unit // Callback khi click ứng dụng
 ) : RecyclerView.Adapter<AllAppAdapter.AppItemViewHolder>() {
 
-    // Mảng lưu trạng thái chọn của từng ứng dụng
+    // Mảng trạng thái chọn của ứng dụng
     internal var booleanArray = BooleanArray(appList.size)
-    // Đếm số ứng dụng được chọn
+    // Số ứng dụng được chọn
     internal var count = 0
-    // Thời gian click cuối cùng để ngăn click liên tục
+    // Thời gian click cuối để ngăn click liên tục
     private var lastClickTime = 0L
 
-    // Cập nhật trạng thái chọn của một ứng dụng
+    // Cập nhật trạng thái chọn của ứng dụng
     fun updateSelectedPosition(selectedAppInfo: AppInfo) {
         for (i in appList.indices) {
             if (appList[i].packageName == selectedAppInfo.packageName) {
-                // Đảo trạng thái chọn và cập nhật số lượng
                 booleanArray[i] = !booleanArray[i]
                 count += if (booleanArray[i]) 1 else -1
-                notifyItemChanged(i) // Cập nhật giao diện chỉ cho mục được thay đổi
+                notifyItemChanged(i)
                 break
             }
         }
@@ -40,9 +39,8 @@ class AllAppAdapter(
     fun updateAllPosition(isSelected: Boolean) {
         for (i in booleanArray.indices) {
             booleanArray[i] = isSelected
-            notifyItemChanged(i) // Cập nhật giao diện từng mục
+            notifyItemChanged(i)
         }
-        // Cập nhật số lượng chọn
         count = if (isSelected) booleanArray.size else 0
     }
 
@@ -51,62 +49,54 @@ class AllAppAdapter(
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
             override fun getOldListSize(): Int = appList.size
             override fun getNewListSize(): Int = newList.size
-            // So sánh packageName để xác định cùng một mục
             override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return appList[oldItemPosition].packageName == newList[newItemPosition].packageName
             }
-            // So sánh toàn bộ nội dung để xác định thay đổi
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
                 return appList[oldItemPosition] == newList[newItemPosition]
             }
         })
         appList.clear()
         appList.addAll(newList)
-        booleanArray = BooleanArray(appList.size) // Đặt lại mảng trạng thái
-        count = 0 // Đặt lại số lượng chọn
-        diffResult.dispatchUpdatesTo(this) // Cập nhật giao diện hiệu quả
+        booleanArray = BooleanArray(appList.size)
+        count = 0
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    // Trả về bản sao danh sách hiện tại
-    fun getCurrentList(): List<AppInfo> {
-        return appList.toList()
-    }
+    // Trả về danh sách hiện tại
+    fun getCurrentList(): List<AppInfo> = appList.toList()
 
-    // Tạo ViewHolder cho mỗi mục trong RecyclerView
+    // Tạo ViewHolder cho mục RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppItemViewHolder {
         val itemView = ItemAppBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AppItemViewHolder(itemView)
     }
 
-    // Gán dữ liệu cho ViewHolder tại vị trí cụ thể
+    // Gán dữ liệu cho ViewHolder
     override fun onBindViewHolder(holder: AppItemViewHolder, position: Int) {
-        holder.itemView.translationX = 0f // Đặt lại vị trí ban đầu
-        val app = appList[position]
-        holder.bind(app, position)
+        holder.itemView.translationX = 0f
+        holder.bind(appList[position], position)
     }
 
-    // Trả về số lượng mục trong danh sách
+    // Số lượng mục trong danh sách
     override fun getItemCount(): Int = appList.size
 
-    // ViewHolder để hiển thị thông tin ứng dụng
-    inner class AppItemViewHolder(private val binding: ItemAppBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    // ViewHolder hiển thị thông tin ứng dụng
+    inner class AppItemViewHolder(private val binding: ItemAppBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(app: AppInfo, position: Int) {
             binding.apply {
-                imgAppIcon.setImageDrawable(app.icon) // Hiển thị biểu tượng ứng dụng
-                tvAppName.text = app.name // Hiển thị tên ứng dụng
-                // Đặt màu chữ dựa trên trạng thái chọn
+                imgAppIcon.setImageDrawable(app.icon)
+                tvAppName.text = app.name
                 tvAppName.setTextColor(
-                    if (booleanArray[position]) Color.parseColor("#FFFFFF") else Color.parseColor("#131936")
+                    if (booleanArray[position]) ContextCompat.getColor(itemView.context, R.color.white)
+                    else ContextCompat.getColor(itemView.context, R.color.dark_blue)
                 )
-                // Đặt nền dựa trên trạng thái chọn
                 itemView.setBackgroundResource(
                     if (booleanArray[position]) R.drawable.bg_selected_language_item else R.drawable.bg_language_item
                 )
-                // Xử lý sự kiện click với debounce
                 itemView.setOnClickListener {
                     val currentTime = System.currentTimeMillis()
-                    if (currentTime - lastClickTime > 800) { // Ngăn click liên tục trong 800ms
+                    if (currentTime - lastClickTime > 800) {
                         lastClickTime = currentTime
                         onItemClick(app)
                     }

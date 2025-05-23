@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// BroadcastReceiver xử lý sự kiện cài/gỡ ứng dụng
 class PackageChangeReceiver(private val viewModel: AppLockViewModel) : BroadcastReceiver() {
 
     private val TAG = "PackageChangeReceiver"
@@ -22,14 +23,12 @@ class PackageChangeReceiver(private val viewModel: AppLockViewModel) : Broadcast
             when (intent.action) {
                 Intent.ACTION_PACKAGE_REMOVED -> {
                     Log.d(TAG, "Package removed: $packageName")
-                    // Xóa ứng dụng khỏi database và cập nhật ViewModel
+                    // Xóa ứng dụng khỏi cơ sở dữ liệu và cập nhật ViewModel
                     CoroutineScope(Dispatchers.IO).launch {
                         val db = AppInfoDatabase.getInstance(context)
-                        // Sử dụng hàm xóa theo package name
                         db.appInfoDAO().deleteAppInfoByPackageName(packageName)
 
-                        // Cập nhật lại dữ liệu trong ViewModel
-                        // Thay vì tải lại toàn bộ, cập nhật danh sách trong ViewModel
+                        // Cập nhật danh sách trong ViewModel
                         withContext(Dispatchers.Main) {
                             val currentAllApps = viewModel.allApps.value?.toMutableList() ?: mutableListOf()
                             currentAllApps.removeAll { it.packageName == packageName }
@@ -43,25 +42,20 @@ class PackageChangeReceiver(private val viewModel: AppLockViewModel) : Broadcast
                 }
                 Intent.ACTION_PACKAGE_ADDED -> {
                     Log.d(TAG, "Package added: $packageName")
-                    // Thêm ứng dụng mới vào database và cập nhật ViewModel
+                    // Thêm ứng dụng mới vào cơ sở dữ liệu và cập nhật ViewModel
                     CoroutineScope(Dispatchers.IO).launch {
                         val db = AppInfoDatabase.getInstance(context)
-                        // Kiểm tra xem ứng dụng đã tồn tại trong database chưa
                         val existingApp = db.appInfoDAO().getAppInfoByPackageName(packageName)
                         if (existingApp == null) {
-                            // Lấy thông tin ứng dụng mới
                             val appInfo = AppInfoUtil.getAppInfoByPackageName(context, packageName)
-                            // Kiểm tra nếu lấy được thông tin ứng dụng (không null)
                             if (appInfo != null) {
-                                // Thêm ứng dụng mới vào database (mặc định chưa khóa)
                                 db.appInfoDAO().insertAppInfo(appInfo)
 
-                                // Cập nhật danh sách trong ViewModel
+                                // Cập nhật danh sách chưa khóa trong ViewModel
                                 withContext(Dispatchers.Main) {
                                     val currentAllApps = viewModel.allApps.value?.toMutableList() ?: mutableListOf()
-                                    currentAllApps.add(appInfo) // Thêm ứng dụng mới vào danh sách chưa khóa
-                                    viewModel.updateAllApps(currentAllApps) // ViewModel sẽ tự sắp xếp
-                                    // Không cần cập nhật danh sách lockedApps vì ứng dụng mới mặc định chưa khóa
+                                    currentAllApps.add(appInfo)
+                                    viewModel.updateAllApps(currentAllApps)
                                 }
                             }
                         }
@@ -70,4 +64,4 @@ class PackageChangeReceiver(private val viewModel: AppLockViewModel) : Broadcast
             }
         }
     }
-} 
+}

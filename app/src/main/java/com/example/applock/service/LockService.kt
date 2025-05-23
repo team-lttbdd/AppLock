@@ -6,12 +6,17 @@ import android.app.PendingIntent
 import android.app.Service
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -27,6 +32,7 @@ import com.example.applock.preference.MyPreferences
 import com.example.applock.screen.home.HomeActivity
 import com.example.applock.util.AnimationUtil
 import com.example.applock.util.AppInfoUtil
+import com.example.applock.util.LocaleUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
@@ -54,6 +60,12 @@ class LockService : Service() {
 
     // Flag để theo dõi trạng thái mở khóa của AppLock
     private var isAppLockUnlocked = false
+
+    override fun attachBaseContext(base: Context) {
+        val languageCode = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en") ?: "en"
+        val context = LocaleUtil.updateContextLocale(base, languageCode.toString())
+        super.attachBaseContext(context)
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -106,9 +118,30 @@ class LockService : Service() {
 
         // Chạy service ở chế độ foreground
         startForeground(NOTIFICATION_ID, notification)
-        startMonitoring()
 
-        return START_STICKY
+        when (intent?.action) {
+            ACTION_UPDATE_LOCALE -> {
+                Log.d(TAG, "Received ACTION_UPDATE_LOCALE. Applying updated locale.")
+                // Chỉ cần set Locale.setDefault và làm mới overlay nếu đang hiển thị.
+                val languageCode = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en") ?: "en"
+                Locale.setDefault(Locale(languageCode))
+                Log.d(TAG, "Default Locale set to: $languageCode")
+
+                if (isOverlayShown) {
+                    val packageName = lastForegroundPackageName
+                    hideOverlay()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showPatternLockOverlay(packageName)
+                    }, 300) // Giữ độ trễ để đảm bảo ẩn view xong
+                }
+                return START_STICKY
+            }
+            else -> {
+                 Log.d(TAG, "LockService started with no specific action. Starting monitoring.")
+                startMonitoring()
+                 return START_STICKY
+            }
+        }
     }
 
     private fun startMonitoring() {
@@ -208,7 +241,6 @@ class LockService : Service() {
     }
 
     private fun showPatternLockOverlay(packageName: String) {
-        // Nếu pattern chưa được tải hoặc không tồn tại, không hiển thị overlay
         if (!::correctPattern.isInitialized) {
             Log.i(TAG, "Không có mẫu khóa được lưu, không hiển thị overlay.")
             return
@@ -216,7 +248,27 @@ class LockService : Service() {
         if (isOverlayShown) return
 
         try {
-            val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            // **Thay đổi chính ở đây: Tạo một Context mới với cấu hình ngôn ngữ mong muốn**
+            // và sử dụng nó để inflate layout VÀ lấy chuỗi văn bản.**
+            val languageCode = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en") ?: "en"
+            val locale = Locale(languageCode)
+
+            // Tạo một Configuration mới
+            val config = Configuration(baseContext.resources.configuration)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                config.setLocale(locale)
+            } else {
+                @Suppress("deprecation")
+                config.locale = locale
+            }
+
+            // Tạo một context mới dựa trên baseContext với cấu hình ngôn ngữ đã đặt
+            val localeUpdatedContext = baseContext.createConfigurationContext(config)
+
+            // Lấy LayoutInflater từ context mới này
+            val inflater = localeUpdatedContext.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+            // Inflate layout sử dụng localeUpdatedContext
             overlayView = inflater.inflate(R.layout.lock_pattern_overlay, null)
 
             // Lấy các view từ layout
@@ -227,32 +279,32 @@ class LockService : Service() {
             // Cập nhật tên ứng dụng
             tvAppName?.text = getAppNameFromPackage(packageName)
 
+            // **Explicitly set the text with the string from the localeUpdatedContext**
+            // **Đặt chuỗi văn bản một cách tường minh từ localeUpdatedContext**
+            tvDrawPattern?.text = localeUpdatedContext.resources.getString(R.string.draw_an_unlock_pattern)
+
+
             // Xử lý sự kiện pattern lock
             patternLockView?.addPatternLockListener(object : PatternLockViewListener {
-                override fun onStarted() {
-                    // Không cần xử lý
-                }
-
-                override fun onProgress(progressPattern: MutableList<PatternLockView.Dot>?) {
-                    // Không cần xử lý
-                }
-
-                override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
+                 override fun onStarted() { }
+                 override fun onProgress(progressPattern: MutableList<PatternLockView.Dot>?) { }
+                 override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
                     val tempPattern = pattern?.let { ArrayList(it) } ?: arrayListOf()
 
                     if (!::correctPattern.isInitialized || pattern != correctPattern) {
-                        // Pattern không đúng, hiển thị thông báo lỗi
+                        // AnimationUtil cần context để lấy chuỗi "wrong" (nếu có).
+                        // Tốt nhất nên truyền localeUpdatedContext hoặc đảm bảo AnimationUtil sử dụng context phù hợp.
+                        // Tạm thời giữ nguyên, nếu chuỗi lỗi vẫn tiếng Anh thì cần xem xét AnimationUtil.
                         AnimationUtil.setTextWrong(patternLockView, tvDrawPattern, tempPattern)
+                         // Sau khi hiển thị lỗi, đặt lại text về chuỗi "Draw an unlock pattern" đã dịch.
+                         Handler(Looper.getMainLooper()).postDelayed({
+                              tvDrawPattern?.text = localeUpdatedContext.resources.getString(R.string.draw_an_unlock_pattern)
+                         }, 1000) // Thời gian tương ứng với AnimationUtil.setTextWrong
                     } else {
-                        // Pattern đúng, ẩn overlay
                         patternLockView.setPattern(PatternLockView.PatternViewMode.CORRECT, tempPattern)
-
-                        // Nếu là AppLock được mở khóa thành công, đặt flag isAppLockUnlocked = true
                         if (packageName == applicationContext.packageName) {
                             isAppLockUnlocked = true
                         }
-
-                        // Thêm độ trễ ngắn để người dùng thấy mẫu hình đúng đã được vẽ
                         Handler(Looper.getMainLooper()).postDelayed({
                             hideOverlay()
                         }, 300)
@@ -260,17 +312,30 @@ class LockService : Service() {
                 }
 
                 override fun onCleared() {
-                    // Không cần xử lý
+                    // Khi pattern bị xóa, đặt lại text về chuỗi "Draw an unlock pattern" đã dịch.
+                     val languageCode = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en") ?: "en"
+                     val locale = Locale(languageCode)
+                     val config = Configuration(baseContext.resources.configuration)
+                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                         config.setLocale(locale)
+                     } else {
+                         @Suppress("deprecation")
+                         config.locale = locale
+                     }
+                     val updatedContextForClear = baseContext.createConfigurationContext(config)
+                     tvDrawPattern?.text = updatedContextForClear.resources.getString(R.string.draw_an_unlock_pattern)
                 }
             })
 
-            // Thiết lập tùy chọn cho overlay
-            val params = WindowManager.LayoutParams(
+
+            // ... existing WindowManager.LayoutParams setup and addView call ...
+             val params = WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 } else {
+                    @Suppress("deprecation")
                     WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
                 },
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
@@ -283,15 +348,14 @@ class LockService : Service() {
 
             params.gravity = Gravity.CENTER
 
-            // Hiển thị overlay
             windowManager.addView(overlayView, params)
             isOverlayShown = true
 
-            // Cập nhật flag để có thể tương tác với overlay
             params.flags = WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
             windowManager.updateViewLayout(overlayView, params)
 
-            Log.i(TAG, "Hiển thị màn hình khóa cho ứng dụng: $packageName")
+
+            Log.i(TAG, "Hiển thị màn hình khóa cho ứng dụng: $packageName. Sử dụng locale để inflate và set text: $languageCode")
 
         } catch (e: Exception) {
             Log.e(TAG, "Lỗi khi hiển thị màn hình khóa: ${e.message}")
@@ -359,5 +423,6 @@ class LockService : Service() {
     companion object {
         private const val CHANNEL_ID = "applock_service_channel"
         private const val NOTIFICATION_ID = 1
+        const val ACTION_UPDATE_LOCALE = "com.example.applock.UPDATE_LOCALE"
     }
 }

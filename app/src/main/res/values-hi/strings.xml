@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">कृपया प्रतीक्षा करें, लोड हो रहा है.....</string>
     <string name="this_action_may_contain_advertisements">(इस कार्रवाई में विज्ञापन हो सकते हैं)</string>
     <string name="languages">भाषाएँ</string>
@@ -55,4 +55,13 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">उपयोग पहुंच अनुमति\nऐप लॉक को आपकी गोपनीयता की रक्षा के लिए उपयोग पहुंच अनुमति की आवश्यकता है</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">स्क्रीन ओवरले अनुमति\nऐप लॉक को लॉक स्क्रीन प्रदर्शित करने के लिए स्क्रीन ओवरले अनुमति की आवश्यकता है</string>
     <string name="permission_required">अनुमति आवश्यक</string>
+
+    <string name="notification_permission_title">सूचनाओं की अनुमति दें</string>
+    <string name="notification_permission_message">ऐप लॉक को आपके ऐप्स को सुरक्षित रखने के लिए सूचना अनुमति की आवश्यकता है</string>
+    <string name="agree">ठीक है</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="notification_permission_denied">सूचना अनुमति अस्वीकृत</string>
+
+    <string name="lock_with_count">(%d) %s</string>
+    <string name="unlock_with_count">(%d) %s</string>
 </resources>

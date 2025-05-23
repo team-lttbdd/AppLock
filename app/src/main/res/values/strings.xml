@@ -55,4 +55,13 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Usage Access Permission\nApp Lock needs Usage Access permission to protect your privacy</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Screen Overlay Permission\nApp Lock requires the Screen Overlay permission to display lock screen</string>
     <string name="permission_required">Permission Required</string>
+
+    <string name="notification_permission_title">Allow Notifications</string>
+    <string name="notification_permission_message">App Lock requires notification permission to keep your apps secure</string>
+    <string name="agree">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="notification_permission_denied">Notification permission denied</string>
+
+    <string name="lock_with_count">(%d) %s</string>
+    <string name="unlock_with_count">(%d) %s</string>
 </resources>
