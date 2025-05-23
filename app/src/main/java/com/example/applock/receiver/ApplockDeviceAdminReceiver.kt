@@ -44,16 +44,5 @@ class AppLockDeviceAdminReceiver : DeviceAdminReceiver() {
             val componentName = android.content.ComponentName(context, AppLockDeviceAdminReceiver::class.java)
             return devicePolicyManager.isAdminActive(componentName)
         }
-
-        /**
-         * Yêu cầu quyền quản trị thiết bị
-         */
-        fun requestAdminPrivilege(context: Context) {
-            val intent = Intent(android.app.admin.DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-            val componentName = android.content.ComponentName(context, AppLockDeviceAdminReceiver::class.java)
-            intent.putExtra(android.app.admin.DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
-            intent.putExtra(android.app.admin.DevicePolicyManager.EXTRA_ADD_EXPLANATION, context.getString(R.string.admin_request_explanation))
-            context.startActivity(intent)
-        }
     }
 }
