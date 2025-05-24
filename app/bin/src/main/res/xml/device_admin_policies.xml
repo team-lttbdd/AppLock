@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Định nghĩa các quyền cần thiết cho Device Admin -->
+    <uses-policies>
+        <!-- Chỉ cần quyền tối thiểu, không yêu cầu quá nhiều để tránh từ chối khi đăng ký trên Google Play -->
+        <limit-password />
+        <watch-login />
+        <force-lock />
+    </uses-policies>
+</device-admin>

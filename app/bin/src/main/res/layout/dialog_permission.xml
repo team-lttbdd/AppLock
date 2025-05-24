@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <!-- Icon lớn ở top -->
+    <ImageView
+        android:id="@+id/img_dialog"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/img_dialog"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Tiêu đề Permission -->
+    <TextView
+        android:id="@+id/tv_permission_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/permission_required"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/img_dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Usage Access -->
+    <TextView
+        android:id="@+id/tv_usage_access"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_permission_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnUsageToggle" />
+
+    <ImageView
+        android:id="@+id/btnUsageToggle"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_toggle_active"
+        app:layout_constraintTop_toTopOf="@id/tv_usage_access"
+        app:layout_constraintStart_toEndOf="@id/tv_usage_access"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Screen Overlay -->
+    <TextView
+        android:id="@+id/tv_overlay_access"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintTop_toBottomOf="@id/btnUsageToggle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnOverlayToggle" />
+
+    <ImageView
+        android:id="@+id/btnOverlayToggle"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_toggle_active"
+        app:layout_constraintTop_toTopOf="@id/tv_overlay_access"
+        app:layout_constraintStart_toEndOf="@id/tv_overlay_access"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDeviceAdmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintTop_toBottomOf="@id/btnOverlayToggle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDeviceAdminToggle" />
+
+    <ImageView
+        android:id="@+id/btnDeviceAdminToggle"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_toggle_active"
+        app:layout_constraintTop_toTopOf="@id/tvDeviceAdmin"
+        app:layout_constraintStart_toEndOf="@id/tvDeviceAdmin"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Button Go to Setting -->
+    <ImageView
+        android:id="@+id/btnGoToSetting"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:contentDescription="@null"
+        android:src="@drawable/bg_active_button"
+        app:layout_constraintTop_toBottomOf="@id/tvDeviceAdmin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_setting"
+        android:textColor="@color/white"
+        android:fontFamily="@font/exo_bold"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintTop_toTopOf="@+id/btnGoToSetting"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGoToSetting"
+        app:layout_constraintStart_toStartOf="@+id/btnGoToSetting"
+        app:layout_constraintEnd_toEndOf="@+id/btnGoToSetting"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
