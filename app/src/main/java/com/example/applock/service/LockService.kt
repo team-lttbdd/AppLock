@@ -33,14 +33,13 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 import kotlin.coroutines.cancellation.CancellationException
 
 class LockService : Service() {
@@ -147,7 +146,7 @@ class LockService : Service() {
 
     private suspend fun checkCurrentApp() {
         val currentTime = System.currentTimeMillis()
-        val startTime = currentTime - 300L
+        val startTime = currentTime - 5000L
         val usageEvents = usageStatsManager.queryEvents(startTime, currentTime)
         val event = UsageEvents.Event()
         var foregroundPackageName = ""
