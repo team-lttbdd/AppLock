@@ -146,7 +146,7 @@ class LockService : Service() {
 
     private suspend fun checkCurrentApp() {
         val currentTime = System.currentTimeMillis()
-        val startTime = currentTime - 5000L
+        val startTime = currentTime - 3000L
         val usageEvents = usageStatsManager.queryEvents(startTime, currentTime)
         val event = UsageEvents.Event()
         var foregroundPackageName = ""
