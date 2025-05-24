@@ -66,6 +66,12 @@ class LockService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // Kiểm tra nếu là hành động cập nhật mẫu khóa
+        if (intent?.action == "UPDATE_PATTERN") {
+            loadSavedPattern()
+            return START_STICKY
+        }
+
         val notificationIntent = Intent(this, HomeActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
@@ -181,12 +187,15 @@ class LockService : Service() {
 
     private fun showPatternLockOverlay() {
         try {
+            // Tải lại mẫu khóa mỗi khi hiển thị overlay để đảm bảo luôn sử dụng mẫu mới nhất
+            loadSavedPattern()
+            
             // Lấy ngôn ngữ đã lưu
             val savedLanguage = MyPreferences.read(MyPreferences.PREF_LANGUAGE, "en") ?: "en"
             val locale = Locale(savedLanguage)
             val configuration = resources.configuration
             configuration.setLocale(locale)
-
+            
             // Tạo Context mới với ngôn ngữ đã cập nhật
             val localizedContext = createConfigurationContext(configuration)
 
@@ -277,6 +286,18 @@ class LockService : Service() {
                 else context.startService(intent)
             } catch (e: Exception) {
                 Log.e("LockService", "Lỗi khi khởi động service: ${e.message}")
+            }
+        }
+        
+        // Thêm phương thức mới để cập nhật mẫu khóa
+        fun updatePattern(context: Context) {
+            try {
+                val intent = Intent(context, LockService::class.java)
+                intent.action = "UPDATE_PATTERN"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
+                else context.startService(intent)
+            } catch (e: Exception) {
+                Log.e("LockService", "Lỗi khi cập nhật mẫu khóa: ${e.message}")
             }
         }
     }

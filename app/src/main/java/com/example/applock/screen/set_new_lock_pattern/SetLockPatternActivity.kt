@@ -17,6 +17,7 @@ import com.example.applock.databinding.ActivitySetLockPatternBinding
 import com.example.applock.preference.MyPreferences
 import com.example.applock.screen.home.HomeActivity
 import com.example.applock.screen.validate_lock_pattern.LockPatternActivity
+import com.example.applock.service.LockService
 import com.example.applock.util.*
 import com.google.gson.Gson
 
@@ -106,6 +107,10 @@ class SetLockPatternActivity : BaseActivity<ActivitySetLockPatternBinding>() {
             val gson = Gson()
             val json = gson.toJson(drawPattern)
             MyPreferences.write(MyPreferences.PREF_LOCK_PATTERN, json)
+            
+            // Cập nhật mẫu khóa trong LockService
+            LockService.updatePattern(this)
+            
             startActivity(Intent(this@SetLockPatternActivity, LockPatternActivity::class.java))
             finish()
         } else {

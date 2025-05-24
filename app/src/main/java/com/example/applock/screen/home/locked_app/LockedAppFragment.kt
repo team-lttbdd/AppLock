@@ -108,6 +108,8 @@ class LockedAppFragment : BaseFragment<FragmentLockedAppsBinding>() {
                             unlockedAppsList.forEach { appInfo ->
                                 viewModel.addToAllApps(appInfo)
                             }
+                            // Thêm dòng này để đảm bảo làm mới dữ liệu
+                            viewModel.refreshData()
                             val currentLockedApps = viewModel.lockedApps.value?.toMutableList() ?: mutableListOf()
                             val appsToRemove = unlockedAppsList.map { it.packageName }
                             currentLockedApps.removeAll { appsToRemove.contains(it.packageName) }

@@ -34,6 +34,8 @@ class AllAppFragment : BaseFragment<FragmentAllAppsBinding>() {
 
     override fun onResume() {
         super.onResume()
+        // Thêm dòng này để đảm bảo làm mới dữ liệu từ nguồn
+        viewModel.refreshData()
         val appList = viewModel.allApps.value ?: mutableListOf()
         allAppAdapter.updateAllPosition(false)
         allAppAdapter.count = 0
