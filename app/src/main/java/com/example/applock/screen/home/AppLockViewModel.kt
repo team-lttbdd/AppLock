@@ -100,9 +100,29 @@ class AppLockViewModel : ViewModel() {
     }
 
     // Update app lock status
-    fun updateAppLockStatus(appInfo: AppInfo, isLocked: Boolean) {
-        appInfo.isLocked = isLocked
-        refreshData()
+    fun updateAppLockStatus(context: Context, appInfo: AppInfo, isLocked: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            // Update database
+            val db = AppInfoDatabase.getInstance(context)
+            db.appInfoDAO().updateAppLockStatus(appInfo.packageName, isLocked)
+            
+            // Update AppInfoUtil lists
+            withContext(Dispatchers.Main) {
+                appInfo.isLocked = isLocked
+                if (isLocked) {
+                    if (!AppInfoUtil.listLockedAppInfo.any { it.packageName == appInfo.packageName }) {
+                        AppInfoUtil.listLockedAppInfo.add(appInfo)
+                    }
+                    // Update isLocked in listAppInfo
+                    AppInfoUtil.listAppInfo.find { it.packageName == appInfo.packageName }?.isLocked = true
+                } else {
+                    AppInfoUtil.listLockedAppInfo.removeAll { it.packageName == appInfo.packageName }
+                    // Update isLocked in listAppInfo
+                    AppInfoUtil.listAppInfo.find { it.packageName == appInfo.packageName }?.isLocked = false
+                }
+                refreshData()
+            }
+        }
     }
 
     fun removeFromAllApps(packageName: String) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">Veuillez patienter, chargement.....</string>
     <string name="this_action_may_contain_advertisements">(Cette action peut contenir des publicités)</string>
     <string name="languages">Langues</string>
@@ -52,7 +52,37 @@
     <string name="hide_pattern_draw_path">Masquer le chemin de dessin du motif</string>
 
     <string name="go_to_setting">Aller aux paramètres</string>
-    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Autorisation d\'accès à l\'utilisation\nApp Lock a besoin de l\'autorisation d\'accès à l\'utilisation pour protéger votre vie privée</string>
-    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Autorisation de superposition d\'écran\nApp Lock nécessite l\'autorisation de superposition d\'écran pour afficher l\'écran de verrouillage</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Autorisation d\'accès à l\'utilisation\nAppLock a besoin de l\'autorisation d\'accès à l\'utilisation pour protéger votre vie privée</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Autorisation de superposition d\'écran\nAppLock nécessite l\'autorisation de superposition d\'écran pour afficher l\'écran de verrouillage</string>
     <string name="permission_required">Permission requise</string>
+
+    <string name="device_admin_label">Administrateur de périphérique AppLock</string>
+    <string name="device_admin_description">Permettre à AppLock de protéger les applications et d\'empêcher la désinstallation non autorisée</string>
+    <string name="admin_receiver_enabled">Protection contre la désinstallation activée</string>
+    <string name="admin_receiver_disabled">Protection contre la désinstallation désactivée</string>
+    <string name="admin_receiver_disable_warning">Attention ! La désactivation de cette permission permettra à AppLock d\'être désinstallé et vos données pourraient être perdues. Êtes-vous sûr de vouloir continuer ?</string>
+    <string name="admin_request_explanation">AppLock nécessite l\'autorisation d\'administrateur de périphérique pour empêcher la désinstallation non autorisée et protéger vos données.</string>
+
+    <string name="device_admin_setup_title">Protégez vos applications</string>
+    <string name="device_admin_setup_description">Pour protéger les applications et empêcher la désinstallation non autorisée, AppLock a besoin de l\'autorisation d\'administrateur de périphérique.</string>
+    <string name="security_shield_icon">Icône de sécurité</string>
+    <string name="current_status">Statut actuel</string>
+    <string name="admin_status_enabled">Protection activée</string>
+    <string name="admin_status_disabled">Protection non activée</string>
+    <string name="activate_admin">Activer la protection</string>
+    <string name="continue_to_app">Continuer vers l\'application</string>
+    <string name="device_admin_benefits">Avantages que vous recevrez :\n\n• Empêcher la désinstallation non autorisée\n• Protéger les applications contre l\'accès non autorisé\n• Exiger l\'authentification pour désinstaller\n• Améliorer la sécurité des données personnelles</string>
+    <string name="device_admin_required_title">Administrateur de périphérique requis</string>
+    <string name="device_admin_required_message">L\'autorisation d\'administrateur de périphérique est requise</string>
+    <string name="activate_now">Activer maintenant</string>
+    <string name="later">Plus tard</string>
+    <string name="device_admin_recommended">Administrateur de périphérique recommandé</string>
+    <string name="notification_permission_title">Autoriser les notifications</string>
+    <string name="notification_permission_message">L\'application nécessite l\'autorisation de notification pour aider à maintenir vos applications en sécurité.</string>
+    <string name="agree">Accepter</string>
+    <string name="cancel">Annuler</string>
+    <string name="notifications_disabled">Notifications désactivées.</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+Autorisation de l\'administrateur de périphérique\nAppLock a besoin de l\'autorisation de l\'administrateur de périphérique pour protéger votre vie privée
+</string>
 </resources>

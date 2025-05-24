@@ -52,7 +52,37 @@
     <string name="hide_pattern_draw_path">Ẩn đường dẫn vẽ hình mẫu</string>
 
     <string name="go_to_setting">Đi đến cài đặt</string>
-    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Quyền truy cập sử dụng\nApp Lock cần quyền truy cập sử dụng để bảo vệ quyền riêng tư của bạn</string>
-    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Quyền phủ màn hình\nApp Lock yêu cầu quyền phủ màn hình để hiển thị màn hình khóa</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Quyền truy cập sử dụng\nAppLock cần quyền truy cập sử dụng để bảo vệ quyền riêng tư của bạn</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Quyền phủ màn hình\nAppLock yêu cầu quyền phủ màn hình để hiển thị màn hình khóa</string>
     <string name="permission_required">Yêu cầu quyền</string>
+
+    <string name="device_admin_label">Quản trị viên thiết bị AppLock</string>
+    <string name="device_admin_description">Cho phép AppLock bảo vệ ứng dụng và ngăn chặn gỡ cài đặt trái phép</string>
+    <string name="admin_receiver_enabled">Đã bật bảo vệ gỡ cài đặt</string>
+    <string name="admin_receiver_disabled">Đã tắt bảo vệ gỡ cài đặt</string>
+    <string name="admin_receiver_disable_warning">Cảnh báo! Tắt quyền này sẽ cho phép gỡ cài đặt AppLock và dữ liệu của bạn có thể bị mất. Bạn có chắc chắn muốn tiếp tục không?</string>
+    <string name="admin_request_explanation">AppLock yêu cầu quyền quản trị viên thiết bị để ngăn chặn gỡ cài đặt trái phép và bảo vệ dữ liệu của bạn.</string>
+
+    <string name="device_admin_setup_title">Bảo vệ ứng dụng của bạn</string>
+    <string name="device_admin_setup_description">Để bảo vệ ứng dụng và ngăn chặn gỡ cài đặt trái phép, AppLock cần quyền quản trị viên thiết bị.</string>
+    <string name="security_shield_icon">Biểu tượng bảo mật</string>
+    <string name="current_status">Trạng thái hiện tại</string>
+    <string name="admin_status_enabled">Đã bật bảo vệ</string>
+    <string name="admin_status_disabled">Chưa bật bảo vệ</string>
+    <string name="activate_admin">Bật bảo vệ</string>
+    <string name="continue_to_app">Tiếp tục vào ứng dụng</string>
+    <string name="device_admin_benefits">Những lợi ích bạn sẽ nhận được:\n\n• Ngăn chặn gỡ cài đặt trái phép\n• Bảo vệ ứng dụng khỏi truy cập trái phép\n• Yêu cầu xác thực để gỡ cài đặt\n• Tăng cường bảo mật dữ liệu cá nhân</string>
+    <string name="device_admin_required_title">Yêu cầu quyền quản trị viên thiết bị</string>
+    <string name="device_admin_required_message">Cần có quyền quản trị viên thiết bị</string>
+    <string name="activate_now">Kích hoạt ngay</string>
+    <string name="later">Để sau</string>
+    <string name="device_admin_recommended">Đề xuất quản trị viên thiết bị</string>
+    <string name="notification_permission_title">Cho phép thông báo</string>
+    <string name="notification_permission_message">Ứng dụng yêu cầu quyền thông báo để giúp giữ ứng dụng của bạn an toàn.</string>
+    <string name="agree">Đồng ý</string>
+    <string name="cancel">Hủy</string>
+    <string name="notifications_disabled">Đã tắt thông báo.</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+Quyền quản trị viên thiết bị\nAppLock cần quyền quản trị viên thiết bị để bảo vệ quyền riêng tư của bạn
+</string>
 </resources>

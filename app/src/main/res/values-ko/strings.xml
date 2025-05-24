@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">앱 잠금 2.0</string>
+    <string name="app_name">앱 잠금</string>
     <string name="please_wait_loading">잠시 기다려주세요, 로딩 중.....</string>
     <string name="this_action_may_contain_advertisements">(이 작업에는 광고가 포함될 수 있습니다)</string>
     <string name="languages">언어</string>
@@ -55,4 +55,34 @@
     <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">사용량 접근 권한\n앱 잠금은 개인 정보 보호를 위해 사용량 접근 권한이 필요합니다</string>
     <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">화면 오버레이 권한\n앱 잠금은 잠금 화면을 표시하기 위해 화면 오버레이 권한이 필요합니다</string>
     <string name="permission_required">권한 필요</string>
+
+    <string name="device_admin_label">앱 잠금 기기 관리자</string>
+    <string name="device_admin_description">앱 잠금이 앱을 보호하고 무단 제거를 방지하도록 허용</string>
+    <string name="admin_receiver_enabled">제거 방지 활성화됨</string>
+    <string name="admin_receiver_disabled">제거 방지 비활성화됨</string>
+    <string name="admin_receiver_disable_warning">경고! 이 권한을 비활성화하면 앱 잠금이 제거될 수 있으며 데이터가 손실될 수 있습니다. 계속하시겠습니까?</string>
+    <string name="admin_request_explanation">앱 잠금은 무단 제거를 방지하고 데이터를 보호하기 위해 기기 관리자 권한이 필요합니다.</string>
+
+    <string name="device_admin_setup_title">앱 보호</string>
+    <string name="device_admin_setup_description">앱을 보호하고 무단 제거를 방지하려면 앱 잠금에 기기 관리자 권한이 필요합니다.</string>
+    <string name="security_shield_icon">보안 아이콘</string>
+    <string name="current_status">현재 상태</string>
+    <string name="admin_status_enabled">보호 활성화됨</string>
+    <string name="admin_status_disabled">보호 활성화되지 않음</string>
+    <string name="activate_admin">보호 활성화</string>
+    <string name="continue_to_app">앱으로 계속</string>
+    <string name="device_admin_benefits">받게 될 혜택:\n\n• 무단 제거 방지\n• 무단 접근으로부터 앱 보호\n• 제거 시 인증 요구\n• 개인 데이터 보안 강화</string>
+    <string name="device_admin_required_title">기기 관리자 필요</string>
+    <string name="device_admin_required_message">기기 관리자 권한이 필요합니다</string>
+    <string name="activate_now">지금 활성화</string>
+    <string name="later">나중에</string>
+    <string name="device_admin_recommended">기기 관리자 권장</string>
+    <string name="notification_permission_title">알림 허용</string>
+    <string name="notification_permission_message">앱이 응용 프로그램을 안전하게 유지하는 데 도움이 되도록 알림 권한이 필요합니다.</string>
+    <string name="agree">동의</string>
+    <string name="cancel">취소</string>
+    <string name="notifications_disabled">알림 비활성화됨.</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+기기 관리자 권한\n앱 잠금은 개인 정보 보호를 위해 기기 관리자 권한이 필요합니다
+</string>
 </resources>

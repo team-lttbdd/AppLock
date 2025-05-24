@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">Por favor, aguarde, carregando.....</string>
     <string name="this_action_may_contain_advertisements">(Esta ação pode conter anúncios)</string>
     <string name="languages">Idiomas</string>
@@ -52,7 +52,37 @@
     <string name="hide_pattern_draw_path">Ocultar caminho de desenho do padrão</string>
 
     <string name="go_to_setting">Ir para configuração</string>
-    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Permissão de Acesso de Uso\nO App Lock precisa da permissão de Acesso de Uso para proteger sua privacidade</string>
-    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Permissão de Sobreposição de Tela\nO App Lock requer a permissão de Sobreposição de Tela para exibir a tela de bloqueio</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">Permissão de Acesso de Uso\nAppLock precisa da permissão de Acesso de Uso para proteger sua privacidade</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">Permissão de Sobreposição de Tela\nAppLock requer a permissão de Sobreposição de Tela para exibir a tela de bloqueio</string>
     <string name="permission_required">Permissão Necessária</string>
+
+    <string name="device_admin_label">Administrador de Dispositivo AppLock</string>
+    <string name="device_admin_description">Permitir que o AppLock proteja os aplicativos e impeça a desinstalação não autorizada</string>
+    <string name="admin_receiver_enabled">Proteção contra desinstalação ativada</string>
+    <string name="admin_receiver_disabled">Proteção contra desinstalação desativada</string>
+    <string name="admin_receiver_disable_warning">Atenção! Desativar esta permissão permitirá que o AppLock seja desinstalado e seus dados podem ser perdidos. Tem certeza de que deseja continuar?</string>
+    <string name="admin_request_explanation">O AppLock requer permissão de administrador de dispositivo para evitar a desinstalação não autorizada e proteger seus dados.</string>
+
+    <string name="device_admin_setup_title">Proteja seus aplicativos</string>
+    <string name="device_admin_setup_description">Para proteger aplicativos e evitar a desinstalação não autorizada, o AppLock precisa de permissão de administrador de dispositivo.</string>
+    <string name="security_shield_icon">Ícone de segurança</string>
+    <string name="current_status">Status atual</string>
+    <string name="admin_status_enabled">Proteção ativada</string>
+    <string name="admin_status_disabled">Proteção não ativada</string>
+    <string name="activate_admin">Ativar proteção</string>
+    <string name="continue_to_app">Continuar para o aplicativo</string>
+    <string name="device_admin_benefits">Benefícios que você receberá:\n\n• Impedir desinstalação não autorizada\n• Proteger aplicativos de acesso não autorizado\n• Exigir autenticação para desinstalar\n• Aumentar a segurança dos dados pessoais</string>
+    <string name="device_admin_required_title">Administrador de Dispositivo Necessário</string>
+    <string name="device_admin_required_message">Permissão de administrador de dispositivo é necessária</string>
+    <string name="activate_now">Ativar agora</string>
+    <string name="later">Mais tarde</string>
+    <string name="device_admin_recommended">Administrador de dispositivo recomendado</string>
+    <string name="notification_permission_title">Permitir Notificações</string>
+    <string name="notification_permission_message">O aplicativo requer permissão de notificação para ajudar a manter seus aplicativos seguros.</string>
+    <string name="agree">Concordar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="notifications_disabled">Notificações desativadas.</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+Permissão de Administrador de Dispositivo\nAppLock precisa de permissão de administrador de dispositivo para proteger sua privacidade
+</string>
 </resources>

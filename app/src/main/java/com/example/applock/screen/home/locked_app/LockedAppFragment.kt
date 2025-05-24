@@ -134,8 +134,7 @@ class LockedAppFragment : BaseFragment<FragmentLockedAppsBinding>() {
                         for (i in flagsSnapshot.indices) {
                             if (flagsSnapshot[i]) {
                                 val appToUnlock = lockedAppsList[i]
-                                db.appInfoDAO().updateAppLockStatus(appToUnlock.packageName, false)
-                                appToUnlock.isLocked = false
+                                viewModel.updateAppLockStatus(requireContext(), appToUnlock, false)
                                 unlockedAppsList.add(appToUnlock) // Thêm vào danh sách mở khóa
                                 removedPositions.add(i) // Ghi lại vị trí xóa
                             }

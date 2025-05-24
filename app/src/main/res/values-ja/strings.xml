@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">お待ちください、読み込み中.....</string>
     <string name="this_action_may_contain_advertisements">(このアクションには広告が含まれる場合があります)</string>
     <string name="languages">言語</string>
@@ -52,7 +52,37 @@
     <string name="hide_pattern_draw_path">パターン描画パスを非表示</string>
 
     <string name="go_to_setting">設定へ移動</string>
-    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">使用状況アクセス許可\nApp Lockはプライバシーを保護するために使用状況アクセス許可が必要です</string>
-    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">画面オーバーレイ許可\nApp Lockはロック画面を表示するために画面オーバーレイ許可が必要です</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">使用状況アクセス許可\nAppLockはプライバシーを保護するために使用状況アクセス許可が必要です</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">画面オーバーレイ許可\nAppLockはロック画面を表示するために画面オーバーレイ許可が必要です</string>
     <string name="permission_required">権限が必要です</string>
+
+    <string name="device_admin_label">AppLockデバイス管理者</string>
+    <string name="device_admin_description">AppLockがアプリを保護し、不正なアンインストールを防ぐことを許可します</string>
+    <string name="admin_receiver_enabled">アンインストール保護が有効になりました</string>
+    <string name="admin_receiver_disabled">アンインストール保護が無効になりました</string>
+    <string name="admin_receiver_disable_warning">警告！この権限を無効にすると、AppLockがアンインストールされ、データが失われる可能性があります。続行してもよろしいですか？</string>
+    <string name="admin_request_explanation">AppLockは不正なアンインストールを防ぎ、データを保護するためにデバイス管理者権限が必要です。</string>
+
+    <string name="device_admin_setup_title">アプリを保護</string>
+    <string name="device_admin_setup_description">アプリを保護し、不正なアンインストールを防ぐために、AppLockにはデバイス管理者権限が必要です。</string>
+    <string name="security_shield_icon">セキュリティアイコン</string>
+    <string name="current_status">現在のステータス</string>
+    <string name="admin_status_enabled">保護有効</string>
+    <string name="admin_status_disabled">保護無効</string>
+    <string name="activate_admin">保護を有効にする</string>
+    <string name="continue_to_app">アプリを続行</string>
+    <string name="device_admin_benefits">得られる利点：\n\n• 不正なアンインストールを防ぐ\n• 不正なアクセスからアプリを保護する\n• アンインストールに認証を要求する\n• 個人データのセキュリティを強化する</string>
+    <string name="device_admin_required_title">デバイス管理者が必要</string>
+    <string name="device_admin_required_message">デバイス管理者権限が必要です</string>
+    <string name="activate_now">今すぐ有効にする</string>
+    <string name="later">後で</string>
+    <string name="device_admin_recommended">デバイス管理者推奨</string>
+    <string name="notification_permission_title">通知を許可</string>
+    <string name="notification_permission_message">アプリがアプリケーションを安全に保つのに役立つように、通知権限が必要です。</string>
+    <string name="agree">同意</string>
+    <string name="cancel">キャンセル</string>
+    <string name="notifications_disabled">通知が無効になりました。</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+デバイス管理者権限\nAppLockはプライバシーを保護するためにデバイス管理者権限が必要です
+</string>
 </resources>

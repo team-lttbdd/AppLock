@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppLock2.0</string>
+    <string name="app_name">AppLock</string>
     <string name="please_wait_loading">कृपया प्रतीक्षा करें, लोड हो रहा है.....</string>
     <string name="this_action_may_contain_advertisements">(इस कार्रवाई में विज्ञापन हो सकते हैं)</string>
     <string name="languages">भाषाएँ</string>
@@ -52,7 +52,37 @@
     <string name="hide_pattern_draw_path">पैटर्न ड्रॉ पाथ छुपाएं</string>
 
     <string name="go_to_setting">सेटिंग पर जाएं</string>
-    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">उपयोग पहुंच अनुमति\nऐप लॉक को आपकी गोपनीयता की रक्षा के लिए उपयोग पहुंच अनुमति की आवश्यकता है</string>
-    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">स्क्रीन ओवरले अनुमति\nऐप लॉक को लॉक स्क्रीन प्रदर्शित करने के लिए स्क्रीन ओवरले अनुमति की आवश्यकता है</string>
+    <string name="usage_access_permission_napp_lock_needs_usage_access_permission_to_protect_your_privacy">उपयोग पहुंच अनुमति\nAppLock को आपकी गोपनीयता की रक्षा के लिए उपयोग पहुंच अनुमति की आवश्यकता है</string>
+    <string name="screen_overlay_permission_napp_lock_requires_the_screen_overlay_permission_to_display_lock_screen">स्क्रीन ओवरले अनुमति\nAppLock को लॉक स्क्रीन प्रदर्शित करने के लिए स्क्रीन ओवरले अनुमति की आवश्यकता है</string>
     <string name="permission_required">अनुमति आवश्यक</string>
+
+    <string name="device_admin_label">AppLock डिवाइस एडमिन</string>
+    <string name="device_admin_description">AppLock को ऐप्स को सुरक्षित रखने और अनाधिकृत अनइंस्टॉलेशन को रोकने की अनुमति दें</string>
+    <string name="admin_receiver_enabled">अनइंस्टॉलेशन सुरक्षा सक्षम की गई</string>
+    <string name="admin_receiver_disabled">अनइंस्टॉलेशन सुरक्षा अक्षम की गई</string>
+    <string name="admin_receiver_disable_warning">चेतावनी! इस अनुमति को अक्षम करने से AppLock को अनइंस्टॉल किया जा सकेगा और आपका डेटा खो सकता है। क्या आप जारी रखना चाहते हैं?</string>
+    <string name="admin_request_explanation">अनाधिकृत अनइंस्टॉलेशन को रोकने और आपके डेटा को सुरक्षित रखने के लिए AppLock को डिवाइस एडमिन अनुमति की आवश्यकता है।</string>
+
+    <string name="device_admin_setup_title">अपने ऐप्स सुरक्षित करें</string>
+    <string name="device_admin_setup_description">ऐप्स को सुरक्षित रखने और अनाधिकृत अनइंस्टॉलेशन को रोकने के लिए, AppLock को डिवाइस एडमिन अनुमति की आवश्यकता है।</string>
+    <string name="security_shield_icon">सुरक्षा आइकन</string>
+    <string name="current_status">वर्तमान स्थिति</string>
+    <string name="admin_status_enabled">सुरक्षा सक्षम</string>
+    <string name="admin_status_disabled">सुरक्षा सक्षम नहीं है</string>
+    <string name="activate_admin">सुरक्षा सक्षम करें</string>
+    <string name="continue_to_app">ऐप पर जारी रखें</string>
+    <string name="device_admin_benefits">आपको मिलने वाले लाभ:\n\n• अनाधिकृत अनइंस्टॉलेशन को रोकें\n• अनाधिकृत पहुंच से ऐप्स को सुरक्षित रखें\n• अनइंस्टॉल करने के लिए प्रमाणीकरण की आवश्यकता\n• व्यक्तिगत डेटा सुरक्षा बढ़ाएँ</string>
+    <string name="device_admin_required_title">डिवाइस एडमिन आवश्यक</string>
+    <string name="device_admin_required_message">डिवाइस एडमिन अनुमति आवश्यक है</string>
+    <string name="activate_now">अभी सक्रिय करें</string>
+    <string name="later">बाद में</string>
+    <string name="device_admin_recommended">डिवाइस एडमिन अनुशंसित</string>
+    <string name="notification_permission_title">अधिसूचना की अनुमति दें</string>
+    <string name="notification_permission_message">आपके अनुप्रयोगों को सुरक्षित रखने में मदद करने के लिए ऐप को अधिसूचना अनुमति की आवश्यकता है।</string>
+    <string name="agree">सहमत</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="notifications_disabled">सूचनाएं अक्षम हैं।</string>
+    <string name="device_admin_permission_n_app_lock_needs_device_admin_permission_to_protect_your_privacy">
+डिवाइस एडमिन अनुमति\nAppLock को आपकी गोपनीयता की रक्षा के लिए डिवाइस एडमिन अनुमति की आवश्यकता है
+</string>
 </resources>
